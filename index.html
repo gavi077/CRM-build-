@@ -1,259 +1,37 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AP Control v0.1</title>
+<!DOCTYPE html><html lang='ru'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>ALI Project Control</title>
 <style>
-:root{
-  --bg:#f6f8fb; --panel:#ffffff; --text:#172033; --muted:#7a8499;
-  --line:#e6eaf0; --primary:#3659b7; --primary2:#27479d;
-  --success:#20a66a; --warn:#ef9b28; --danger:#d9534f; --sidebar:#111827;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-button,input{font:inherit}
-.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
-.sidebar{background:var(--sidebar);color:#fff;padding:24px 18px;position:sticky;top:0;height:100vh}
-.brand{font-size:22px;font-weight:800;letter-spacing:.3px;margin-bottom:28px}
-.brand span{color:#8ea7ff}
-.nav{display:flex;flex-direction:column;gap:8px}
-.nav button{background:transparent;border:0;color:#cbd5e1;text-align:left;padding:11px 12px;border-radius:10px;cursor:pointer}
-.nav button:hover,.nav button.active{background:#1f2937;color:#fff}
-.main{padding:28px}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.title{font-size:28px;font-weight:800}
-.subtitle{color:var(--muted);margin-top:4px}
-.actions{display:flex;gap:10px}
-.btn{border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
-.btn.primary{background:var(--primary);color:#fff}
-.btn.primary:hover{background:var(--primary2)}
-.btn.ghost{background:#fff;border:1px solid var(--line)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
-.kpi .value{font-size:30px;font-weight:800}
-.kpi .label{color:var(--muted);margin-top:4px}
-.section{margin-top:22px}
-.section h3{margin:0 0 12px;font-size:18px}
-.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.project{cursor:pointer}
-.project:hover{transform:translateY(-1px);transition:.15s;box-shadow:0 8px 22px rgba(0,0,0,.07)}
-.project-head{display:flex;justify-content:space-between;align-items:center}
-.badge{font-size:12px;padding:5px 8px;border-radius:999px;background:#eef2ff;color:#4355b9}
-.progress{height:9px;background:#edf0f5;border-radius:999px;overflow:hidden;margin:14px 0 8px}
-.progress > div{height:100%;background:var(--primary)}
-.meta{display:flex;gap:14px;color:var(--muted);font-size:13px;flex-wrap:wrap}
-.attn{display:flex;flex-direction:column;gap:10px}
-.attn-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
-.dot{width:10px;height:10px;border-radius:50%;margin-top:6px}
-.red{background:var(--danger)} .orange{background:var(--warn)} .green{background:var(--success)}
-.hidden{display:none !important}
-.project-page .hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.tab{padding:8px 11px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer}
-.tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.stage-list{display:flex;flex-direction:column;gap:10px}
-.stage{display:grid;grid-template-columns:1.4fr .7fr .7fr .8fr .8fr;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);padding:12px;border-radius:12px}
-.stage .small{color:var(--muted);font-size:13px}
-.status{font-size:12px;padding:5px 8px;border-radius:999px;display:inline-block;width:max-content}
-.s-work{background:#e7f6ef;color:#188653}
-.s-check{background:#fff3de;color:#a86800}
-.s-done{background:#e8eefc;color:#2e52a4}
-.s-late{background:#fde9e8;color:#b33b37}
-.modal-back{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;padding:20px}
-.modal{background:#fff;width:min(560px,95vw);border-radius:16px;padding:20px}
-.modal h3{margin-top:0}
-.form{display:grid;gap:12px}
-.form label{font-size:13px;color:var(--muted)}
-.form input,.form select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px}
-.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
-@media(max-width:1000px){.app{grid-template-columns:82px 1fr}.sidebar{padding:20px 10px}.brand{font-size:14px}.brand span{display:none}.nav button{font-size:0}.nav button:before{font-size:18px}.grid{grid-template-columns:repeat(2,1fr)}.projects{grid-template-columns:1fr}}
-@media(max-width:700px){.app{display:block}.sidebar{position:static;height:auto}.nav{flex-direction:row;overflow:auto}.nav button{font-size:13px;white-space:nowrap}.main{padding:18px}.grid{grid-template-columns:1fr 1fr}.project-page .hero{display:block}.stage{grid-template-columns:1fr 1fr}.stage > *:first-child{grid-column:1/-1}}
-</style>
-</head>
-<body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="brand">ALI Project<br><span>AP Control</span></div>
-    <div class="nav">
-      <button class="active" data-view="dashboard">Главная</button>
-      <button data-view="projects">Объекты</button>
-      <button data-view="tasks">Задачи</button>
-      <button data-view="schedule">График работ</button>
-      <button data-view="finance">Финансы</button>
-      <button data-view="docs">Документы</button>
-      <button data-view="supply">Снабжение</button>
-      <button data-view="people">Сотрудники</button>
-      <button data-view="journal">Журнал</button>
-    </div>
-  </aside>
-
-  <main class="main">
-    <section id="dashboardView">
-      <div class="topbar">
-        <div>
-          <div class="title">Главная</div>
-          <div class="subtitle">Оперативная картина по всем объектам</div>
-        </div>
-        <div class="actions">
-          <button class="btn ghost">+ Задача</button>
-          <button class="btn primary" id="newProjectBtn">+ Новый объект</button>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="card kpi"><div class="value">4</div><div class="label">Активных объекта</div></div>
-        <div class="card kpi"><div class="value">10</div><div class="label">Открытых задач</div></div>
-        <div class="card kpi"><div class="value">6</div><div class="label">Просрочено</div></div>
-        <div class="card kpi"><div class="value">2</div><div class="label">На проверке</div></div>
-      </div>
-
-      <div class="section">
-        <h3>Объекты</h3>
-        <div class="projects" id="projectGrid"></div>
-      </div>
-
-      <div class="section">
-        <h3>Требует внимания</h3>
-        <div class="attn">
-          <div class="attn-item"><span class="dot red"></span><div><b>ЖК Кенже</b><div class="small">Монолит 3 этажа просрочен на 4 дня</div></div></div>
-          <div class="attn-item"><span class="dot orange"></span><div><b>ЖК Нальчик</b><div class="small">Не загружен акт выполненных работ</div></div></div>
-          <div class="attn-item"><span class="dot orange"></span><div><b>ЖК Чегет</b><div class="small">Заявка на бетон ожидает согласования</div></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projectView" class="hidden project-page">
-      <div class="topbar">
-        <div>
-          <button class="btn ghost" id="backBtn">← К объектам</button>
-        </div>
-        <div class="actions"><button class="btn primary">+ Новый этап</button></div>
-      </div>
-      <div class="card hero">
-        <div>
-          <div class="title" id="projectTitle">ЖК Нальчик</div>
-          <div class="subtitle">Карточка объекта</div>
-        </div>
-        <div><span class="badge">В строительстве</span></div>
-      </div>
-      <div class="tabs">
-        <button class="tab active">Обзор</button>
-        <button class="tab">Работы</button>
-        <button class="tab">Задачи</button>
-        <button class="tab">График</button>
-        <button class="tab">Финансы</button>
-        <button class="tab">Документы</button>
-        <button class="tab">Материалы</button>
-        <button class="tab">Фото</button>
-        <button class="tab">Команда</button>
-        <button class="tab">Журнал</button>
-      </div>
-      <div class="card">
-        <h3 style="margin-top:0">Этапы строительства</h3>
-        <div class="stage-list">
-          <div class="stage"><div><b>Монолит</b><div class="small">Ответственный: Мурат Асланов</div></div><div><span class="status s-work">В работе</span></div><div>68%</div><div>01.10 - 12.10</div><div>1 850 000 ₽</div></div>
-          <div class="stage"><div><b>Кладка</b><div class="small">Ответственный: Заур Канаметов</div></div><div><span class="status s-check">На проверке</span></div><div>44%</div><div>05.10 - 20.10</div><div>980 000 ₽</div></div>
-          <div class="stage"><div><b>Электрика</b><div class="small">Ответственный: Тимур Альбертович</div></div><div><span class="status s-done">Принято</span></div><div>100%</div><div>20.09 - 30.09</div><div>640 000 ₽</div></div>
-          <div class="stage"><div><b>Фасад</b><div class="small">Ответственный: не назначен</div></div><div><span class="status s-late">Просрочено</span></div><div>12%</div><div>01.10 - 15.10</div><div>2 400 000 ₽</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="placeholderView" class="hidden">
-      <div class="topbar">
-        <div><div class="title" id="placeholderTitle">Раздел</div><div class="subtitle">Каркас модуля заложен в v0.1</div></div>
-      </div>
-      <div class="card">Этот раздел подключим следующим шагом к общей модели объектов, этапов, задач, документов и истории действий.</div>
-    </section>
-  </main>
-</div>
-
-<div class="modal-back hidden" id="modalBack">
-  <div class="modal">
-    <h3>Новый объект</h3>
-    <div class="form">
-      <div><label>Название объекта</label><input id="mName" placeholder="Например, ЖК Новый" /></div>
-      <div><label>Ответственный</label><input id="mOwner" placeholder="ФИО" /></div>
-      <div><label>Статус</label><select id="mStatus"><option>В строительстве</option><option>Проектирование</option><option>Подготовка</option></select></div>
-    </div>
-    <div class="modal-actions"><button class="btn ghost" id="cancelModal">Отмена</button><button class="btn primary" id="saveProject">Создать</button></div>
-  </div>
-</div>
-
+:root{--nav:#274d73;--nav2:#1f3f60;--bg:#f4f7fa;--paper:#fff;--ink:#203243;--muted:#7b8b99;--line:#dfe6ec;--blue:#2f6fa6;--green:#62b18d;--amber:#e2ad5a;--red:#d76d6d;--shadow:0 10px 28px rgba(37,66,91,.08)}*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.app{display:grid;grid-template-columns:74px 238px minmax(0,1fr) 300px;min-height:100vh}.rail{background:var(--nav);color:#fff;display:flex;flex-direction:column;align-items:center;padding:14px 0;position:sticky;top:0;height:100vh}.logo{width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:12px;display:grid;place-items:center;font-weight:800;margin-bottom:18px;background:rgba(255,255,255,.07)}.rail button{width:44px;height:44px;border:0;background:transparent;color:#dce8f4;border-radius:10px;margin:3px 0;font-size:18px}.rail button:hover,.rail button.active{background:rgba(255,255,255,.14);color:#fff}.rail .spacer{flex:1}.rail small{writing-mode:vertical-rl;transform:rotate(180deg);opacity:.6;font-size:10px;margin-bottom:10px}.side{background:#f9fbfc;border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow:auto}.sideHead{padding:22px 18px 16px;border-bottom:1px solid var(--line)}.brand{font-weight:800;font-size:16px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.sideSection{padding:14px 10px 4px}.sideLabel{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#9aabb8;padding:0 10px 7px;font-weight:800}.side button{width:100%;border:0;background:transparent;text-align:left;color:#536576;padding:10px 12px;border-radius:9px;margin:2px 0;display:flex;align-items:center}.side button:hover,.side button.active{background:#eaf1f7;color:var(--blue);font-weight:700}.count{margin-left:auto;font-size:11px;background:#e2edf6;color:var(--blue);padding:2px 7px;border-radius:999px}.main{min-width:0;padding:0 22px 42px}.top{height:68px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(244,247,250,.94);backdrop-filter:blur(10px);z-index:4}.search{flex:1;max-width:520px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 12px;color:var(--muted)}.search input{border:0;outline:0;width:100%}.topActions{margin-left:auto;display:flex;gap:8px}.btn,.iconBtn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:9px 12px}.iconBtn{width:38px;height:38px;padding:0}.btn.primary{background:var(--nav);border-color:var(--nav);color:#fff}.btn.soft{background:#eef4f8;color:var(--blue);border-color:#d7e5ef}.page{padding-top:20px}.pageHead{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}.pageHead h1{margin:0;font-size:24px}.pageHead p{margin:4px 0 0;color:var(--muted)}.pageHead .actions{margin-left:auto;display:flex;gap:8px}.tabs{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 16px}.tab{border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:9px;color:#637686}.tab.active{background:var(--nav);border-color:var(--nav);color:#fff}.card{background:var(--paper);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.empty{min-height:360px;display:grid;place-items:center;text-align:center;padding:35px}.empty .icon{width:64px;height:64px;border-radius:18px;background:#edf3f8;color:var(--blue);display:grid;place-items:center;font-size:27px;margin:0 auto 15px}.empty h3{font-size:18px;margin:0 0 7px}.empty p{color:var(--muted);max-width:450px;margin:0 auto 18px;line-height:1.55}.toolbar{display:flex;gap:8px;padding:13px 14px;border-bottom:1px solid var(--line)}.searchMini{min-width:220px;max-width:360px;flex:1}.searchMini input{width:100%;border:1px solid var(--line);padding:9px 11px;border-radius:8px;outline:0}.tableWrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:12px 14px;border-bottom:1px solid #edf1f4;text-align:left;white-space:nowrap}th{font-size:11px;color:#8393a1;text-transform:uppercase;letter-spacing:.06em;background:#fbfcfd}tbody tr:hover{background:#fafcfd}.status{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}.status:before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}.s-blue{background:#eaf2f8;color:#447ca7}.s-amber{background:#fff3dd;color:#b98127}.s-gray{background:#eef1f3;color:#75828d}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.kpi{padding:16px}.kpi .v{font-size:24px;font-weight:800}.kpi .l{color:var(--muted);font-size:12px;margin-top:4px}.projectShell{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px}.panel{padding:16px}.panel h3{margin:0 0 12px;font-size:15px}.stageTrack{display:flex;overflow:auto;padding:8px 0 14px}.stageNode{min-width:120px;text-align:center;position:relative;padding:0 8px}.stageNode:not(:last-child):after{content:'';position:absolute;top:13px;left:60%;right:-40%;height:2px;background:#d9e2e9}.stageDot{width:28px;height:28px;border-radius:50%;background:#e6edf2;border:6px solid #fff;box-shadow:0 0 0 1px #d9e3ea;margin:0 auto 8px;position:relative;z-index:1}.stageNode strong{font-size:11px;display:block}.stageNode small{color:var(--muted);font-size:10px}.projectTiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tile{border:1px solid var(--line);border-radius:11px;padding:14px;min-height:135px}.tile h4{margin:0 0 10px;font-size:13px}.placeholder{height:88px;border:1px dashed #cfd9e1;border-radius:9px;display:grid;place-items:center;color:#9aabb8;font-size:12px;background:#fbfdfe}.right{border-left:1px solid var(--line);background:#f9fbfc;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}.right h3{font-size:13px;margin:0 0 10px}.emptySmall{border:1px dashed #d1dbe3;border-radius:10px;padding:18px;text-align:center;color:#8a9aa7;background:#fff;font-size:12px;margin-bottom:18px}.modalBack{position:fixed;inset:0;background:rgba(20,35,48,.48);display:grid;place-items:center;padding:20px;z-index:40}.modal{width:min(620px,96vw);max-height:92vh;overflow:auto;background:#fff;border-radius:14px;box-shadow:0 24px 80px rgba(22,41,58,.28)}.modalHead{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center}.modalHead h3{margin:0}.modalHead button{margin-left:auto;border:0;background:transparent;font-size:20px}.modalBody{padding:18px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field.full{grid-column:1/-1}.field label{display:block;font-size:11px;color:#758795;margin-bottom:5px;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;outline:0;background:#fff}.field textarea{min-height:90px}.modalFoot{padding:14px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}.toast{position:fixed;right:22px;bottom:22px;background:#243f56;color:#fff;padding:12px 14px;border-radius:10px;z-index:60}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ganttEmpty{min-height:300px;background:linear-gradient(90deg,#fbfcfd 0,#fbfcfd 19.8%,#edf2f6 20%,#fbfcfd 20.2%);background-size:120px 100%;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;color:#8a9aa7}.employeeTabs{display:flex;gap:5px;border-bottom:1px solid var(--line);padding:0 16px}.employeeTabs button{border:0;background:transparent;padding:12px 10px;color:#6d7e8c;border-bottom:2px solid transparent}.employeeTabs button.active{color:var(--blue);border-color:var(--blue);font-weight:700}@media(max-width:1250px){.app{grid-template-columns:68px 220px minmax(0,1fr)}.right{display:none}}@media(max-width:900px){.app{grid-template-columns:62px minmax(0,1fr)}.side{display:none}.main{padding:0 14px 30px}.kpis{grid-template-columns:1fr 1fr}.projectShell{grid-template-columns:1fr}.formGrid{grid-template-columns:1fr}.field.full{grid-column:auto}}@media(max-width:560px){.rail{position:fixed;bottom:0;left:0;right:0;top:auto;height:62px;width:100%;flex-direction:row;justify-content:space-around;padding:6px}.logo,.rail .spacer,.rail small,.rail button:nth-of-type(n+6){display:none}.rail button{margin:0}.app{display:block}.main{padding-bottom:78px}.kpis,.projectTiles,.split{grid-template-columns:1fr}.pageHead{display:block}.pageHead .actions{margin-top:12px}.search{display:none}}
+</style></head><body>
+<div class='app'>
+<nav class='rail'><div class='logo'>AP</div><button class='active' data-view='home' title='Главная'>⌂</button><button data-view='projects'>▦</button><button data-view='tasks'>✓</button><button data-view='employees'>♙</button><button data-view='finance'>₽</button><button data-view='tools'>⚒</button><button data-view='clients'>◎</button><button data-view='cameras'>◉</button><button data-view='dashboards'>▤</button><div class='spacer'></div><small>ALI PROJECT CONTROL</small></nav>
+<aside class='side'><div class='sideHead'><div class='brand'>ALI Project Control<small>Строительная CRM / ERP</small></div></div><div class='sideSection'><div class='sideLabel'>Рабочее пространство</div><button class='active' data-view='home'>Обзор</button><button data-view='projects'>Объекты <span class='count' id='sideProjectCount'>0</span></button><button data-view='tasks'>Задачи <span class='count' id='sideTaskCount'>0</span></button></div><div class='sideSection'><div class='sideLabel'>Управление</div><button data-view='employees'>Сотрудники <span class='count' id='sideEmployeeCount'>0</span></button><button data-view='clients'>Клиенты <span class='count' id='sideClientCount'>0</span></button><button data-view='finance'>Финансы</button><button data-view='tools'>Инструменты <span class='count' id='sideToolCount'>0</span></button><button data-view='cameras'>Камеры <span class='count' id='sideCameraCount'>0</span></button><button data-view='dashboards'>Дашборды</button></div><div class='sideSection'><div class='sideLabel'>Система</div><button data-view='settings'>Настройки</button></div></aside>
+<main class='main'><header class='top'><div class='search'>⌕ <input id='globalSearch' placeholder='Поиск по AP Control'></div><div class='topActions'><button class='iconBtn'>♢</button><button class='iconBtn'>?</button><button class='btn soft'>Профиль</button></div></header><div id='content'></div></main>
+<aside class='right'><h3>Новые задачи</h3><div class='emptySmall' id='rightTasks'>Новых задач пока нет</div><h3>Напоминания</h3><div class='emptySmall'>Напоминаний пока нет</div><h3>Уведомления</h3><div class='emptySmall'>Новых уведомлений нет</div></aside></div><div id='modalHost'></div><div id='toastHost'></div>
 <script>
-const projects = [
-  {name:'ЖК Нальчик', progress:63, issues:3, overdue:2},
-  {name:'ЖК Искож', progress:41, issues:1, overdue:0},
-  {name:'ЖК Кенже', progress:27, issues:4, overdue:3},
-  {name:'ЖК Чегет', progress:52, issues:2, overdue:1},
-];
-
-const grid = document.getElementById('projectGrid');
-
-function renderProjects(){
-  grid.innerHTML='';
-  projects.forEach((p,i)=>{
-    const el=document.createElement('div');
-    el.className='card project';
-    el.innerHTML=`
-      <div class="project-head"><b>${p.name}</b><span class="badge">В строительстве</span></div>
-      <div class="progress"><div style="width:${p.progress}%"></div></div>
-      <div class="meta"><span>Прогресс: ${p.progress}%</span><span>Проблемы: ${p.issues}</span><span>Просрочки: ${p.overdue}</span></div>`;
-    el.onclick=()=>openProject(i);
-    grid.appendChild(el);
-  });
-}
-renderProjects();
-
-const dashboardView=document.getElementById('dashboardView');
-const projectView=document.getElementById('projectView');
-const placeholderView=document.getElementById('placeholderView');
-const placeholderTitle=document.getElementById('placeholderTitle');
-
-function show(el){
-  [dashboardView,projectView,placeholderView].forEach(x=>x.classList.add('hidden'));
-  el.classList.remove('hidden');
-}
-
-function openProject(i){
-  document.getElementById('projectTitle').textContent=projects[i].name;
-  show(projectView);
-}
-document.getElementById('backBtn').onclick=()=>show(dashboardView);
-
-document.querySelectorAll('.nav button').forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
-    btn.classList.add('active');
-    const v=btn.dataset.view;
-    if(v==='dashboard'||v==='projects') show(dashboardView);
-    else {
-      placeholderTitle.textContent=btn.textContent;
-      show(placeholderView);
-    }
-  }
-});
-
-const modalBack=document.getElementById('modalBack');
-document.getElementById('newProjectBtn').onclick=()=>modalBack.classList.remove('hidden');
-document.getElementById('cancelModal').onclick=()=>modalBack.classList.add('hidden');
-document.getElementById('saveProject').onclick=()=>{
-  const name=document.getElementById('mName').value.trim();
-  if(!name) return alert('Введите название объекта');
-  projects.push({name,progress:0,issues:0,overdue:0});
-  renderProjects();
-  modalBack.classList.add('hidden');
-  document.getElementById('mName').value='';
-};
-modalBack.onclick=e=>{ if(e.target===modalBack) modalBack.classList.add('hidden'); };
-
-document.querySelectorAll('.tab').forEach(tab=>{
-  tab.onclick=()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-    tab.classList.add('active');
-  }
-});
-</script>
-</body>
-</html>
+const DBKEY='ap_control_v02',seed={projects:[],tasks:[],employees:[],clients:[],tools:[],cameras:[],finance:[],activity:[]};let db=JSON.parse(localStorage.getItem(DBKEY)||'null')||JSON.parse(JSON.stringify(seed)),currentView='home',taskMode='list',taskFilter='active',employeeTab='info';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function save(){localStorage.setItem(DBKEY,JSON.stringify(db));counts()}function toast(t){$('#toastHost').innerHTML='<div class="toast">'+esc(t)+'</div>';setTimeout(()=>$('#toastHost').innerHTML='',2000)}function counts(){$('#sideProjectCount').textContent=db.projects.length;$('#sideTaskCount').textContent=db.tasks.filter(x=>x.status!=='Завершена').length;$('#sideEmployeeCount').textContent=db.employees.length;$('#sideClientCount').textContent=db.clients.length;$('#sideToolCount').textContent=db.tools.length;$('#sideCameraCount').textContent=db.cameras.length;$('#rightTasks').textContent=db.tasks.length?db.tasks.filter(x=>x.status!=='Завершена').length+' активных задач':'Новых задач пока нет'}
+function empty(i,t,p,b='',a=''){return `<div class='card empty'><div><div class='icon'>${i}</div><h3>${t}</h3><p>${p}</p>${b?`<button class='btn primary' onclick="${a}">${b}</button>`:''}</div></div>`}function head(t,s,b=''){return `<div class='pageHead'><div><h1>${t}</h1><p>${s}</p></div><div class='actions'>${b}</div></div>`}
+function setView(v){currentView=v;$$('.rail button,.side button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));render()}$$('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
+function modal(t,body,saveFn,saveText='Сохранить'){$('#modalHost').innerHTML=`<div class='modalBack' id='modalBack'><div class='modal'><div class='modalHead'><h3>${t}</h3><button onclick='closeModal()'>×</button></div><div class='modalBody'>${body}</div><div class='modalFoot'><button class='btn' onclick='closeModal()'>Отмена</button><button class='btn primary' id='modalSave'>${saveText}</button></div></div></div>`;$('#modalSave').onclick=saveFn;$('#modalBack').onclick=e=>{if(e.target.id==='modalBack')closeModal()}}function closeModal(){$('#modalHost').innerHTML=''}
+function newProject(){modal('Новый объект',`<div class='formGrid'><div class='field full'><label>Название объекта *</label><input id='pName'></div><div class='field'><label>Тип процесса</label><select id='pType'><option>Строительство</option><option>Проектирование</option><option>Отделка</option></select></div><div class='field'><label>Статус</label><select id='pStatus'><option>Подготовка</option><option>Активен</option></select></div><div class='field full'><label>Адрес</label><input id='pAddr'></div><div class='field'><label>Дата начала</label><input id='pStart' type='date'></div><div class='field'><label>Плановое завершение</label><input id='pEnd' type='date'></div><div class='field full'><label>Описание</label><textarea id='pDesc'></textarea></div></div>`,()=>{let n=$('#pName').value.trim();if(!n)return toast('Введите название объекта');db.projects.push({id:uid(),name:n,type:$('#pType').value,status:$('#pStatus').value,address:$('#pAddr').value,start:$('#pStart').value,end:$('#pEnd').value,desc:$('#pDesc').value,stages:[],docs:[],photos:[]});save();closeModal();render();toast('Объект создан')},'Создать объект')}
+function newTask(){modal('Новая задача',`<div class='formGrid'><div class='field full'><label>Название *</label><input id='tName'></div><div class='field'><label>Объект</label><select id='tProject'><option value=''>Без объекта</option>${db.projects.map(p=>`<option value='${p.id}'>${esc(p.name)}</option>`).join('')}</select></div><div class='field'><label>Исполнитель</label><select id='tExec'><option value=''>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class='field'><label>Срок</label><input id='tDue' type='date'></div><div class='field'><label>Приоритет</label><select id='tPri'><option>Обычный</option><option>Высокий</option><option>Критический</option></select></div><div class='field full'><label>Описание</label><textarea id='tDesc'></textarea></div></div>`,()=>{let n=$('#tName').value.trim();if(!n)return toast('Введите название задачи');db.tasks.push({id:uid(),name:n,projectId:$('#tProject').value,executor:$('#tExec').value,due:$('#tDue').value,priority:$('#tPri').value,desc:$('#tDesc').value,status:'Активная'});save();closeModal();render();toast('Задача создана')},'Создать задачу')}
+function newEmployee(){modal('Новый сотрудник',`<div class='formGrid'><div class='field full'><label>ФИО *</label><input id='eName'></div><div class='field'><label>Должность</label><input id='eJob'></div><div class='field'><label>Роль</label><select id='eRole'><option>Работник</option><option>Админ</option><option>Бухгалтер</option><option>Суперадмин</option></select></div><div class='field'><label>Телефон</label><input id='ePhone'></div><div class='field'><label>Email</label><input id='eMail'></div><div class='field'><label>Telegram</label><input id='eTg'></div><div class='field'><label>Дата приема</label><input id='eDate' type='date'></div></div>`,()=>{let n=$('#eName').value.trim();if(!n)return toast('Введите ФИО');db.employees.push({id:uid(),name:n,job:$('#eJob').value,role:$('#eRole').value,phone:$('#ePhone').value,email:$('#eMail').value,tg:$('#eTg').value,date:$('#eDate').value,status:'Ожидает активации'});save();closeModal();render();toast('Сотрудник добавлен')},'Добавить сотрудника')}
+function newClient(){modal('Новый клиент',`<div class='formGrid'><div class='field full'><label>Имя / компания *</label><input id='cName'></div><div class='field'><label>Телефон</label><input id='cPhone'></div><div class='field'><label>Email</label><input id='cMail'></div><div class='field'><label>WhatsApp</label><input id='cWa'></div><div class='field'><label>Telegram</label><input id='cTg'></div></div>`,()=>{let n=$('#cName').value.trim();if(!n)return toast('Введите клиента');db.clients.push({id:uid(),name:n,phone:$('#cPhone').value,email:$('#cMail').value,wa:$('#cWa').value,tg:$('#cTg').value});save();closeModal();render();toast('Клиент добавлен')},'Добавить клиента')}
+function newTool(){modal('Новый инструмент / имущество',`<div class='formGrid'><div class='field full'><label>Наименование *</label><input id='iName'></div><div class='field'><label>Инвентарный номер</label><input id='iNum'></div><div class='field'><label>Стоимость</label><input id='iCost' type='number'></div><div class='field'><label>Статус</label><select id='iStatus'><option>Склад</option><option>Выдан</option><option>Ремонт</option></select></div><div class='field'><label>Ответственный</label><select id='iResp'><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div></div>`,()=>{let n=$('#iName').value.trim();if(!n)return toast('Введите наименование');db.tools.push({id:uid(),name:n,num:$('#iNum').value,cost:$('#iCost').value,status:$('#iStatus').value,responsible:$('#iResp').value});save();closeModal();render();toast('Инструмент добавлен')},'Добавить')}
+function newCamera(){modal('Новая камера',`<div class='formGrid'><div class='field full'><label>Название *</label><input id='camName'></div><div class='field'><label>Объект</label><select id='camProject'><option value=''>Не выбран</option>${db.projects.map(p=>`<option value='${p.id}'>${esc(p.name)}</option>`).join('')}</select></div><div class='field'><label>Тип</label><select id='camType'><option>RTSP / ONVIF</option><option>Snapshot / FTP</option></select></div><div class='field full'><label>URL / адрес потока</label><input id='camUrl'></div></div>`,()=>{let n=$('#camName').value.trim();if(!n)return toast('Введите название камеры');db.cameras.push({id:uid(),name:n,projectId:$('#camProject').value,type:$('#camType').value,url:$('#camUrl').value,status:'Не подключена'});save();closeModal();render();toast('Камера добавлена')},'Добавить камеру')}
+function newStage(pid){modal('Новый этап',`<div class='formGrid'><div class='field full'><label>Название этапа *</label><input id='sName'></div><div class='field'><label>Начало</label><input id='sStart' type='date'></div><div class='field'><label>Окончание</label><input id='sEnd' type='date'></div><div class='field'><label>Ответственный</label><select id='sResp'><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class='field'><label>Проверяющий</label><select id='sCheck'><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class='field'><label>Стоимость</label><input id='sCost' type='number'></div><div class='field'><label>Статус</label><select id='sStatus'><option>Не начат</option><option>В работе</option><option>На проверке</option><option>Завершен</option></select></div></div>`,()=>{let p=db.projects.find(x=>x.id===pid),n=$('#sName').value.trim();if(!n)return toast('Введите этап');p.stages.push({id:uid(),name:n,start:$('#sStart').value,end:$('#sEnd').value,responsible:$('#sResp').value,checker:$('#sCheck').value,cost:$('#sCost').value,status:$('#sStatus').value});save();closeModal();renderProject(pid);toast('Этап добавлен')},'Добавить этап')}
+function renderHome(){let has=db.projects.length||db.tasks.length||db.employees.length;$('#content').innerHTML=`<section class='page'>${head('Обзор','Центр управления компанией',`<button class='btn primary' onclick='newProject()'>+ Новый объект</button>`)}${has?`<div class='kpis'><div class='card kpi'><div class='v'>${db.projects.length}</div><div class='l'>Объекты</div></div><div class='card kpi'><div class='v'>${db.tasks.filter(x=>x.status==='Активная').length}</div><div class='l'>Активные задачи</div></div><div class='card kpi'><div class='v'>${db.employees.length}</div><div class='l'>Сотрудники</div></div><div class='card kpi'><div class='v'>${db.finance.length}</div><div class='l'>Финансовые операции</div></div></div><div class='split'><div class='card panel'><h3>Объекты</h3>${db.projects.length?db.projects.map(p=>`<div style='padding:10px 0;border-bottom:1px solid #edf1f4'><button style='border:0;background:none;color:var(--blue);font-weight:700;padding:0' onclick="openProject('${p.id}')">${esc(p.name)}</button><div style='font-size:12px;color:var(--muted);margin-top:3px'>${esc(p.type)} · ${esc(p.status)}</div></div>`).join(''):`<div class='placeholder'>Нет объектов</div>`}</div><div class='card panel'><h3>Последние события</h3><div class='placeholder'>Журнал пока пуст</div></div></div>`:empty('▦','Система готова к работе','Создайте первый объект. После этого здесь автоматически появятся реальные показатели, события и рабочие данные.','Создать первый объект','newProject()')}</section>`}
+function renderProjects(){$('#content').innerHTML=`<section class='page'>${head('Объекты','Строительство · Проектирование · Отделка',`<button class='btn primary' onclick='newProject()'>+ Новый объект</button>`)}<div class='tabs'><button class='tab active'>Активные (${db.projects.length})</button><button class='tab'>Архив (0)</button></div>${db.projects.length?`<div class='card'><div class='toolbar'><div class='searchMini'><input placeholder='Найти объект' oninput="filterRows(this.value,'projectRow')"></div></div><div class='tableWrap'><table><thead><tr><th>Объект</th><th>Тип</th><th>Статус</th><th>Адрес</th><th>Этапы</th><th></th></tr></thead><tbody>${db.projects.map(p=>`<tr class='projectRow'><td><b>${esc(p.name)}</b></td><td>${esc(p.type)}</td><td><span class='status s-blue'>${esc(p.status)}</span></td><td>${esc(p.address||'—')}</td><td>${p.stages.length}</td><td><button class='btn soft' onclick="openProject('${p.id}')">Открыть</button></td></tr>`).join('')}</tbody></table></div></div>`:empty('▦','Объектов пока нет','Добавьте первый объект. Структура этапов, задачи, документы, команда и финансы будут храниться внутри него.','+ Новый объект','newProject()')}</section>`}
+function openProject(pid){renderProject(pid)}function renderProject(pid){let p=db.projects.find(x=>x.id===pid);if(!p)return setView('projects');$('#content').innerHTML=`<section class='page'>${head(esc(p.name),`${esc(p.type)} · ${esc(p.address||'Адрес не указан')}`,`<button class='btn' onclick="setView('projects')">← Объекты</button><button class='btn primary' onclick="newStage('${p.id}')">+ Этап</button>`)}<div class='tabs'><button class='tab active'>Обзор</button><button class='tab' onclick="projectStages('${p.id}')">Этапы</button><button class='tab' onclick="setView('tasks')">Задачи</button><button class='tab'>Финансы</button><button class='tab'>Документы</button><button class='tab'>Галерея</button><button class='tab'>Камеры</button><button class='tab'>Лента активности</button></div><div class='projectShell'><div><div class='card panel' style='margin-bottom:12px'><h3>Этапы проекта</h3>${p.stages.length?`<div class='stageTrack'>${p.stages.map(s=>`<div class='stageNode'><div class='stageDot' style='background:${s.status==='Завершен'?'var(--green)':s.status==='В работе'?'var(--blue)':'#e6edf2'}'></div><strong>${esc(s.name)}</strong><small>${esc(s.status)}</small></div>`).join('')}</div>`:`<div class='placeholder'>Этапы пока не добавлены</div>`}</div><div class='projectTiles'><div class='tile'><h4>Документы проекта</h4><div class='placeholder'>Нет документов</div></div><div class='tile'><h4>Галерея</h4><div class='placeholder'>Нет фотографий</div></div><div class='tile'><h4>Онлайн-камера</h4><div class='placeholder'>Камеры не подключены</div></div><div class='tile'><h4>Последние события</h4><div class='placeholder'>Событий пока нет</div></div></div></div><div class='card panel'><h3>Информация</h3><p><b>Статус:</b> ${esc(p.status)}</p><p><b>Начало:</b> ${esc(p.start||'—')}</p><p><b>План:</b> ${esc(p.end||'—')}</p><p><b>Этапов:</b> ${p.stages.length}</p><hr style='border:0;border-top:1px solid var(--line)'><p style='color:var(--muted);line-height:1.5'>${esc(p.desc||'Описание пока не добавлено.')}</p></div></div></section>`}
+function projectStages(pid){let p=db.projects.find(x=>x.id===pid);$('#content').innerHTML=`<section class='page'>${head(`${esc(p.name)} · Этапы`,'Планирование и контроль работ',`<button class='btn' onclick="renderProject('${pid}')">← Обзор</button><button class='btn primary' onclick="newStage('${pid}')">+ Новый этап</button>`)}${p.stages.length?`<div class='card'><div class='tableWrap'><table><thead><tr><th>Этап</th><th>Статус</th><th>Начало</th><th>Окончание</th><th>Ответственный</th><th>Проверяющий</th><th>Стоимость</th></tr></thead><tbody>${p.stages.map(s=>`<tr><td><b>${esc(s.name)}</b></td><td><span class='status s-blue'>${esc(s.status)}</span></td><td>${esc(s.start||'—')}</td><td>${esc(s.end||'—')}</td><td>${esc(s.responsible)}</td><td>${esc(s.checker)}</td><td>${s.cost?Number(s.cost).toLocaleString('ru-RU')+' ₽':'—'}</td></tr>`).join('')}</tbody></table></div></div>`:empty('◌','Этапов пока нет','Добавьте основной этап.','+ Новый этап',`newStage('${pid}')`)}</section>`}
+function renderTasks(){let rows=db.tasks.filter(t=>taskFilter==='active'?t.status==='Активная':taskFilter==='done'?t.status==='Завершена':true);$('#content').innerHTML=`<section class='page'>${head('Задачи','Постановка, исполнение, проверка и сроки',`<button class='btn primary' onclick='newTask()'>+ Новая задача</button>`)}<div class='tabs'><button class='tab ${taskMode==='list'?'active':''}' onclick="taskMode='list';renderTasks()">Список</button><button class='tab ${taskMode==='gantt'?'active':''}' onclick="taskMode='gantt';renderTasks()">Гант</button><button class='tab ${taskFilter==='active'?'active':''}' onclick="taskFilter='active';renderTasks()">Активные (${db.tasks.filter(x=>x.status==='Активная').length})</button><button class='tab ${taskFilter==='done'?'active':''}' onclick="taskFilter='done';renderTasks()">Завершены (${db.tasks.filter(x=>x.status==='Завершена').length})</button><button class='tab'>Просрочены (0)</button><button class='tab'>Архив (0)</button></div>${taskMode==='gantt'?(rows.length?`<div class='ganttEmpty'>Gantt будет строиться по созданным задачам и датам</div>`:empty('▥','Гант пока пуст','Создайте задачи со сроками — временная шкала появится автоматически.','+ Новая задача','newTask()')):(rows.length?`<div class='card'><div class='toolbar'><div class='searchMini'><input placeholder='Найти задачу' oninput="filterRows(this.value,'taskRow')"></div></div><div class='tableWrap'><table><thead><tr><th>Задача</th><th>Объект</th><th>Исполнитель</th><th>Срок</th><th>Приоритет</th><th>Статус</th></tr></thead><tbody>${rows.map(t=>{let p=db.projects.find(x=>x.id===t.projectId);return `<tr class='taskRow'><td><b>${esc(t.name)}</b></td><td>${esc(p?.name||'—')}</td><td>${esc(t.executor||'—')}</td><td>${esc(t.due||'—')}</td><td>${esc(t.priority)}</td><td><span class='status s-blue'>${esc(t.status)}</span></td></tr>`}).join('')}</tbody></table></div></div>`:empty('✓','Список задач пуст','Создайте первую задачу.','+ Новая задача','newTask()'))}</section>`}
+function renderEmployees(){$('#content').innerHTML=`<section class='page'>${head('Сотрудники','Команда, роли, доступы и занятость',`<button class='btn primary' onclick='newEmployee()'>+ Новый сотрудник</button>`)}<div class='tabs'><button class='tab active'>Активные (${db.employees.length})</button><button class='tab'>Неактивные (0)</button><button class='tab'>Архив (0)</button></div>${db.employees.length?`<div class='card'><div class='tableWrap'><table><thead><tr><th>Сотрудник</th><th>Должность</th><th>Роль</th><th>Телефон</th><th>Email</th><th>Статус</th></tr></thead><tbody>${db.employees.map(e=>`<tr onclick="openEmployee('${e.id}')" style='cursor:pointer'><td><b>${esc(e.name)}</b></td><td>${esc(e.job||'—')}</td><td>${esc(e.role)}</td><td>${esc(e.phone||'—')}</td><td>${esc(e.email||'—')}</td><td><span class='status s-amber'>${esc(e.status)}</span></td></tr>`).join('')}</tbody></table></div></div>`:empty('♙','Сотрудников пока нет','Добавьте сотрудника и назначьте ему должность и роль.','+ Новый сотрудник','newEmployee()')}</section>`}
+function openEmployee(eid){let e=db.employees.find(x=>x.id===eid);$('#content').innerHTML=`<section class='page'>${head(esc(e.name),`${esc(e.job||'Должность не указана')} · ${esc(e.role)}`,`<button class='btn' onclick='renderEmployees()'>← Сотрудники</button>`)}<div class='card'><div class='employeeTabs'>${['info','tasks','tools','busy','trips','money'].map((x,i)=>`<button class='${employeeTab===x?'active':''}' onclick="employeeTab='${x}';openEmployee('${eid}')">${['Информация','Задачи','Инструменты','Занятость','Поездки','Финансы'][i]}</button>`).join('')}</div><div class='panel'>${employeeTab==='info'?`<div class='split'><div><p><b>Телефон:</b> ${esc(e.phone||'—')}</p><p><b>Email:</b> ${esc(e.email||'—')}</p><p><b>Telegram:</b> ${esc(e.tg||'—')}</p></div><div><p><b>Статус аккаунта:</b> ${esc(e.status)}</p><p><b>Роль:</b> ${esc(e.role)}</p></div></div>`:employeeTab==='tasks'?`<div class='placeholder'>Задачи сотрудника пока отсутствуют</div>`:employeeTab==='tools'?`<div class='placeholder'>Инструменты сотруднику не выданы</div>`:employeeTab==='busy'?`<div class='ganttEmpty'>Занятость будет строиться из назначенных этапов</div>`:employeeTab==='trips'?`<div class='placeholder'>Поездок пока нет</div>`:`<div class='placeholder'>Финансовых операций пока нет</div>`}</div></div></section>`}
+function renderClients(){$('#content').innerHTML=`<section class='page'>${head('Клиенты','Заказчики и доступ к объектам',`<button class='btn primary' onclick='newClient()'>+ Новый клиент</button>`)}<div class='tabs'><button class='tab active'>Активные (${db.clients.length})</button><button class='tab'>Архив (0)</button></div>${db.clients.length?`<div class='card'><div class='tableWrap'><table><thead><tr><th>Клиент</th><th>Телефон</th><th>Email</th><th>WhatsApp</th><th>Telegram</th></tr></thead><tbody>${db.clients.map(c=>`<tr><td><b>${esc(c.name)}</b></td><td>${esc(c.phone||'—')}</td><td>${esc(c.email||'—')}</td><td>${esc(c.wa||'—')}</td><td>${esc(c.tg||'—')}</td></tr>`).join('')}</tbody></table></div></div>`:empty('◎','Активных клиентов нет','Добавьте клиента и позже привяжите его к объектам.','+ Новый клиент','newClient()')}</section>`}
+function renderTools(){$('#content').innerHTML=`<section class='page'>${head('Инструменты и имущество','Склад, выдача, возврат и ремонт',`<button class='btn primary' onclick='newTool()'>+ Новый инструмент</button>`)}<div class='tabs'><button class='tab active'>Все (${db.tools.length})</button><button class='tab'>Мои (0)</button><button class='tab'>Склад (${db.tools.filter(x=>x.status==='Склад').length})</button><button class='tab'>Ремонт (${db.tools.filter(x=>x.status==='Ремонт').length})</button></div>${db.tools.length?`<div class='card'><div class='tableWrap'><table><thead><tr><th>Инструмент</th><th>Инв. №</th><th>Статус</th><th>Ответственный</th><th>Стоимость</th></tr></thead><tbody>${db.tools.map(i=>`<tr><td><b>${esc(i.name)}</b></td><td>${esc(i.num||'—')}</td><td><span class='status s-blue'>${esc(i.status)}</span></td><td>${esc(i.responsible)}</td><td>${i.cost?Number(i.cost).toLocaleString('ru-RU')+' ₽':'—'}</td></tr>`).join('')}</tbody></table></div></div>`:empty('⚒','Список инструментов пуст','Добавьте инструмент или имущество.','+ Новый инструмент','newTool()')}</section>`}
+function renderFinance(){$('#content').innerHTML=`<section class='page'>${head('Финансы','Договоры, начисления, выплаты и акты',`<button class='btn primary' onclick="toast('Форма финансовой операции будет подключена далее')">+ Операция</button>`)}<div class='tabs'><button class='tab active'>Объекты</button><button class='tab'>Сотрудники</button><button class='tab'>Акты</button><button class='tab'>Платежи</button></div>${empty('₽','Финансовые данные отсутствуют','Здесь появятся договоры, стоимость этапов, акты, оплаты и операции сотрудников.')}</section>`}
+function renderCameras(){$('#content').innerHTML=`<section class='page'>${head('Камеры','Видеоконтроль и фотофиксация объектов',`<button class='btn primary' onclick='newCamera()'>+ Новая камера</button>`)}${db.cameras.length?`<div class='card'><div class='tableWrap'><table><thead><tr><th>Камера</th><th>Объект</th><th>Тип</th><th>Статус</th></tr></thead><tbody>${db.cameras.map(c=>{let p=db.projects.find(x=>x.id===c.projectId);return `<tr><td><b>${esc(c.name)}</b></td><td>${esc(p?.name||'—')}</td><td>${esc(c.type)}</td><td><span class='status s-gray'>${esc(c.status)}</span></td></tr>`}).join('')}</tbody></table></div></div>`:empty('◉','Камеры не подключены','Добавьте камеру и привяжите ее к объекту.','+ Новая камера','newCamera()')}</section>`}
+function renderDashboards(){$('#content').innerHTML=`<section class='page'>${head('Дашборды','Аналитика появляется только из реальных данных')}${empty('▤','Недостаточно данных для аналитики','После появления объектов, этапов, задач, финансов и занятости здесь автоматически сформируются графики и показатели.')}</section>`}
+function renderSettings(){$('#content').innerHTML=`<section class='page'>${head('Настройки','Компания, роли, права и интеграции')}<div class='split'><div class='card panel'><h3>Роли и права</h3><div class='placeholder'>Владелец · Суперадмин · Бухгалтер · Админ · Работник · Клиент</div></div><div class='card panel'><h3>Интеграции</h3><div class='placeholder'>Telegram · Email · Файлы</div></div></div></section>`}
+function filterRows(q,cls){q=q.toLowerCase();$$('.'+cls).forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?'':'none')}function render(){if(currentView==='home')renderHome();else if(currentView==='projects')renderProjects();else if(currentView==='tasks')renderTasks();else if(currentView==='employees')renderEmployees();else if(currentView==='clients')renderClients();else if(currentView==='tools')renderTools();else if(currentView==='finance')renderFinance();else if(currentView==='cameras')renderCameras();else if(currentView==='dashboards')renderDashboards();else renderSettings();counts()}counts();render();
+</script></body></html>
