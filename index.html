@@ -1,214 +1,259 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ALI Project Control — Dashboard</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AP Control v0.1</title>
 <style>
 :root{
-  --bg:#f4f6f8;
-  --panel:#ffffff;
-  --sidebar:#263947;
-  --sidebar-2:#21323e;
-  --text:#27313b;
-  --muted:#7f8c98;
-  --border:#e7ebef;
-  --accent:#4e78a0;
-  --accent-2:#6f8faa;
-  --green:#5d8f70;
-  --red:#c95b5b;
-  --orange:#c9974f;
-  --purple:#8b7799;
-  --blue:#5a9ac4;
-  --shadow:0 2px 8px rgba(28,45,58,.05);
+  --bg:#f6f8fb; --panel:#ffffff; --text:#172033; --muted:#7a8499;
+  --line:#e6eaf0; --primary:#3659b7; --primary2:#27479d;
+  --success:#20a66a; --warn:#ef9b28; --danger:#d9534f; --sidebar:#111827;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;background:var(--bg);color:var(--text)}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
 button,input{font:inherit}
-.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh;transition:.2s ease}
-.app.collapsed{grid-template-columns:68px 1fr}
-.sidebar{background:linear-gradient(180deg,var(--sidebar),var(--sidebar-2));color:#dfe8ee;position:sticky;top:0;height:100vh;padding:14px 12px;border-right:1px solid rgba(255,255,255,.04);overflow:hidden}
-.brand{display:flex;align-items:center;gap:10px;height:42px;padding:0 8px 12px;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
-.brand-mark{width:30px;height:30px;border-radius:6px;background:linear-gradient(135deg,#89a5ba,#4f6f86);display:grid;place-items:center;font-weight:800;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
-.brand-text{line-height:1.05;white-space:nowrap}.brand-text b{display:block;font-size:13px;letter-spacing:.08em}.brand-text span{font-size:10px;color:#aebdca;letter-spacing:.12em}
-.nav-section{margin:16px 8px 8px;font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:#7f96a6;white-space:nowrap}
-.nav a{height:36px;display:flex;align-items:center;gap:10px;color:#c9d6de;text-decoration:none;border-radius:5px;padding:0 10px;margin:2px 0;font-size:12px;white-space:nowrap}
-.nav a:hover{background:rgba(255,255,255,.05)}
-.nav a.active{background:#ffffff10;color:#fff;box-shadow:inset 3px 0 0 var(--accent-2)}
-.ico{width:20px;text-align:center;font-size:14px;opacity:.95;flex:0 0 20px}.label{transition:.2s ease}
-.app.collapsed .label,.app.collapsed .brand-text,.app.collapsed .nav-section{opacity:0;pointer-events:none}
-.app.collapsed .sidebar{padding-inline:8px}.app.collapsed .nav a{justify-content:center;padding:0}.app.collapsed .brand{justify-content:center;padding-left:0;padding-right:0}
-.main{min-width:0}
-.topbar{height:56px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 18px;position:sticky;top:0;z-index:5}
-.menu-btn{width:34px;height:34px;border:0;background:#eef2f5;border-radius:5px;color:#51616e;cursor:pointer}
-.search{flex:1;max-width:560px;position:relative}.search input{width:100%;height:34px;border:1px solid var(--border);background:#f8fafb;border-radius:5px;padding:0 34px 0 34px;outline:none;color:var(--text)}
-.search:before{content:'⌕';position:absolute;left:11px;top:5px;color:#9aa6af;font-size:20px}.kbd{position:absolute;right:9px;top:8px;font-size:10px;color:#9aa6af;border:1px solid #dfe5ea;border-radius:4px;padding:1px 5px;background:#fff}
-.top-actions{margin-left:auto;display:flex;align-items:center;gap:10px;color:#7e8b95}.icon-btn{border:0;background:transparent;color:#7e8b95;cursor:pointer;font-size:16px}
-.avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#d9e1e6,#aab7c0);display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700}.userbox{display:flex;align-items:center;gap:8px;font-size:12px;color:#5b6770}
-.content{padding:18px;max-width:1680px;margin:0 auto}
-.headline{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px}.headline h1{font-size:18px;margin:0;font-weight:600}.headline p{margin:4px 0 0;font-size:11px;color:var(--muted)}
-.period{display:flex;gap:4px}.period button{height:28px;border:1px solid var(--border);background:#fff;color:#7a8791;border-radius:4px;font-size:10px;padding:0 10px;cursor:pointer}.period button.active{background:#eef3f7;color:#435a6c}
-.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}.card{background:var(--panel);border:1px solid var(--border);border-radius:6px;box-shadow:var(--shadow)}
-.kpi{padding:14px 15px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between}.kpi-top{display:flex;justify-content:space-between;align-items:flex-start}.kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.kpi-icon{width:28px;height:28px;border-radius:4px;background:#f0f4f6;display:grid;place-items:center;color:#738594}.kpi-value{font-size:23px;line-height:1;font-weight:600;letter-spacing:-.02em}.kpi-foot{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted)}.delta.up{color:var(--green)}.delta.down{color:var(--red)}
-.grid-main{display:grid;grid-template-columns:minmax(0,2fr) minmax(320px,.9fr);gap:12px;margin-bottom:12px}.stack{display:grid;gap:12px}
-.panel-head{height:42px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--border)}.panel-head h3{font-size:12px;margin:0;font-weight:600}.subtle{font-size:10px;color:var(--muted)}
-.chart-wrap{padding:14px}.chart{height:238px;position:relative;overflow:hidden;background:linear-gradient(#fff,#fbfcfd)}
-.gridlines{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 47px,#edf0f2 48px),repeating-linear-gradient(to right,transparent 0,transparent 84px,#f2f4f6 85px)}
-.chart svg{position:absolute;inset:0;width:100%;height:100%}.axis{position:absolute;left:0;right:0;bottom:2px;display:flex;justify-content:space-between;padding:0 4px;font-size:9px;color:#9ba6ae}
-.legend{display:flex;gap:16px;margin-top:10px;font-size:10px;color:#7d8891}.legend i{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:5px}
-.objects{padding:0}.table{width:100%;border-collapse:collapse}.table th{height:36px;text-align:left;padding:0 12px;font-size:9px;color:#89959d;font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap}.table td{padding:11px 12px;font-size:11px;border-bottom:1px solid #eef1f3}.table tr:last-child td{border-bottom:0}.obj-name{font-weight:600}.bar{height:5px;background:#edf1f4;border-radius:4px;overflow:hidden;min-width:70px}.bar span{display:block;height:100%;background:#648aa8;border-radius:4px}.badge{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:10px;background:#eef2f4;color:#68757f;font-size:9px;white-space:nowrap}.badge.red{background:#f8ecec;color:#b35c5c}.badge.green{background:#edf5ef;color:#5e866b}.badge.orange{background:#f8f0e5;color:#a77838}
-.activity{padding:4px 14px 8px}.activity-item{display:grid;grid-template-columns:28px 1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid #eef1f3}.activity-item:last-child{border-bottom:0}.mini-avatar{width:28px;height:28px;border-radius:50%;background:#d9e1e6;display:grid;place-items:center;font-size:9px;color:#fff;font-weight:700}.activity-item b{font-size:10px;display:block}.activity-item span{font-size:9px;color:var(--muted);line-height:1.45}.time{font-size:9px;color:#a0abb2}.teamstats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}.teamstats div{padding:12px;text-align:center;border-right:1px solid var(--border)}.teamstats div:last-child{border-right:0}.teamstats b{display:block;font-size:16px}.teamstats span{font-size:9px;color:var(--muted)}
-.bottom-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:12px}.finance-body{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)}.finance-metric{padding:14px;border-right:1px solid var(--border)}.finance-metric:last-child{border-right:0}.finance-metric span{font-size:9px;color:var(--muted)}.finance-metric b{display:block;margin-top:7px;font-size:16px}.finance-chart{height:130px;padding:10px 14px 12px}.bars{height:100%;display:flex;align-items:flex-end;gap:9px}.group{flex:1;height:100%;display:flex;align-items:flex-end;gap:3px;position:relative}.group i{flex:1;border-radius:2px 2px 0 0;background:#9bb2c5}.group i:nth-child(2){background:#d7e0e7}.group:after{content:attr(data-m);position:absolute;left:50%;transform:translateX(-50%);bottom:-14px;font-size:8px;color:#9aa5ad}
-.tasks{padding:0 14px 8px}.task{display:grid;grid-template-columns:10px 1fr auto;gap:8px;padding:10px 0;border-bottom:1px solid #eef1f3}.task:last-child{border-bottom:0}.dot{width:7px;height:7px;border-radius:50%;margin-top:5px;background:var(--accent)}.dot.red{background:var(--red)}.dot.orange{background:var(--orange)}.task b{display:block;font-size:10px}.task span{font-size:9px;color:var(--muted)}
-.footer-note{margin-top:12px;font-size:9px;color:#98a3aa;text-align:right}
-@media (max-width:1100px){.app{grid-template-columns:68px 1fr}.label,.brand-text,.nav-section{opacity:0}.sidebar{padding-inline:8px}.nav a{justify-content:center;padding:0}.brand{justify-content:center;padding-left:0;padding-right:0}.grid-main,.bottom-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:650px){.content{padding:10px}.kpis{grid-template-columns:1fr}.topbar{padding:0 10px}.userbox span{display:none}.headline{align-items:flex-start;gap:10px}.period{flex-wrap:wrap;justify-content:flex-end}.finance-body{grid-template-columns:repeat(2,1fr)}.grid-main{grid-template-columns:1fr}.table th:nth-child(4),.table td:nth-child(4){display:none}}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{background:var(--sidebar);color:#fff;padding:24px 18px;position:sticky;top:0;height:100vh}
+.brand{font-size:22px;font-weight:800;letter-spacing:.3px;margin-bottom:28px}
+.brand span{color:#8ea7ff}
+.nav{display:flex;flex-direction:column;gap:8px}
+.nav button{background:transparent;border:0;color:#cbd5e1;text-align:left;padding:11px 12px;border-radius:10px;cursor:pointer}
+.nav button:hover,.nav button.active{background:#1f2937;color:#fff}
+.main{padding:28px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.title{font-size:28px;font-weight:800}
+.subtitle{color:var(--muted);margin-top:4px}
+.actions{display:flex;gap:10px}
+.btn{border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+.btn.primary{background:var(--primary);color:#fff}
+.btn.primary:hover{background:var(--primary2)}
+.btn.ghost{background:#fff;border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+.kpi .value{font-size:30px;font-weight:800}
+.kpi .label{color:var(--muted);margin-top:4px}
+.section{margin-top:22px}
+.section h3{margin:0 0 12px;font-size:18px}
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.project{cursor:pointer}
+.project:hover{transform:translateY(-1px);transition:.15s;box-shadow:0 8px 22px rgba(0,0,0,.07)}
+.project-head{display:flex;justify-content:space-between;align-items:center}
+.badge{font-size:12px;padding:5px 8px;border-radius:999px;background:#eef2ff;color:#4355b9}
+.progress{height:9px;background:#edf0f5;border-radius:999px;overflow:hidden;margin:14px 0 8px}
+.progress > div{height:100%;background:var(--primary)}
+.meta{display:flex;gap:14px;color:var(--muted);font-size:13px;flex-wrap:wrap}
+.attn{display:flex;flex-direction:column;gap:10px}
+.attn-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.dot{width:10px;height:10px;border-radius:50%;margin-top:6px}
+.red{background:var(--danger)} .orange{background:var(--warn)} .green{background:var(--success)}
+.hidden{display:none !important}
+.project-page .hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.tab{padding:8px 11px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.stage-list{display:flex;flex-direction:column;gap:10px}
+.stage{display:grid;grid-template-columns:1.4fr .7fr .7fr .8fr .8fr;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);padding:12px;border-radius:12px}
+.stage .small{color:var(--muted);font-size:13px}
+.status{font-size:12px;padding:5px 8px;border-radius:999px;display:inline-block;width:max-content}
+.s-work{background:#e7f6ef;color:#188653}
+.s-check{background:#fff3de;color:#a86800}
+.s-done{background:#e8eefc;color:#2e52a4}
+.s-late{background:#fde9e8;color:#b33b37}
+.modal-back{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:#fff;width:min(560px,95vw);border-radius:16px;padding:20px}
+.modal h3{margin-top:0}
+.form{display:grid;gap:12px}
+.form label{font-size:13px;color:var(--muted)}
+.form input,.form select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+@media(max-width:1000px){.app{grid-template-columns:82px 1fr}.sidebar{padding:20px 10px}.brand{font-size:14px}.brand span{display:none}.nav button{font-size:0}.nav button:before{font-size:18px}.grid{grid-template-columns:repeat(2,1fr)}.projects{grid-template-columns:1fr}}
+@media(max-width:700px){.app{display:block}.sidebar{position:static;height:auto}.nav{flex-direction:row;overflow:auto}.nav button{font-size:13px;white-space:nowrap}.main{padding:18px}.grid{grid-template-columns:1fr 1fr}.project-page .hero{display:block}.stage{grid-template-columns:1fr 1fr}.stage > *:first-child{grid-column:1/-1}}
 </style>
 </head>
 <body>
-<div class="app" id="app">
+<div class="app">
   <aside class="sidebar">
-    <div class="brand"><div class="brand-mark">AP</div><div class="brand-text"><b>ALI PROJECT</b><span>AP CONTROL</span></div></div>
-    <nav class="nav">
-      <div class="nav-section">Основное</div>
-      <a class="active" href="#"><span class="ico">▦</span><span class="label">Обзор</span></a>
-      <div class="nav-section">Строительство</div>
-      <a href="#"><span class="ico">▣</span><span class="label">Объекты</span></a>
-      <a href="#"><span class="ico">✓</span><span class="label">Задачи</span></a>
-      <a href="#"><span class="ico">▤</span><span class="label">Гант</span></a>
-      <a href="#"><span class="ico">◫</span><span class="label">Этапы</span></a>
-      <div class="nav-section">Управление</div>
-      <a href="#"><span class="ico">₽</span><span class="label">Финансы</span></a>
-      <a href="#"><span class="ico">▥</span><span class="label">Документы</span></a>
-      <a href="#"><span class="ico">▧</span><span class="label">Снабжение</span></a>
-      <a href="#"><span class="ico">⚙</span><span class="label">Оборудование</span></a>
-      <div class="nav-section">Команда</div>
-      <a href="#"><span class="ico">♙</span><span class="label">Сотрудники</span></a>
-      <a href="#"><span class="ico">◎</span><span class="label">Подрядчики</span></a>
-      <a href="#"><span class="ico">☑</span><span class="label">Технадзор</span></a>
-      <div class="nav-section">Система</div>
-      <a href="#"><span class="ico">↻</span><span class="label">Журнал</span></a>
-      <a href="#"><span class="ico">⚙</span><span class="label">Настройки</span></a>
-    </nav>
+    <div class="brand">ALI Project<br><span>AP Control</span></div>
+    <div class="nav">
+      <button class="active" data-view="dashboard">Главная</button>
+      <button data-view="projects">Объекты</button>
+      <button data-view="tasks">Задачи</button>
+      <button data-view="schedule">График работ</button>
+      <button data-view="finance">Финансы</button>
+      <button data-view="docs">Документы</button>
+      <button data-view="supply">Снабжение</button>
+      <button data-view="people">Сотрудники</button>
+      <button data-view="journal">Журнал</button>
+    </div>
   </aside>
 
   <main class="main">
-    <div class="topbar">
-      <button class="menu-btn" id="menuBtn">☰</button>
-      <div class="search"><input id="search" placeholder="Поиск по объектам, задачам, документам..."/><span class="kbd">⌘ K</span></div>
-      <div class="top-actions"><button class="icon-btn">◔</button><button class="icon-btn">🔔</button><div class="userbox"><div class="avatar">АД</div><span>Алихан Дзуев ▾</span></div></div>
-    </div>
-
-    <section class="content">
-      <div class="headline">
-        <div><h1>Обзор компании</h1><p>ALI Project Control · оперативная картина по всем объектам</p></div>
-        <div class="period"><button>Неделя</button><button class="active">Месяц</button><button>Квартал</button><button>Год</button></div>
-      </div>
-
-      <div class="kpis">
-        <div class="card kpi"><div class="kpi-top"><div class="kpi-label">Активные объекты</div><div class="kpi-icon">▣</div></div><div class="kpi-value">4</div><div class="kpi-foot"><span class="delta up">+1</span><span>за последний месяц</span></div></div>
-        <div class="card kpi"><div class="kpi-top"><div class="kpi-label">Активные задачи</div><div class="kpi-icon">✓</div></div><div class="kpi-value">37</div><div class="kpi-foot"><span class="delta up">+14%</span><span>выполнение</span></div></div>
-        <div class="card kpi"><div class="kpi-top"><div class="kpi-label">Просрочено</div><div class="kpi-icon">!</div></div><div class="kpi-value">8</div><div class="kpi-foot"><span class="delta down">−21%</span><span>к прошлому месяцу</span></div></div>
-        <div class="card kpi"><div class="kpi-top"><div class="kpi-label">К оплате</div><div class="kpi-icon">₽</div></div><div class="kpi-value">12,4 млн ₽</div><div class="kpi-foot"><span>по подтверждённым актам</span></div></div>
-      </div>
-
-      <div class="grid-main">
-        <div class="stack">
-          <div class="card">
-            <div class="panel-head"><h3>Ход строительства</h3><span class="subtle">План / факт · 30 дней</span></div>
-            <div class="chart-wrap">
-              <div class="chart"><div class="gridlines"></div>
-                <svg viewBox="0 0 800 240" preserveAspectRatio="none" aria-hidden="true">
-                  <polyline points="0,190 70,175 140,178 210,150 280,157 350,130 420,145 490,110 560,118 630,78 700,92 800,48" fill="none" stroke="#6b8daa" stroke-width="3"/>
-                  <polyline points="0,205 70,198 140,188 210,182 280,165 350,160 420,143 490,137 560,125 630,118 700,101 800,94" fill="none" stroke="#adb9c3" stroke-width="2"/>
-                  <polyline points="0,220 70,216 140,208 210,196 280,190 350,183 420,169 490,160 560,151 630,138 700,130 800,119" fill="none" stroke="#c9a269" stroke-width="2"/>
-                </svg>
-                <div class="axis"><span>1 сен</span><span>5 сен</span><span>10 сен</span><span>15 сен</span><span>20 сен</span><span>25 сен</span><span>30 сен</span></div>
-              </div>
-              <div class="legend"><span><i style="background:#6b8daa"></i>Факт</span><span><i style="background:#adb9c3"></i>План</span><span><i style="background:#c9a269"></i>Риски</span></div>
-            </div>
-          </div>
-
-          <div class="card objects">
-            <div class="panel-head"><h3>Объекты</h3><span class="subtle">4 активных</span></div>
-            <table class="table">
-              <thead><tr><th>Объект</th><th>Готовность</th><th>Текущий этап</th><th>План</th><th>Статус</th></tr></thead>
-              <tbody>
-                <tr><td class="obj-name">ЖК Нальчик</td><td><div class="bar"><span style="width:78%"></span></div><span class="subtle">78%</span></td><td>Фасад</td><td>82%</td><td><span class="badge red">−4 дня</span></td></tr>
-                <tr><td class="obj-name">ЖК Искож</td><td><div class="bar"><span style="width:61%"></span></div><span class="subtle">61%</span></td><td>Инженерия</td><td>65%</td><td><span class="badge orange">−2 дня</span></td></tr>
-                <tr><td class="obj-name">ЖК Кенже</td><td><div class="bar"><span style="width:69%"></span></div><span class="subtle">69%</span></td><td>Монолит</td><td>70%</td><td><span class="badge green">В графике</span></td></tr>
-                <tr><td class="obj-name">ЖК Чегет</td><td><div class="bar"><span style="width:34%"></span></div><span class="subtle">34%</span></td><td>Кладка</td><td>40%</td><td><span class="badge red">−6 дней</span></td></tr>
-              </tbody>
-            </table>
-          </div>
+    <section id="dashboardView">
+      <div class="topbar">
+        <div>
+          <div class="title">Главная</div>
+          <div class="subtitle">Оперативная картина по всем объектам</div>
         </div>
-
-        <div class="stack">
-          <div class="card">
-            <div class="panel-head"><h3>Команда / события</h3><span class="subtle">Сегодня</span></div>
-            <div class="activity">
-              <div class="activity-item"><div class="mini-avatar">РК</div><div><b>Руслан Казбеков</b><span>Загрузил исполнительную схему · ЖК Нальчик</span></div><div class="time">09:12</div></div>
-              <div class="activity-item"><div class="mini-avatar">МА</div><div><b>Мурат Асланов</b><span>Завершил этап «Монолит, секция 2»</span></div><div class="time">10:04</div></div>
-              <div class="activity-item"><div class="mini-avatar">АЖ</div><div><b>Аскер Жанхотов</b><span>Вернул этап на доработку · 3 замечания</span></div><div class="time">11:27</div></div>
-              <div class="activity-item"><div class="mini-avatar">ХЗ</div><div><b>Хъыданыжь Заур</b><span>Добавил фотоотчёт · 7 фотографий</span></div><div class="time">12:18</div></div>
-              <div class="activity-item"><div class="mini-avatar">ИА</div><div><b>Ислам Алимов</b><span>Создал заявку на поставку арматуры</span></div><div class="time">13:02</div></div>
-            </div>
-            <div class="teamstats"><div><b>+14%</b><span>выполнение</span></div><div><b>−21%</b><span>просрочка</span></div><div><b>+8%</b><span>производит.</span></div></div>
-          </div>
-
-          <div class="card">
-            <div class="panel-head"><h3>Критические задачи</h3><span class="subtle">5 требуют внимания</span></div>
-            <div class="tasks">
-              <div class="task"><div class="dot red"></div><div><b>Армирование П7</b><span>ЖК Нальчик · Ахмед Батыров</span></div><span class="badge red">Сегодня</span></div>
-              <div class="task"><div class="dot orange"></div><div><b>Акт скрытых работ</b><span>ЖК Искож · Руслан Казбеков</span></div><span class="badge orange">Сегодня</span></div>
-              <div class="task"><div class="dot red"></div><div><b>Кладка 5 этажа</b><span>ЖК Чегет · Заур Канаметов</span></div><span class="badge red">Просрочено</span></div>
-              <div class="task"><div class="dot"></div><div><b>Поставка кабеля</b><span>ЖК Кенже · Ислам Алимов</span></div><span class="badge">04.10</span></div>
-            </div>
-          </div>
+        <div class="actions">
+          <button class="btn ghost">+ Задача</button>
+          <button class="btn primary" id="newProjectBtn">+ Новый объект</button>
         </div>
       </div>
 
-      <div class="bottom-grid">
-        <div class="card">
-          <div class="panel-head"><h3>Финансы</h3><span class="subtle">Сводка по всем объектам</span></div>
-          <div class="finance-body">
-            <div class="finance-metric"><span>Бюджет</span><b>286,4 млн ₽</b></div>
-            <div class="finance-metric"><span>Оплачено</span><b>174,8 млн ₽</b></div>
-            <div class="finance-metric"><span>Актировано</span><b>191,3 млн ₽</b></div>
-            <div class="finance-metric"><span>К оплате</span><b>16,5 млн ₽</b></div>
-          </div>
-          <div class="finance-chart"><div class="bars">
-            <div class="group" data-m="май"><i style="height:38%"></i><i style="height:25%"></i></div>
-            <div class="group" data-m="июн"><i style="height:52%"></i><i style="height:41%"></i></div>
-            <div class="group" data-m="июл"><i style="height:61%"></i><i style="height:54%"></i></div>
-            <div class="group" data-m="авг"><i style="height:73%"></i><i style="height:63%"></i></div>
-            <div class="group" data-m="сен"><i style="height:86%"></i><i style="height:75%"></i></div>
-            <div class="group" data-m="окт"><i style="height:69%"></i><i style="height:61%"></i></div>
-          </div></div>
-        </div>
+      <div class="grid">
+        <div class="card kpi"><div class="value">4</div><div class="label">Активных объекта</div></div>
+        <div class="card kpi"><div class="value">10</div><div class="label">Открытых задач</div></div>
+        <div class="card kpi"><div class="value">6</div><div class="label">Просрочено</div></div>
+        <div class="card kpi"><div class="value">2</div><div class="label">На проверке</div></div>
+      </div>
 
-        <div class="card">
-          <div class="panel-head"><h3>Контроль исполнения</h3><span class="subtle">По объектам</span></div>
-          <table class="table"><thead><tr><th>Объект</th><th>Задач</th><th>Просрочено</th><th>Риск</th></tr></thead><tbody>
-            <tr><td>ЖК Нальчик</td><td>11</td><td>3</td><td><span class="badge red">Высокий</span></td></tr>
-            <tr><td>ЖК Искож</td><td>9</td><td>2</td><td><span class="badge orange">Средний</span></td></tr>
-            <tr><td>ЖК Кенже</td><td>8</td><td>0</td><td><span class="badge green">Низкий</span></td></tr>
-            <tr><td>ЖК Чегет</td><td>9</td><td>3</td><td><span class="badge red">Высокий</span></td></tr>
-          </tbody></table>
+      <div class="section">
+        <h3>Объекты</h3>
+        <div class="projects" id="projectGrid"></div>
+      </div>
+
+      <div class="section">
+        <h3>Требует внимания</h3>
+        <div class="attn">
+          <div class="attn-item"><span class="dot red"></span><div><b>ЖК Кенже</b><div class="small">Монолит 3 этажа просрочен на 4 дня</div></div></div>
+          <div class="attn-item"><span class="dot orange"></span><div><b>ЖК Нальчик</b><div class="small">Не загружен акт выполненных работ</div></div></div>
+          <div class="attn-item"><span class="dot orange"></span><div><b>ЖК Чегет</b><div class="small">Заявка на бетон ожидает согласования</div></div></div>
         </div>
       </div>
-      <div class="footer-note">ALI Project Control · UI prototype v0.1</div>
+    </section>
+
+    <section id="projectView" class="hidden project-page">
+      <div class="topbar">
+        <div>
+          <button class="btn ghost" id="backBtn">← К объектам</button>
+        </div>
+        <div class="actions"><button class="btn primary">+ Новый этап</button></div>
+      </div>
+      <div class="card hero">
+        <div>
+          <div class="title" id="projectTitle">ЖК Нальчик</div>
+          <div class="subtitle">Карточка объекта</div>
+        </div>
+        <div><span class="badge">В строительстве</span></div>
+      </div>
+      <div class="tabs">
+        <button class="tab active">Обзор</button>
+        <button class="tab">Работы</button>
+        <button class="tab">Задачи</button>
+        <button class="tab">График</button>
+        <button class="tab">Финансы</button>
+        <button class="tab">Документы</button>
+        <button class="tab">Материалы</button>
+        <button class="tab">Фото</button>
+        <button class="tab">Команда</button>
+        <button class="tab">Журнал</button>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Этапы строительства</h3>
+        <div class="stage-list">
+          <div class="stage"><div><b>Монолит</b><div class="small">Ответственный: Мурат Асланов</div></div><div><span class="status s-work">В работе</span></div><div>68%</div><div>01.10 - 12.10</div><div>1 850 000 ₽</div></div>
+          <div class="stage"><div><b>Кладка</b><div class="small">Ответственный: Заур Канаметов</div></div><div><span class="status s-check">На проверке</span></div><div>44%</div><div>05.10 - 20.10</div><div>980 000 ₽</div></div>
+          <div class="stage"><div><b>Электрика</b><div class="small">Ответственный: Тимур Альбертович</div></div><div><span class="status s-done">Принято</span></div><div>100%</div><div>20.09 - 30.09</div><div>640 000 ₽</div></div>
+          <div class="stage"><div><b>Фасад</b><div class="small">Ответственный: не назначен</div></div><div><span class="status s-late">Просрочено</span></div><div>12%</div><div>01.10 - 15.10</div><div>2 400 000 ₽</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="placeholderView" class="hidden">
+      <div class="topbar">
+        <div><div class="title" id="placeholderTitle">Раздел</div><div class="subtitle">Каркас модуля заложен в v0.1</div></div>
+      </div>
+      <div class="card">Этот раздел подключим следующим шагом к общей модели объектов, этапов, задач, документов и истории действий.</div>
     </section>
   </main>
 </div>
+
+<div class="modal-back hidden" id="modalBack">
+  <div class="modal">
+    <h3>Новый объект</h3>
+    <div class="form">
+      <div><label>Название объекта</label><input id="mName" placeholder="Например, ЖК Новый" /></div>
+      <div><label>Ответственный</label><input id="mOwner" placeholder="ФИО" /></div>
+      <div><label>Статус</label><select id="mStatus"><option>В строительстве</option><option>Проектирование</option><option>Подготовка</option></select></div>
+    </div>
+    <div class="modal-actions"><button class="btn ghost" id="cancelModal">Отмена</button><button class="btn primary" id="saveProject">Создать</button></div>
+  </div>
+</div>
+
 <script>
-const app=document.getElementById('app');
-document.getElementById('menuBtn').addEventListener('click',()=>app.classList.toggle('collapsed'));
-const buttons=[...document.querySelectorAll('.period button')];
-buttons.forEach(b=>b.addEventListener('click',()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active')}));
-const search=document.getElementById('search');
-document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();search.focus();}});
+const projects = [
+  {name:'ЖК Нальчик', progress:63, issues:3, overdue:2},
+  {name:'ЖК Искож', progress:41, issues:1, overdue:0},
+  {name:'ЖК Кенже', progress:27, issues:4, overdue:3},
+  {name:'ЖК Чегет', progress:52, issues:2, overdue:1},
+];
+
+const grid = document.getElementById('projectGrid');
+
+function renderProjects(){
+  grid.innerHTML='';
+  projects.forEach((p,i)=>{
+    const el=document.createElement('div');
+    el.className='card project';
+    el.innerHTML=`
+      <div class="project-head"><b>${p.name}</b><span class="badge">В строительстве</span></div>
+      <div class="progress"><div style="width:${p.progress}%"></div></div>
+      <div class="meta"><span>Прогресс: ${p.progress}%</span><span>Проблемы: ${p.issues}</span><span>Просрочки: ${p.overdue}</span></div>`;
+    el.onclick=()=>openProject(i);
+    grid.appendChild(el);
+  });
+}
+renderProjects();
+
+const dashboardView=document.getElementById('dashboardView');
+const projectView=document.getElementById('projectView');
+const placeholderView=document.getElementById('placeholderView');
+const placeholderTitle=document.getElementById('placeholderTitle');
+
+function show(el){
+  [dashboardView,projectView,placeholderView].forEach(x=>x.classList.add('hidden'));
+  el.classList.remove('hidden');
+}
+
+function openProject(i){
+  document.getElementById('projectTitle').textContent=projects[i].name;
+  show(projectView);
+}
+document.getElementById('backBtn').onclick=()=>show(dashboardView);
+
+document.querySelectorAll('.nav button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+    const v=btn.dataset.view;
+    if(v==='dashboard'||v==='projects') show(dashboardView);
+    else {
+      placeholderTitle.textContent=btn.textContent;
+      show(placeholderView);
+    }
+  }
+});
+
+const modalBack=document.getElementById('modalBack');
+document.getElementById('newProjectBtn').onclick=()=>modalBack.classList.remove('hidden');
+document.getElementById('cancelModal').onclick=()=>modalBack.classList.add('hidden');
+document.getElementById('saveProject').onclick=()=>{
+  const name=document.getElementById('mName').value.trim();
+  if(!name) return alert('Введите название объекта');
+  projects.push({name,progress:0,issues:0,overdue:0});
+  renderProjects();
+  modalBack.classList.add('hidden');
+  document.getElementById('mName').value='';
+};
+modalBack.onclick=e=>{ if(e.target===modalBack) modalBack.classList.add('hidden'); };
+
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    tab.classList.add('active');
+  }
+});
 </script>
 </body>
 </html>
