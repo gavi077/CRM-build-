@@ -55,6 +55,64 @@
   .authMobileBrand{display:flex}
   .authPanelInner{width:min(430px,100%)}
 }
+
+/* ===== AP CONTROL v0.5 · visual layer only ===== */
+:root{
+  --nav:#20384d;--nav2:#172c3d;--bg:#f5f7fa;--paper:#ffffff;--ink:#263746;
+  --muted:#778896;--line:#e1e7ec;--blue:#4c97cf;--green:#55a77d;--amber:#e0a33d;
+  --red:#de6668;--violet:#8d78ae;--teal:#47a39d;--coral:#ed7f76;--sky:#6db1dc;
+  --shadow:0 10px 26px rgba(26,55,78,.075)
+}
+.rail{background:linear-gradient(180deg,#20384d,#1a3042)}
+.logo{background:#f05f5d;border-color:#f05f5d;box-shadow:0 8px 18px rgba(240,95,93,.22)}
+.side{background:#f7f9fb}
+.side button.active{background:#e9f1f7;color:#2c79ae}
+.btn.primary{background:#3f8fc6;border-color:#3f8fc6;box-shadow:0 5px 14px rgba(63,143,198,.18)}
+.btn.primary:hover{background:#347fae}.btn.soft{background:#edf6fb;color:#357ea9;border-color:#d4e9f4}
+.tab.active{background:#3f8fc6;border-color:#3f8fc6}.card{border-color:#e5eaee}
+.s-green{background:#e8f6ee;color:#3f9369}.s-red{background:#fdeaea;color:#c94e55}
+.s-violet{background:#f0ebf7;color:#775f9e}.s-teal{background:#e4f5f3;color:#31877f}
+.s-coral{background:#fcebe9;color:#c96b63}
+.kpi{position:relative;overflow:hidden;border-top:3px solid transparent}
+.kpi.kpi-green{border-top-color:var(--green)}.kpi.kpi-blue{border-top-color:var(--blue)}
+.kpi.kpi-red{border-top-color:var(--red)}.kpi.kpi-violet{border-top-color:var(--violet)}
+.kpi.kpi-amber{border-top-color:var(--amber)}.kpi.kpi-teal{border-top-color:var(--teal)}
+.kpi .trend{margin-top:7px;font-size:11px;font-weight:700}.trend.up{color:var(--green)}.trend.down{color:var(--red)}.trend.warn{color:#b37a1e}
+.dashGrid{display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin-top:14px}
+.dashGrid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.chartCard{padding:17px;min-height:280px}.chartCard h3{margin:0 0 3px;font-size:15px}.chartSub{font-size:11px;color:var(--muted);margin-bottom:16px}
+.barChart{height:190px;display:flex;align-items:flex-end;gap:11px;border-bottom:1px solid #e6ecef;padding:0 4px}
+.barCol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:5px}
+.bar{width:min(34px,70%);border-radius:5px 5px 1px 1px;min-height:3px}.bar.blue{background:var(--blue)}.bar.green{background:var(--green)}
+.bar.violet{background:var(--violet)}.bar.coral{background:var(--coral)}.bar.amber{background:var(--amber)}.bar.teal{background:var(--teal)}
+.barLabel{font-size:9px;color:#84939f;white-space:nowrap}
+.donut{width:150px;height:150px;border-radius:50%;margin:9px auto;display:grid;place-items:center;background:conic-gradient(var(--green) 0 52%,var(--blue) 52% 75%,var(--amber) 75% 89%,var(--red) 89% 100%)}
+.donut:after{content:"";width:92px;height:92px;background:white;border-radius:50%;box-shadow:0 0 0 1px #edf1f4}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px}.legend span{display:flex;align-items:center;gap:6px}.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.alertList{display:grid;gap:8px}.alertItem{border-left:3px solid var(--amber);background:#fffaf1;border-radius:7px;padding:10px 11px}
+.alertItem.red{border-color:var(--red);background:#fff5f5}.alertItem.green{border-color:var(--green);background:#f2faf6}.alertItem.blue{border-color:var(--blue);background:#f2f8fc}
+.alertItem b{display:block;font-size:12px;margin-bottom:3px}.alertItem small{color:#758693;line-height:1.4}
+.financeStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#e8ecef;border-radius:12px;overflow:hidden;margin:14px 0}
+.financeStrip>div{background:white;padding:15px}.financeStrip strong{display:block;font-size:20px;margin-top:4px}.financeStrip small{color:var(--muted)}
+.ganttBoard{border:1px solid var(--line);background:#fff;border-radius:12px;overflow:hidden}
+.ganttHeader,.ganttRow{display:grid;grid-template-columns:235px minmax(640px,1fr)}
+.ganttHeader{background:#f8fafb;border-bottom:1px solid var(--line);font-size:10px;color:#778896;font-weight:800}
+.ganttHeader>div,.ganttName{padding:10px 12px}.ganttMonths{display:grid;grid-template-columns:repeat(12,1fr);border-left:1px solid var(--line)}
+.ganttMonths span{text-align:center;padding:10px 2px;border-right:1px solid #edf1f4}.ganttRow{min-height:49px;border-bottom:1px solid #edf1f4}.ganttRow:last-child{border-bottom:0}
+.ganttName{font-size:11px;display:flex;flex-direction:column;justify-content:center}.ganttName b{font-size:12px}.ganttName small{color:var(--muted);margin-top:2px}
+.ganttTrack{position:relative;border-left:1px solid var(--line);background:repeating-linear-gradient(90deg,#fff 0,#fff calc(8.333% - 1px),#edf1f4 calc(8.333% - 1px),#edf1f4 8.333%)}
+.ganttBar{position:absolute;top:13px;height:22px;border-radius:5px;color:white;font-size:9px;font-weight:800;padding:5px 7px;overflow:hidden;white-space:nowrap;min-width:18px}
+.ganttBar.green{background:var(--green)}.ganttBar.blue{background:var(--blue)}.ganttBar.red{background:var(--red)}
+.ganttBar.amber{background:var(--amber)}.ganttBar.violet{background:var(--violet)}.ganttBar.teal{background:var(--teal)}
+.progressLine{height:7px;background:#edf1f4;border-radius:10px;overflow:hidden}.progressLine span{display:block;height:100%;border-radius:10px}
+@media(max-width:900px){.dashGrid,.dashGrid3{grid-template-columns:1fr}.financeStrip{grid-template-columns:1fr 1fr}.chartCard{min-height:auto}}
+@media(max-width:560px){
+ body{font-size:13px;background:#f3f6f8}.top{height:58px}.main{padding-left:12px;padding-right:12px}.page{padding-top:14px}.pageHead h1{font-size:21px}
+ .card{border-radius:12px;box-shadow:0 5px 16px rgba(26,55,78,.06)}.kpis{grid-template-columns:1fr 1fr;gap:9px}.kpi{padding:13px}.kpi .v{font-size:20px}.kpi .l{font-size:10px}
+ .financeStrip{grid-template-columns:1fr 1fr}.financeStrip>div{padding:12px}.financeStrip strong{font-size:16px}.dashGrid3{gap:10px}.dashGrid{gap:10px}.chartCard{padding:14px}
+ .barChart{height:150px;gap:5px}.barLabel{font-size:8px}.ganttBoard{overflow-x:auto}.ganttHeader,.ganttRow{min-width:820px}
+}
+
 </style></head><body>
 
 <div id="authGate" class="authGate">
@@ -136,7 +194,7 @@
 <div class="app"><nav class="rail"><div class="logo">AP</div><button class="active" data-view="home">⌂</button><button data-view="projects">▦</button><button data-view="tasks">✓</button><button data-view="employees">♙</button><button data-view="finance">₽</button><button data-view="tools">⚒</button><button data-view="clients">◎</button><button data-view="cameras">◉</button><button data-view="dashboards">▤</button><div class="spacer"></div><small>ALI PROJECT CONTROL</small></nav>
 <aside class="side"><div class="sideHead"><div class="brand">ALI Project Control<small id="companyName">Строительная CRM / ERP</small></div></div><div class="sideSection"><div class="sideLabel">Рабочее пространство</div><button class="active" data-view="home">Обзор</button><button data-view="projects">Объекты <span class="count" id="sideProjectCount">0</span></button><button data-view="tasks">Задачи <span class="count" id="sideTaskCount">0</span></button></div><div class="sideSection"><div class="sideLabel">Управление</div><button data-view="employees">Сотрудники <span class="count" id="sideEmployeeCount">0</span></button><button data-view="clients">Клиенты <span class="count" id="sideClientCount">0</span></button><button data-view="finance">Финансы</button><button data-view="tools">Инструменты <span class="count" id="sideToolCount">0</span></button><button data-view="cameras">Камеры <span class="count" id="sideCameraCount">0</span></button><button data-view="dashboards">Дашборды</button></div><div class="sideSection"><div class="sideLabel">Система</div><button data-view="settings">Настройки</button><button class="logoutBtn" onclick="logout()">Выйти</button></div></aside>
 <main class="main"><header class="top"><div class="search">⌕ <input placeholder="Поиск по AP Control"></div><div class="topActions"><button class="iconBtn">♢</button><button class="iconBtn">?</button><button class="btn soft" id="profileBtn">Профиль</button></div></header><div id="content"></div></main>
-<aside class="right"><h3>Новые задачи</h3><div class="emptySmall" id="rightTasks">Новых задач пока нет</div><h3>Напоминания</h3><div class="emptySmall">Напоминаний пока нет</div><h3>Уведомления</h3><div class="emptySmall">Новых уведомлений нет</div></aside></div><div id="modalHost"></div><div id="toastHost"></div>
+<aside class="right"><h3>Новые задачи</h3><div class="emptySmall" id="rightTasks">Новых задач пока нет</div><div id="rightDemoAlerts"></div><h3>Напоминания</h3><div class="emptySmall">Напоминаний пока нет</div><h3>Уведомления</h3><div class="emptySmall">Новых уведомлений нет</div></aside></div><div id="modalHost"></div><div id="toastHost"></div>
 <script>
 const API='https://ap-control-backend-crm.onrender.com/api';
 let token=localStorage.getItem('ap_token')||'';let demoMode=sessionStorage.getItem('ap_demo')==='1';let me=null;let company=null;let db={projects:[],tasks:[],employees:[],clients:[],tools:[],cameras:[],finance:[],stages:[],activity:[]};let currentView='home';let currentProjectId=null;let taskMode='list';let employeeTab='info';
@@ -153,33 +211,132 @@ function authScreen(name){
   $('#authInfo').textContent='';
 }
 function demoData(){
-  return {
-    projects:[
-      {id:'demo-p1',name:'Демо · Жилой комплекс',type:'Строительство',status:'Активен',address:'Демонстрационный объект',start:'2026-09-01',end:'2027-05-30',description:'Демонстрационные данные не сохраняются в рабочую базу.'}
-    ],
-    stages:[
-      {id:'ds1',project_id:'demo-p1',name:'Фундамент',status:'Завершен',start:'2026-09-01',end:'2026-09-28',responsible:'Алексей Смирнов',checker:'Технадзор',cost:1850000},
-      {id:'ds2',project_id:'demo-p1',name:'Монолит',status:'В работе',start:'2026-09-29',end:'2026-12-15',responsible:'Иван Петров',checker:'Технадзор',cost:4600000},
-      {id:'ds3',project_id:'demo-p1',name:'Фасад',status:'Не начат',start:'2027-01-10',end:'2027-03-30',responsible:'Не назначен',checker:'Не назначен',cost:2900000}
-    ],
-    tasks:[
-      {id:'dt1',name:'Проверить армирование перекрытия',project_id:'demo-p1',executor:'Иван Петров',due:'2026-10-08',priority:'Высокий',status:'Активная'},
-      {id:'dt2',name:'Согласовать поставку бетона',project_id:'demo-p1',executor:'Алексей Смирнов',due:'2026-10-10',priority:'Обычный',status:'Активная'}
-    ],
-    employees:[
-      {id:'de1',name:'Алексей Смирнов',job:'Руководитель проекта',role:'Админ',phone:'+7 900 000-00-01',email:'demo.manager@example.com',status:'Активен'},
-      {id:'de2',name:'Иван Петров',job:'Прораб',role:'Работник',phone:'+7 900 000-00-02',email:'demo.foreman@example.com',status:'Активен'}
-    ],
-    clients:[{id:'dc1',name:'Демо-заказчик',phone:'+7 900 000-00-03',email:'client@example.com',whatsapp:'—',telegram:'—'}],
-    tools:[{id:'di1',name:'Лазерный нивелир',inventory_no:'AP-001',status:'Выдан',responsible:'Иван Петров',cost:45000}],
-    cameras:[{id:'dca1',name:'Камера стройплощадки',project_id:'demo-p1',type:'RTSP / ONVIF',status:'Демо'}],
-    finance:[{id:'df1',type:'Расход',category:'Материалы',project_id:'demo-p1',amount:350000,comment:'Демонстрационная операция'}],
-    activity:[]
-  };
+  const projects=[
+    ['p1','ЖК Нальчик','Активен','Нальчик','2026-03-10','2027-12-20','Монолит и инженерные сети'],
+    ['p2','ЖК Терек','Активен','Терек','2026-04-01','2027-10-30','Монолит 7–9 этаж'],
+    ['p3','ЖК Баксан','Активен','Баксан','2026-01-20','2027-08-15','Фасад и внутренние сети'],
+    ['p4','ЖК Терскол','Активен','Терскол','2026-05-01','2027-11-30','Кровля, окна, вентиляция'],
+    ['p5','ЖК Тырныауз','Активен','Тырныауз','2025-11-15','2027-05-30','Отделка и инженерия'],
+    ['p6','ЖК Нарткала','Активен','Нарткала','2026-02-01','2027-04-20','Кровля и благоустройство'],
+    ['p7','ЖК Чегем','Активен','Чегем','2026-06-10','2028-01-30','Монолит, лифты, инженерия'],
+    ['p8','ЖК Эльбрус','Активен','Эльбрус','2026-07-01','2028-03-15','Фундамент и подпорные стены'],
+    ['p9','ЖК Долинск','Подготовка','Нальчик','2026-10-20','2028-06-01','Проектирование и подготовка площадки']
+  ].map(x=>({id:x[0],name:x[1],type:'Строительство',status:x[2],address:x[3],start:x[4],end:x[5],description:x[6]}));
+
+  const employees=[
+    ['e1','Залим Докшоков','Главный инженер','Админ'],['e2','Казим Бейтуганов','Начальник участка','Админ'],
+    ['e3','Залим Кагазежев','Прораб','Работник'],['e4','Ислам Жемухов','Прораб','Работник'],['e5','Азамат Анахаев','Прораб','Работник'],
+    ['e6','Асхат Биттиров','Инженер ПТО','Работник'],['e7','Павел Васильев','Инженер-сметчик','Работник'],
+    ['e8','Жукова Альбина','Бухгалтер','Бухгалтер'],['e9','Оксана Битокова','Кассир','Работник'],['e10','Кирилл Борисов','Проектировщик','Работник'],
+    ['e11','Тархон Улугбеков','Бригадир-монолитчик','Работник'],['e12','Жашон Туркменов','Монолитчик','Работник'],
+    ['e13','Ароджон Мухаметджанов','Монолитчик','Работник'],['e14','Осман Рахимов','Монолитчик','Работник'],['e15','Нияз Насретдинов','Монолитчик','Работник'],
+    ['e16','Гафур Мирзиев','Монолитчик','Работник'],['e17','Исуф Нишанов','Монолитчик','Работник'],['e18','Рахмет Искандаров','Монолитчик','Работник'],
+    ['e19','Бегшот Пулатов','Монолитчик','Работник'],['e20','Аброр Азимов','Монолитчик','Работник'],['e21','Айдым Акимов','Монолитчик','Работник'],
+    ['e22','Шерзод Рахманов','Монолитчик','Работник'],['e23','Бахтиёр Камолов','Монолитчик','Работник'],['e24','Дилшод Эргашев','Монолитчик','Работник'],
+    ['e25','Анзор Батыров','Штукатурщик','Работник'],['e26','Семён Дорофеев','Сварщик','Работник'],['e27','Роман Лебедев','Сантехник','Работник'],
+    ['e28','Арсен Мамишев','Фасадчик','Работник'],['e29','Денис Устинов','Электрик','Работник'],['e30','Аслан Нагеров','Вентиляционщик','Работник'],
+    ['e31','Беслан Османов','Кровельщик','Работник'],['e32','Константин Демидов','Гидроизоляционщик','Работник'],['e33','Николай Федоров','Шпаклевщик','Работник'],
+    ['e34','Арсен Дауров','Слаботочник','Работник'],['e35','Адам Машуков','Оконщик-монтажник','Работник'],['e36','Артур Бегидов','Асфальтчик','Работник'],
+    ['e37','Юрий Маслов','Экскаваторщик','Работник'],['e38','Марат Боттаев','Крановщик','Работник'],['e39','Игорь Семёнов','Сторож','Работник'],
+    ['e40','Руслан Хачиров','Инженер газоснабжения','Работник'],['e41','Мурат Шогенов','Мастер ВК','Работник'],['e42','Альберт Кумыков','Инженер по лифтам','Работник'],
+    ['e43','Рустам Карданов','Мастер благоустройства','Работник']
+  ].map((x,i)=>({id:x[0],name:x[1],job:x[2],role:x[3],phone:'+7 928 410-'+String(10+i).padStart(2,'0')+'-'+String(20+i).padStart(2,'0'),email:'demo'+(i+1)+'@specpromstroy.ru',status:i===23?'В отпуске':'Активен'}));
+
+  const S=(id,p,name,status,start,end,responsible,cost,checker='Залим Докшоков')=>({id,project_id:p,name,status,start,end,responsible,checker,cost});
+  const stages=[
+    S('s1','p1','Фундаментная плита','Завершен','2026-03-10','2026-04-18','Тархон Улугбеков',12800000),
+    S('s2','p1','Монолит 10–12 этаж','В работе','2026-09-15','2026-11-25','Тархон Улугбеков',18600000),
+    S('s3','p1','Электроснабжение стояков','В работе','2026-10-01','2026-12-18','Денис Устинов',5400000),
+    S('s4','p1','ВК и канализация','В работе','2026-09-25','2026-12-30','Мурат Шогенов',6100000),
+    S('s5','p2','Колонны 7 этажа','Завершен','2026-09-01','2026-09-20','Тархон Улугбеков',3900000),
+    S('s6','p2','Перекрытие 7 этажа','Просрочен','2026-09-21','2026-09-30','Ислам Жемухов',4750000),
+    S('s7','p2','Монолит 8 этажа','В работе','2026-10-01','2026-10-20','Ислам Жемухов',5200000),
+    S('s8','p3','Кладка наружных стен','Завершен','2026-06-01','2026-08-30','Залим Кагазежев',9800000),
+    S('s9','p3','Вентилируемый фасад','В работе','2026-09-01','2027-01-30','Арсен Мамишев',21400000),
+    S('s10','p3','Вентиляция и подпор воздуха','На проверке','2026-08-20','2026-10-15','Аслан Нагеров',8700000),
+    S('s11','p4','Монтаж окон','В работе','2026-09-10','2026-11-20','Адам Машуков',7400000),
+    S('s12','p4','Кровля ПВХ-мембрана','В работе','2026-09-25','2026-10-30','Беслан Османов',6300000),
+    S('s13','p4','Гидроизоляция техэтажа','На проверке','2026-10-01','2026-10-18','Константин Демидов',1850000),
+    S('s14','p5','Штукатурные работы','В работе','2026-08-01','2026-11-10','Анзор Батыров',6900000),
+    S('s15','p5','Шпаклёвка МОП','В работе','2026-09-15','2026-12-20','Николай Федоров',4300000),
+    S('s16','p5','Газоснабжение','В работе','2026-09-01','2026-11-25','Руслан Хачиров',5100000),
+    S('s17','p6','Гидроизоляция кровли','Завершен','2026-08-01','2026-09-28','Константин Демидов',3900000),
+    S('s18','p6','Благоустройство двора','В работе','2026-09-10','2026-11-15','Рустам Карданов',12500000),
+    S('s19','p6','Асфальтирование проездов','Не начат','2026-10-20','2026-11-12','Артур Бегидов',5800000),
+    S('s20','p7','Фундамент и ростверк','Завершен','2026-06-10','2026-08-10','Тархон Улугбеков',16700000),
+    S('s21','p7','Монолит 1–3 этаж','В работе','2026-08-11','2026-12-20','Тархон Улугбеков',24900000),
+    S('s22','p7','Подготовка шахт лифтов','В работе','2026-10-01','2026-11-05','Альберт Кумыков',2700000),
+    S('s23','p8','Разработка котлована','Завершен','2026-07-01','2026-08-10','Юрий Маслов',4500000),
+    S('s24','p8','Подпорные стены','В работе','2026-08-11','2026-12-25','Семён Дорофеев',18600000),
+    S('s25','p8','Фундаментная плита','В работе','2026-09-15','2026-11-30','Тархон Улугбеков',21800000),
+    S('s26','p9','Рабочее проектирование','В работе','2026-09-20','2027-01-20','Кирилл Борисов',3600000),
+    S('s27','p9','Подготовка площадки','Не начат','2026-11-01','2026-12-10','Казим Бейтуганов',4200000)
+  ];
+
+  const T=(id,p,name,executor,due,priority,status)=>({id,project_id:p,name,executor,due,priority,status});
+  const tasks=[
+    T('t1','p1','Армирование плиты перекрытия 11 этажа','Тархон Улугбеков','2026-10-07','Высокий','Активная'),
+    T('t2','p1','Проверить исполнительную схему ВК','Асхат Биттиров','2026-10-06','Обычный','На проверке'),
+    T('t3','p2','Закрыть замечания по перекрытию 7 этажа','Ислам Жемухов','2026-10-01','Критический','Просрочена'),
+    T('t4','p2','Заказать бетон В25 — 180 м³','Залим Кагазежев','2026-10-05','Высокий','Активная'),
+    T('t5','p3','Сдать узлы фасада технадзору','Арсен Мамишев','2026-10-09','Высокий','Активная'),
+    T('t6','p3','Подписать акт вентиляции','Аслан Нагеров','2026-10-03','Высокий','Просрочена'),
+    T('t7','p4','Испытание кровли проливом','Беслан Османов','2026-10-08','Обычный','Активная'),
+    T('t8','p4','Закрыть примыкания окон 3 секции','Адам Машуков','2026-10-11','Обычный','Активная'),
+    T('t9','p5','Проверить давление газопровода','Руслан Хачиров','2026-10-12','Высокий','Активная'),
+    T('t10','p5','Завершить шпаклёвку 4 этажа','Николай Федоров','2026-10-02','Обычный','Просрочена'),
+    T('t11','p6','Подготовить основание под асфальт','Рустам Карданов','2026-10-14','Обычный','Активная'),
+    T('t12','p7','Проверить геометрию лифтовых шахт','Альберт Кумыков','2026-10-13','Высокий','Активная'),
+    T('t13','p8','Приёмка армирования фундаментной плиты','Залим Докшоков','2026-10-04','Критический','На проверке'),
+    T('t14','p9','Выдать корректировку раздела КЖ','Кирилл Борисов','2026-10-08','Высокий','Активная'),
+    T('t15','p1','Закрыть журнал бетонных работ','Асхат Биттиров','2026-10-01','Высокий','Завершена'),
+    T('t16','p6','Сдать гидроизоляцию кровли','Константин Демидов','2026-09-28','Обычный','Завершена')
+  ];
+
+  const F=(id,p,type,category,amount,comment,status='Проведено',person='')=>({id,project_id:p,type,category,amount,comment,status,person});
+  const finance=[
+    F('f1','p1','Расход','Бетон',2180000,'Бетон В25, плита 11 этажа','Проведено','Залим Кагазежев'),
+    F('f2','p1','Подотчёт','Материалы',780000,'Выдано под закупку арматуры; закрыто 610 000 ₽','Частично закрыт','Залим Кагазежев'),
+    F('f3','p2','Подотчёт','Бетон',490000,'Не представлены закрывающие документы','Не закрыт','Ислам Жемухов'),
+    F('f4','p2','Расход','Опалубка',860000,'Аренда опалубки на октябрь','Проведено',''),
+    F('f5','p3','Оплата подрядчику','Фасад',1650000,'Аванс фасадной бригаде','Проведено','Арсен Мамишев'),
+    F('f6','p3','Акт КС-2','Вентиляция',1240000,'Акт загружен, ожидает проверки','На проверке','Аслан Нагеров'),
+    F('f7','p4','Расход','Кровля',970000,'ПВХ-мембрана и комплектующие','Проведено','Беслан Османов'),
+    F('f8','p5','Подотчёт','Хозрасходы',465000,'Остаток сентября 145 000 ₽ + новая выдача 320 000 ₽','Не закрыт','Азамат Анахаев'),
+    F('f9','p5','Расход','Газоснабжение',1120000,'Трубы и запорная арматура','Проведено','Руслан Хачиров'),
+    F('f10','p6','Расход','Благоустройство',1380000,'Бордюр, щебень, песок','Проведено','Рустам Карданов'),
+    F('f11','p7','Оплата подрядчику','Лифты',3200000,'Первый платёж по поставке лифтов','Проведено','Альберт Кумыков'),
+    F('f12','p8','Расход','Арматура',2860000,'Фундаментная плита','Проведено','Казим Бейтуганов'),
+    F('f13','p8','Подотчёт','Топливо',210000,'Не закрыто 68 000 ₽','Частично закрыт','Юрий Маслов'),
+    F('f14','p9','Оплата подрядчику','Проектирование',720000,'Аванс проектной группе','Проведено','Кирилл Борисов')
+  ];
+
+  const tools=[
+    {id:'i1',name:'Лазерный нивелир Leica',inventory_no:'AP-001',status:'Выдан',responsible:'Залим Кагазежев',cost:118000},
+    {id:'i2',name:'Вибратор глубинный',inventory_no:'AP-014',status:'Выдан',responsible:'Тархон Улугбеков',cost:64000},
+    {id:'i3',name:'Сварочный аппарат',inventory_no:'AP-021',status:'Выдан',responsible:'Семён Дорофеев',cost:94000},
+    {id:'i4',name:'Компрессор',inventory_no:'AP-034',status:'На складе',responsible:'—',cost:135000},
+    {id:'i5',name:'Тепловизор',inventory_no:'AP-043',status:'Выдан',responsible:'Аслан Нагеров',cost:189000}
+  ];
+  const cameras=projects.slice(0,7).map((p,i)=>({id:'c'+i,name:'Камера '+(i+1)+' · '+p.name,project_id:p.id,type:'RTSP / ONVIF',status:i===4?'Требует проверки':'Онлайн'}));
+  const clients=[
+    {id:'cl1',name:'Заказчик · ЖК Нальчик',phone:'+7 928 100-20-30',email:'nalchik@client.demo',whatsapp:'Подключен',telegram:'Подключен'},
+    {id:'cl2',name:'Заказчик · ЖК Терек',phone:'+7 928 110-25-40',email:'terek@client.demo',whatsapp:'Подключен',telegram:'Подключен'},
+    {id:'cl3',name:'Заказчик · ЖК Баксан',phone:'+7 928 120-30-50',email:'baksan@client.demo',whatsapp:'—',telegram:'Подключен'}
+  ];
+  const activity=[
+    {action:'Загружен акт КС-2 по вентиляции',details:'ЖК Баксан · Аслан Нагеров',created_at:'2026-10-04T17:12:00'},
+    {action:'Этап «Гидроизоляция кровли» принят',details:'ЖК Нарткала · Залим Докшоков',created_at:'2026-10-04T15:40:00'},
+    {action:'Зафиксирована просрочка задачи',details:'ЖК Терек · перекрытие 7 этажа',created_at:'2026-10-04T12:15:00'},
+    {action:'Выдано 320 000 ₽ под отчёт',details:'Азамат Анахаев · ЖК Тырныауз',created_at:'2026-10-03T18:05:00'},
+    {action:'Камера восстановила связь',details:'ЖК Чегем',created_at:'2026-10-03T14:20:00'},
+    {action:'Добавлен фотоотчёт по фасаду',details:'ЖК Баксан · Арсен Мамишев',created_at:'2026-10-03T10:46:00'}
+  ];
+  return {projects,stages,tasks,employees,clients,tools,cameras,finance,activity};
 }
 async function start(){
   if(demoMode){
-    token='';me={full_name:'Демо пользователь',role:'demo'};company={name:'Демо AP Control'};db=demoData();
+    token='';me={full_name:'Демо пользователь',role:'demo'};company={name:'ООО Спецпромстрой'};db=demoData();
     $('#companyName').textContent=company.name;$('#profileBtn').innerHTML='Демо <span class="demoBadge">DEMO</span>';
     counts();render();showAuth(false);return;
   }
@@ -192,7 +349,7 @@ $('#openRegister').onclick=()=>authScreen('register');
 $$('[data-auth-back]').forEach(b=>b.onclick=()=>authScreen('chooser'));
 $('#forgotBtn').onclick=()=>{$('#authError').textContent='Восстановление пароля подключим после настройки почтовой отправки. Сейчас используйте действующий пароль.'};
 $('#demoBtn').onclick=()=>{
-  demoMode=true;sessionStorage.setItem('ap_demo','1');me={full_name:'Демо пользователь',role:'demo'};company={name:'Демо AP Control'};db=demoData();
+  demoMode=true;sessionStorage.setItem('ap_demo','1');me={full_name:'Демо пользователь',role:'demo'};company={name:'ООО Спецпромстрой'};db=demoData();
   $('#companyName').textContent=company.name;$('#profileBtn').innerHTML='Демо <span class="demoBadge">DEMO</span>';
   counts();render();showAuth(false);toast('Демо-режим: данные не записываются в вашу базу');
 };
@@ -225,7 +382,7 @@ function demoBlock(){
   toast('Демо-режим: создание и изменение данных отключено');
   return true;
 }
-function counts(){$('#sideProjectCount').textContent=db.projects.length;$('#sideTaskCount').textContent=db.tasks.filter(x=>x.status!=='Завершена').length;$('#sideEmployeeCount').textContent=db.employees.length;$('#sideClientCount').textContent=db.clients.length;$('#sideToolCount').textContent=db.tools.length;$('#sideCameraCount').textContent=db.cameras.length;$('#rightTasks').textContent=db.tasks.length?db.tasks.filter(x=>x.status!=='Завершена').length+' активных задач':'Новых задач пока нет'}
+function counts(){$('#sideProjectCount').textContent=db.projects.length;$('#sideTaskCount').textContent=db.tasks.filter(x=>x.status!=='Завершена').length;$('#sideEmployeeCount').textContent=db.employees.length;$('#sideClientCount').textContent=db.clients.length;$('#sideToolCount').textContent=db.tools.length;$('#sideCameraCount').textContent=db.cameras.length;$('#rightTasks').textContent=db.tasks.length?db.tasks.filter(x=>x.status!=='Завершена').length+' активных задач':'Новых задач пока нет';let r=$('#rightDemoAlerts');if(r)r.innerHTML=demoMode?'<h3 style="margin-top:18px">Контроль</h3>'+demoAlerts().slice(0,3).map(a=>`<div class="alertItem ${a.c}" style="margin-bottom:8px"><b>${a.t}</b><small>${a.d}</small></div>`).join(''):''}
 function empty(ic,t,d,b='',a=''){return `<div class="card empty"><div><div class="icon">${ic}</div><h3>${t}</h3><p>${d}</p>${b?`<button class="btn primary" onclick="${a}">${b}</button>`:''}</div></div>`}
 function head(t,s,b=''){return `<div class="pageHead"><div><h1>${t}</h1><p>${s}</p></div><div class="actions">${b}</div></div>`}
 function modal(t,b,onSave,save='Сохранить'){$('#modalHost').innerHTML=`<div class="modalBack" id="modalBack"><div class="modal"><div class="modalHead"><h3>${t}</h3><button onclick="closeModal()">×</button></div><div class="modalBody">${b}</div><div class="modalFoot"><button class="btn" onclick="closeModal()">Отмена</button><button class="btn primary" id="modalSave">${save}</button></div></div></div>`;$('#modalSave').onclick=onSave;$('#modalBack').onclick=e=>{if(e.target.id==='modalBack')closeModal()}}
@@ -233,6 +390,35 @@ function closeModal(){$('#modalHost').innerHTML=''}
 function setView(v){currentView=v;currentProjectId=null;$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));render()}$$('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
 async function reload(){db=await api('/bootstrap');counts();render()}
 function projectStages(pid){return db.stages.filter(s=>s.project_id===pid)}
+function statusClass(v){
+  v=String(v||'').toLowerCase();
+  if(v.includes('заверш')||v.includes('активен')||v.includes('оплачен')||v.includes('принят'))return 's-green';
+  if(v.includes('проср')||v.includes('крит')||v.includes('долг')||v.includes('не закрыт')||v.includes('отклон'))return 's-red';
+  if(v.includes('работ')||v.includes('провер')||v.includes('частич'))return 's-blue';
+  if(v.includes('ожид')||v.includes('план')||v.includes('не начат')||v.includes('подготов'))return 's-amber';
+  return 's-gray';
+}
+function money(n){return Number(n||0).toLocaleString('ru-RU')+' ₽'}
+function demoAlerts(){
+  if(!demoMode)return [];
+  return [
+    {c:'red',t:'ЖК Терек · просрочка монолита',d:'Перекрытие 7 этажа отстаёт от графика на 4 дня. Ответственный: Ислам Жемухов.'},
+    {c:'red',t:'Не закрыт подотчёт 170 000 ₽',d:'Азамат Анахаев получил новый аванс при незакрытом остатке за сентябрь.'},
+    {c:'',t:'ЖК Баксан · акт ожидает проверки',d:'КС-2 по вентиляции загружен, но ещё не принят главным инженером.'},
+    {c:'blue',t:'ЖК Чегем · поставка лифтов',d:'Плановая поставка через 12 дней. Требуется подтвердить готовность шахт.'},
+    {c:'green',t:'ЖК Нарткала · этап завершён',d:'Гидроизоляция кровли принята без замечаний.'}
+  ];
+}
+function demoGanttRows(){
+  if(!demoMode)return [];
+  return db.stages.slice(0,18).map((s,i)=>({name:s.name,project:(db.projects.find(p=>p.id===s.project_id)||{}).name||'—',start:s.start,end:s.end,status:s.status,color:['green','blue','violet','amber','teal'][i%5]}));
+}
+function ganttHtml(rows){
+  const months=['Окт','Ноя','Дек','Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен'];
+  const base=new Date('2026-10-01T00:00:00'),end=new Date('2027-10-01T00:00:00'),total=end-base;
+  return `<div class="ganttBoard"><div class="ganttHeader"><div>Работа / объект</div><div class="ganttMonths">${months.map(m=>`<span>${m}</span>`).join('')}</div></div>${rows.map(r=>{let s=new Date((r.start||'2026-10-01')+'T00:00:00'),e=new Date((r.end||r.start||'2026-11-01')+'T00:00:00');let l=Math.max(0,Math.min(98,(s-base)/total*100)),w=Math.max(2,Math.min(100-l,(e-s)/total*100));let color=String(r.status).includes('Проср')?'red':String(r.status).includes('Заверш')?'green':String(r.status).includes('провер')?'amber':r.color||'blue';return `<div class="ganttRow"><div class="ganttName"><b>${esc(r.name)}</b><small>${esc(r.project)}</small></div><div class="ganttTrack"><div class="ganttBar ${color}" style="left:${l}%;width:${w}%">${esc(r.status||'В работе')}</div></div></div>`}).join('')}</div>`;
+}
+
 async function newProject(){if(demoBlock())return;modal('Новый объект',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="pName"></div><div class="field"><label>Тип</label><select id="pType"><option>Строительство</option><option>Проектирование</option><option>Отделка</option></select></div><div class="field"><label>Статус</label><select id="pStatus"><option>Подготовка</option><option>Активен</option></select></div><div class="field full"><label>Адрес</label><input id="pAddr"></div><div class="field"><label>Начало</label><input id="pStart" type="date"></div><div class="field"><label>Плановое завершение</label><input id="pEnd" type="date"></div><div class="field full"><label>Описание</label><textarea id="pDesc"></textarea></div></div>`,async()=>{try{await api('/projects',{method:'POST',body:JSON.stringify({name:$('#pName').value,type:$('#pType').value,status:$('#pStatus').value,address:$('#pAddr').value||null,start:$('#pStart').value||null,end:$('#pEnd').value||null,description:$('#pDesc').value||null})});closeModal();await reload();toast('Объект создан')}catch(e){toast(e.message)}},'Создать объект')}
 async function newStage(pid){if(demoBlock())return;modal('Новый этап',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="sName"></div><div class="field"><label>Начало</label><input id="sStart" type="date"></div><div class="field"><label>Окончание</label><input id="sEnd" type="date"></div><div class="field"><label>Ответственный</label><select id="sResp"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Проверяющий</label><select id="sCheck"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Стоимость</label><input id="sCost" type="number"></div><div class="field"><label>Статус</label><select id="sStatus"><option>Не начат</option><option>В работе</option><option>На проверке</option><option>Завершен</option></select></div></div>`,async()=>{try{await api(`/projects/${pid}/stages`,{method:'POST',body:JSON.stringify({name:$('#sName').value,start:$('#sStart').value||null,end:$('#sEnd').value||null,responsible:$('#sResp').value,checker:$('#sCheck').value,cost:$('#sCost').value?Number($('#sCost').value):null,status:$('#sStatus').value})});closeModal();await bootstrap();openProject(pid)}catch(e){toast(e.message)}},'Добавить этап')}
 async function createSimple(kind,title,fields,map){modal(title,`<div class="formGrid">${fields}</div>`,async()=>{let payload=map();try{await api('/'+kind,{method:'POST',body:JSON.stringify(payload)});closeModal();await reload();toast('Сохранено')}catch(e){toast(e.message)}},'Сохранить')}
@@ -242,62 +428,65 @@ function newClient(){createSimple('clients','Новый клиент',`<div clas
 function newTool(){createSimple('tools','Новый инструмент',`<div class="field full"><label>Наименование *</label><input id="xName"></div><div class="field"><label>Инв. №</label><input id="xNum"></div><div class="field"><label>Стоимость</label><input id="xCost" type="number"></div><div class="field"><label>Статус</label><select id="xStatus"><option>Склад</option><option>Выдан</option><option>Ремонт</option></select></div><div class="field"><label>Ответственный</label><select id="xResp"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div>`,()=>({name:$('#xName').value,inventory_no:$('#xNum').value||null,cost:$('#xCost').value?Number($('#xCost').value):null,status:$('#xStatus').value,responsible:$('#xResp').value}))}
 function newCamera(){createSimple('cameras','Новая камера',`<div class="field full"><label>Название *</label><input id="xName"></div><div class="field"><label>Объект</label><select id="xProject"><option value="">Не выбран</option>${db.projects.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></div><div class="field"><label>Тип</label><select id="xType"><option>RTSP / ONVIF</option><option>Snapshot / FTP</option></select></div><div class="field full"><label>URL</label><input id="xUrl"></div>`,()=>({name:$('#xName').value,project_id:$('#xProject').value||null,type:$('#xType').value,url:$('#xUrl').value||null}))}
 function newFinance(){createSimple('finance','Финансовая операция',`<div class="field"><label>Тип</label><select id="xType"><option>Начисление</option><option>Выдача</option><option>Перерасчет</option><option>Оплата</option><option>Акт</option></select></div><div class="field"><label>Категория</label><input id="xCat"></div><div class="field"><label>Объект</label><select id="xProject"><option value="">Без объекта</option>${db.projects.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></div><div class="field"><label>Сумма</label><input id="xAmount" type="number"></div><div class="field full"><label>Комментарий</label><textarea id="xComment"></textarea></div>`,()=>({type:$('#xType').value,category:$('#xCat').value||null,project_id:$('#xProject').value||null,amount:Number($('#xAmount').value||0),comment:$('#xComment').value||null}))}
-function renderHome(){let has=db.projects.length||db.tasks.length||db.employees.length;$('#content').innerHTML=`<section class="page">${head('Обзор','Центр управления компанией',`<button class="btn primary" onclick="newProject()">+ Новый объект</button>`)}${has?`<div class="kpis"><div class="card kpi"><div class="v">${db.projects.length}</div><div class="l">Объекты</div></div><div class="card kpi"><div class="v">${db.tasks.filter(x=>x.status!=='Завершена').length}</div><div class="l">Активные задачи</div></div><div class="card kpi"><div class="v">${db.employees.length}</div><div class="l">Сотрудники</div></div><div class="card kpi"><div class="v">${db.finance.length}</div><div class="l">Финансовые операции</div></div></div><div class="split"><div class="card panel"><h3>Объекты</h3>${db.projects.length?db.projects.slice(0,6).map(p=>`<div style="padding:10px 0;border-bottom:1px solid #edf1f4"><button style="border:0;background:none;color:var(--blue);font-weight:700" onclick="openProject('${p.id}')">${esc(p.name)}</button><div style="font-size:12px;color:var(--muted)">${esc(p.type)} · ${esc(p.status)}</div></div>`).join(''):'<div class="placeholder">Нет объектов</div>'}</div><div class="card panel"><h3>Последние события</h3>${db.activity.length?db.activity.slice(0,8).map(a=>`<div class="activityItem"><b>${esc(a.action)}</b><br><small>${new Date(a.created_at).toLocaleString('ru-RU')} · ${esc(a.details||a.entity_type)}</small></div>`).join(''):'<div class="placeholder">Журнал пока пуст</div>'}</div></div>`:empty('▦','Система готова к работе','Создайте первый объект. Показатели появятся только из реальных данных.','Создать первый объект','newProject()')}</section>`}
-function renderProjects(){$('#content').innerHTML=`<section class="page">${head('Объекты','Строительство · Проектирование · Отделка',`<button class="btn primary" onclick="newProject()">+ Новый объект</button>`)}<div class="tabs"><button class="tab active">Активные (${db.projects.length})</button><button class="tab">Архив (0)</button></div>${db.projects.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Объект</th><th>Тип</th><th>Статус</th><th>Адрес</th><th>Этапы</th><th></th></tr></thead><tbody>${db.projects.map(p=>`<tr><td><b>${esc(p.name)}</b></td><td>${esc(p.type)}</td><td><span class="status s-blue">${esc(p.status)}</span></td><td>${esc(p.address||'—')}</td><td>${projectStages(p.id).length}</td><td><button class="btn soft" onclick="openProject('${p.id}')">Открыть</button></td></tr>`).join('')}</tbody></table></div></div>`:empty('▦','Объектов пока нет','Добавьте первый объект.','+ Новый объект','newProject()')}</section>`}
-function openProject(pid){currentProjectId=pid;renderProject(pid)}
-function renderProject(pid){let p=db.projects.find(x=>x.id===pid),st=projectStages(pid);$('#content').innerHTML=`<section class="page">${head(esc(p.name),`${esc(p.type)} · ${esc(p.address||'Адрес не указан')}`,`<button class="btn" onclick="setView('projects')">← Объекты</button><button class="btn primary" onclick="newStage('${pid}')">+ Этап</button>`)}<div class="tabs"><button class="tab active">Обзор</button><button class="tab" onclick="projectStagePage('${pid}')">Этапы</button><button class="tab" onclick="setView('tasks')">Задачи</button><button class="tab" onclick="setView('finance')">Финансы</button><button class="tab">Документы</button><button class="tab">Галерея</button><button class="tab" onclick="setView('cameras')">Камеры</button><button class="tab">Лента активности</button></div><div class="projectShell"><div><div class="card panel" style="margin-bottom:12px"><h3>Этапы проекта</h3>${st.length?`<div class="stageTrack">${st.map(s=>`<div class="stageNode"><div class="stageDot" style="background:${s.status==='Завершен'?'var(--green)':s.status==='В работе'?'var(--blue)':'#e6edf2'}"></div><strong>${esc(s.name)}</strong><small>${esc(s.status)}</small></div>`).join('')}</div>`:'<div class="placeholder">Этапы пока не добавлены</div>'}</div><div class="projectTiles"><div class="tile"><h4>Документы проекта</h4><div class="placeholder">Нет документов</div></div><div class="tile"><h4>Галерея</h4><div class="placeholder">Нет фотографий</div></div><div class="tile"><h4>Онлайн-камера</h4><div class="placeholder">Камеры не подключены</div></div><div class="tile"><h4>Последние события</h4><div class="placeholder">События появятся автоматически</div></div></div></div><div class="card panel"><h3>Информация</h3><p><b>Статус:</b> ${esc(p.status)}</p><p><b>Начало:</b> ${esc(p.start||'—')}</p><p><b>План:</b> ${esc(p.end||'—')}</p><p><b>Этапов:</b> ${st.length}</p><hr style="border:0;border-top:1px solid var(--line)"><p style="color:var(--muted)">${esc(p.description||'Описание пока не добавлено.')}</p></div></div></section>`}
-function projectStagePage(pid){let p=db.projects.find(x=>x.id===pid),st=projectStages(pid);$('#content').innerHTML=`<section class="page">${head(esc(p.name)+' · Этапы','Планирование и контроль работ',`<button class="btn" onclick="renderProject('${pid}')">← Обзор</button><button class="btn primary" onclick="newStage('${pid}')">+ Новый этап</button>`)}${st.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Этап</th><th>Статус</th><th>Начало</th><th>Окончание</th><th>Ответственный</th><th>Проверяющий</th><th>Стоимость</th></tr></thead><tbody>${st.map(s=>`<tr><td><b>${esc(s.name)}</b></td><td><span class="status s-blue">${esc(s.status)}</span></td><td>${esc(s.start||'—')}</td><td>${esc(s.end||'—')}</td><td>${esc(s.responsible||'—')}</td><td>${esc(s.checker||'—')}</td><td>${s.cost?Number(s.cost).toLocaleString('ru-RU')+' ₽':'—'}</td></tr>`).join('')}</tbody></table></div></div>`:empty('◌','Этапов пока нет','Добавьте основной этап.','+ Новый этап',`newStage('${pid}')`)}</section>`}
-
-function renderTasks(){
-  const activeCount=db.tasks.filter(x=>x.status!=='Завершена').length;
-  const doneCount=db.tasks.filter(x=>x.status==='Завершена').length;
-  let body='';
-  if(taskMode==='gantt'){
-    body=db.tasks.length
-      ? '<div class="ganttEmpty">Временная шкала строится по срокам созданных задач</div>'
-      : empty('▥','Гант пока пуст','Создайте задачи со сроками.','+ Новая задача','newTask()');
-  }else{
-    if(db.tasks.length){
-      const rows=db.tasks.map(t=>{
-        const p=db.projects.find(x=>x.id===t.project_id);
-        return `<tr>
-          <td><b>${esc(t.name)}</b></td>
-          <td>${esc(p?.name||'—')}</td>
-          <td>${esc(t.executor||'—')}</td>
-          <td>${esc(t.due||'—')}</td>
-          <td>${esc(t.priority)}</td>
-          <td><span class="status s-blue">${esc(t.status)}</span></td>
-        </tr>`;
-      }).join('');
-      body=`<div class="card"><div class="tableWrap"><table>
-        <thead><tr><th>Задача</th><th>Объект</th><th>Исполнитель</th><th>Срок</th><th>Приоритет</th><th>Статус</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table></div></div>`;
-    }else{
-      body=empty('✓','Список задач пуст','Создайте первую задачу.','+ Новая задача','newTask()');
-    }
-  }
+function renderHome(){
+  let has=db.projects.length||db.tasks.length||db.employees.length;
+  if(!has){$('#content').innerHTML=`<section class="page">${head('Обзор','Центр управления компанией',`<button class="btn primary" onclick="newProject()">+ Новый объект</button>`)}${empty('▦','Система готова к работе','Создайте первый объект. Показатели появятся только из реальных данных.','Создать первый объект','newProject()')}</section>`;return}
+  const active=db.tasks.filter(x=>x.status!=='Завершена').length,overdue=db.tasks.filter(x=>x.status==='Просрочена').length,alerts=demoMode?demoAlerts():[];
   $('#content').innerHTML=`<section class="page">
-    ${head('Задачи','Постановка, исполнение, проверка и сроки',`<button class="btn primary" onclick="newTask()">+ Новая задача</button>`)}
-    <div class="tabs">
-      <button class="tab ${taskMode==='list'?'active':''}" onclick="taskMode='list';renderTasks()">Список</button>
-      <button class="tab ${taskMode==='gantt'?'active':''}" onclick="taskMode='gantt';renderTasks()">Гант</button>
-      <button class="tab">Активные (${activeCount})</button>
-      <button class="tab">Завершены (${doneCount})</button>
-      <button class="tab">Просрочены (0)</button>
+    ${head('Обзор',demoMode?'ООО «Спецпромстрой» · демонстрационный центр управления':'Центр управления компанией',`<button class="btn primary" onclick="newProject()">+ Новый объект</button>`)}
+    <div class="kpis">
+      <div class="card kpi kpi-green"><div class="v">${db.projects.filter(x=>x.status==='Активен').length}</div><div class="l">Активные объекты</div><div class="trend up">● в работе</div></div>
+      <div class="card kpi kpi-blue"><div class="v">${active}</div><div class="l">Активные задачи</div><div class="trend">${db.tasks.length} всего</div></div>
+      <div class="card kpi kpi-red"><div class="v">${overdue}</div><div class="l">Просрочено</div><div class="trend down">${overdue?'требует внимания':'нет проблем'}</div></div>
+      <div class="card kpi kpi-violet"><div class="v">${db.employees.length}</div><div class="l">Сотрудники</div><div class="trend up">команда</div></div>
     </div>
-    ${body}
+    ${demoMode?`<div class="financeStrip"><div><small>Операции за период</small><strong>${money(db.finance.reduce((a,b)=>a+Number(b.amount||0),0))}</strong></div><div><small>Незакрытый подотчёт</small><strong style="color:var(--red)">${money(728000)}</strong></div><div><small>Этапы в работе</small><strong>${db.stages.filter(s=>s.status==='В работе').length}</strong></div><div><small>На проверке</small><strong style="color:#b98127">${db.stages.filter(s=>s.status==='На проверке').length}</strong></div></div>`:''}
+    <div class="dashGrid">
+      <div class="card chartCard"><h3>Динамика по объектам</h3><div class="chartSub">Условный объём выполненных работ по неделям</div><div class="barChart">${[42,58,51,72,64,81,76,88,69,91,84,96].map((v,i)=>`<div class="barCol"><div class="bar ${['blue','green','violet','teal'][i%4]}" style="height:${v}%"></div><div class="barLabel">${i+1} нед</div></div>`).join('')}</div></div>
+      <div class="card chartCard"><h3>Статусы задач</h3><div class="chartSub">Распределение текущей нагрузки</div><div class="donut"></div><div class="legend"><span><i class="dot" style="background:var(--green)"></i>Завершены</span><span><i class="dot" style="background:var(--blue)"></i>В работе</span><span><i class="dot" style="background:var(--amber)"></i>Проверка</span><span><i class="dot" style="background:var(--red)"></i>Просрочка</span></div></div>
+    </div>
+    <div class="dashGrid">
+      <div class="card panel"><h3>Объекты</h3>${db.projects.slice(0,9).map((p,i)=>`<div style="padding:10px 0;border-bottom:1px solid #edf1f4;display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:12px;align-items:center"><div><button style="border:0;background:none;color:var(--blue);font-weight:800;padding:0" onclick="openProject('${p.id}')">${esc(p.name)}</button><div style="font-size:11px;color:var(--muted);margin-top:3px">${esc(p.description||p.type)}</div></div><div><div class="progressLine"><span style="width:${[64,48,72,57,81,88,36,29,12][i]||50}%;background:${['var(--green)','var(--blue)','var(--violet)','var(--teal)'][i%4]}"></span></div><small style="color:var(--muted)">${[64,48,72,57,81,88,36,29,12][i]||50}%</small></div></div>`).join('')}</div>
+      <div class="card panel"><h3>Контроль и подсказки</h3>${alerts.length?`<div class="alertList">${alerts.map(a=>`<div class="alertItem ${a.c}"><b>${a.t}</b><small>${a.d}</small></div>`).join('')}</div>`:(db.activity.length?db.activity.slice(0,6).map(a=>`<div class="activityItem"><b>${esc(a.action)}</b><br><small>${esc(a.details||'')}</small></div>`).join(''):'<div class="placeholder">Нет событий</div>')}</div>
+    </div>
   </section>`;
 }
+function renderProjects(){$('#content').innerHTML=`<section class="page">${head('Объекты','Строительство · Проектирование · Отделка',`<button class="btn primary" onclick="newProject()">+ Новый объект</button>`)}<div class="tabs"><button class="tab active">Активные (${db.projects.length})</button><button class="tab">Архив (0)</button></div>${db.projects.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Объект</th><th>Тип</th><th>Статус</th><th>Адрес</th><th>Этапы</th><th></th></tr></thead><tbody>${db.projects.map(p=>`<tr><td><b>${esc(p.name)}</b></td><td>${esc(p.type)}</td><td><span class="status ${statusClass(p.status)}">${esc(p.status)}</span></td><td>${esc(p.address||'—')}</td><td>${projectStages(p.id).length}</td><td><button class="btn soft" onclick="openProject('${p.id}')">Открыть</button></td></tr>`).join('')}</tbody></table></div></div>`:empty('▦','Объектов пока нет','Добавьте первый объект.','+ Новый объект','newProject()')}</section>`}
+function openProject(pid){currentProjectId=pid;renderProject(pid)}
+function renderProject(pid){let p=db.projects.find(x=>x.id===pid),st=projectStages(pid);$('#content').innerHTML=`<section class="page">${head(esc(p.name),`${esc(p.type)} · ${esc(p.address||'Адрес не указан')}`,`<button class="btn" onclick="setView('projects')">← Объекты</button><button class="btn primary" onclick="newStage('${pid}')">+ Этап</button>`)}<div class="tabs"><button class="tab active">Обзор</button><button class="tab" onclick="projectStagePage('${pid}')">Этапы</button><button class="tab" onclick="setView('tasks')">Задачи</button><button class="tab" onclick="setView('finance')">Финансы</button><button class="tab">Документы</button><button class="tab">Галерея</button><button class="tab" onclick="setView('cameras')">Камеры</button><button class="tab">Лента активности</button></div><div class="projectShell"><div><div class="card panel" style="margin-bottom:12px"><h3>Этапы проекта</h3>${st.length?`<div class="stageTrack">${st.map(s=>`<div class="stageNode"><div class="stageDot" style="background:${s.status==='Завершен'?'var(--green)':s.status==='В работе'?'var(--blue)':'#e6edf2'}"></div><strong>${esc(s.name)}</strong><small>${esc(s.status)}</small></div>`).join('')}</div>`:'<div class="placeholder">Этапы пока не добавлены</div>'}</div><div class="projectTiles"><div class="tile"><h4>Документы проекта</h4><div class="placeholder">Нет документов</div></div><div class="tile"><h4>Галерея</h4><div class="placeholder">Нет фотографий</div></div><div class="tile"><h4>Онлайн-камера</h4><div class="placeholder">Камеры не подключены</div></div><div class="tile"><h4>Последние события</h4><div class="placeholder">События появятся автоматически</div></div></div></div><div class="card panel"><h3>Информация</h3><p><b>Статус:</b> ${esc(p.status)}</p><p><b>Начало:</b> ${esc(p.start||'—')}</p><p><b>План:</b> ${esc(p.end||'—')}</p><p><b>Этапов:</b> ${st.length}</p><hr style="border:0;border-top:1px solid var(--line)"><p style="color:var(--muted)">${esc(p.description||'Описание пока не добавлено.')}</p></div></div></section>`}
+function projectStagePage(pid){let p=db.projects.find(x=>x.id===pid),st=projectStages(pid);$('#content').innerHTML=`<section class="page">${head(esc(p.name)+' · Этапы','Планирование и контроль работ',`<button class="btn" onclick="renderProject('${pid}')">← Обзор</button><button class="btn primary" onclick="newStage('${pid}')">+ Новый этап</button>`)}${st.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Этап</th><th>Статус</th><th>Начало</th><th>Окончание</th><th>Ответственный</th><th>Проверяющий</th><th>Стоимость</th></tr></thead><tbody>${st.map(s=>`<tr><td><b>${esc(s.name)}</b></td><td><span class="status ${statusClass(s.status)}">${esc(s.status)}</span></td><td>${esc(s.start||'—')}</td><td>${esc(s.end||'—')}</td><td>${esc(s.responsible||'—')}</td><td>${esc(s.checker||'—')}</td><td>${s.cost?Number(s.cost).toLocaleString('ru-RU')+' ₽':'—'}</td></tr>`).join('')}</tbody></table></div></div>`:empty('◌','Этапов пока нет','Добавьте основной этап.','+ Новый этап',`newStage('${pid}')`)}</section>`}
 
-function renderEmployees(){$('#content').innerHTML=`<section class="page">${head('Сотрудники','Команда, роли, доступы и занятость',`<button class="btn primary" onclick="newEmployee()">+ Новый сотрудник</button>`)}<div class="tabs"><button class="tab active">Активные (${db.employees.length})</button><button class="tab">Архив (0)</button></div>${db.employees.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Сотрудник</th><th>Должность</th><th>Роль</th><th>Телефон</th><th>Email</th><th>Статус</th></tr></thead><tbody>${db.employees.map(e=>`<tr onclick="openEmployee('${e.id}')" style="cursor:pointer"><td><b>${esc(e.name)}</b></td><td>${esc(e.job||'—')}</td><td>${esc(e.role)}</td><td>${esc(e.phone||'—')}</td><td>${esc(e.email||'—')}</td><td><span class="status s-amber">${esc(e.status)}</span></td></tr>`).join('')}</tbody></table></div></div>`:empty('♙','Сотрудников пока нет','Добавьте сотрудника и назначьте роль.','+ Новый сотрудник','newEmployee()')}</section>`}
-function openEmployee(eid){let e=db.employees.find(x=>x.id===eid);$('#content').innerHTML=`<section class="page">${head(esc(e.name),`${esc(e.job||'Должность не указана')} · ${esc(e.role)}`,`<button class="btn" onclick="renderEmployees()">← Сотрудники</button>`)}<div class="card"><div class="employeeTabs">${['info','tasks','tools','busy','trips','money'].map((x,i)=>`<button class="${employeeTab===x?'active':''}" onclick="employeeTab='${x}';openEmployee('${eid}')">${['Информация','Задачи','Инструменты','Занятость','Поездки','Финансы'][i]}</button>`).join('')}</div><div class="panel">${employeeTab==='info'?`<div class="split"><div><p><b>Телефон:</b> ${esc(e.phone||'—')}</p><p><b>Email:</b> ${esc(e.email||'—')}</p><p><b>Telegram:</b> ${esc(e.telegram||'—')}</p></div><div><p><b>Статус:</b> ${esc(e.status)}</p><p><b>Роль:</b> ${esc(e.role)}</p></div></div>`:employeeTab==='busy'?'<div class="ganttEmpty">Занятость будет строиться из назначений на этапы</div>':'<div class="placeholder">Данных пока нет</div>'}</div></div></section>`}
+function renderTasks(){
+  const activeCount=db.tasks.filter(x=>x.status!=='Завершена').length,doneCount=db.tasks.filter(x=>x.status==='Завершена').length,overdue=db.tasks.filter(x=>x.status==='Просрочена').length;
+  let body='';
+  if(taskMode==='gantt'){
+    body=db.tasks.length?ganttHtml(demoMode?demoGanttRows():db.tasks.map((t,i)=>({name:t.name,project:(db.projects.find(p=>p.id===t.project_id)||{}).name||'—',start:t.due,end:t.due,status:t.status,color:['blue','green','violet','amber'][i%4]}))):empty('▥','Гант пока пуст','Создайте задачи со сроками.','+ Новая задача','newTask()');
+  }else{
+    body=db.tasks.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Задача</th><th>Объект</th><th>Исполнитель</th><th>Срок</th><th>Приоритет</th><th>Статус</th></tr></thead><tbody>${db.tasks.map(t=>{const p=db.projects.find(x=>x.id===t.project_id);return `<tr><td><b>${esc(t.name)}</b></td><td>${esc(p?.name||'—')}</td><td>${esc(t.executor||'—')}</td><td>${esc(t.due||'—')}</td><td>${esc(t.priority)}</td><td><span class="status ${statusClass(t.status)}">${esc(t.status)}</span></td></tr>`}).join('')}</tbody></table></div></div>`:empty('✓','Список задач пуст','Создайте первую задачу.','+ Новая задача','newTask()');
+  }
+  $('#content').innerHTML=`<section class="page">${head('Задачи','Постановка, исполнение, проверка и сроки',`<button class="btn primary" onclick="newTask()">+ Новая задача</button>`)}<div class="tabs"><button class="tab ${taskMode==='list'?'active':''}" onclick="taskMode='list';renderTasks()">Список</button><button class="tab ${taskMode==='gantt'?'active':''}" onclick="taskMode='gantt';renderTasks()">Гант</button><button class="tab">Активные (${activeCount})</button><button class="tab">Завершены (${doneCount})</button><button class="tab">Просрочены (${overdue})</button></div>${body}</section>`;
+}
+
+function renderEmployees(){$('#content').innerHTML=`<section class="page">${head('Сотрудники','Команда, роли, доступы и занятость',`<button class="btn primary" onclick="newEmployee()">+ Новый сотрудник</button>`)}<div class="tabs"><button class="tab active">Активные (${db.employees.length})</button><button class="tab">Архив (0)</button></div>${db.employees.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Сотрудник</th><th>Должность</th><th>Роль</th><th>Телефон</th><th>Email</th><th>Статус</th></tr></thead><tbody>${db.employees.map(e=>`<tr onclick="openEmployee('${e.id}')" style="cursor:pointer"><td><b>${esc(e.name)}</b></td><td>${esc(e.job||'—')}</td><td>${esc(e.role)}</td><td>${esc(e.phone||'—')}</td><td>${esc(e.email||'—')}</td><td><span class="status ${statusClass(e.status)}">${esc(e.status)}</span></td></tr>`).join('')}</tbody></table></div></div>`:empty('♙','Сотрудников пока нет','Добавьте сотрудника и назначьте роль.','+ Новый сотрудник','newEmployee()')}</section>`}
+function openEmployee(eid){let e=db.employees.find(x=>x.id===eid);$('#content').innerHTML=`<section class="page">${head(esc(e.name),`${esc(e.job||'Должность не указана')} · ${esc(e.role)}`,`<button class="btn" onclick="renderEmployees()">← Сотрудники</button>`)}<div class="card"><div class="employeeTabs">${['info','tasks','tools','busy','trips','money'].map((x,i)=>`<button class="${employeeTab===x?'active':''}" onclick="employeeTab='${x}';openEmployee('${eid}')">${['Информация','Задачи','Инструменты','Занятость','Поездки','Финансы'][i]}</button>`).join('')}</div><div class="panel">${employeeTab==='info'?`<div class="split"><div><p><b>Телефон:</b> ${esc(e.phone||'—')}</p><p><b>Email:</b> ${esc(e.email||'—')}</p><p><b>Telegram:</b> ${esc(e.telegram||'—')}</p></div><div><p><b>Статус:</b> ${esc(e.status)}</p><p><b>Роль:</b> ${esc(e.role)}</p></div></div>`:employeeTab==='busy'?(demoMode?ganttHtml(db.stages.filter(s=>s.responsible===e.name).map((s,i)=>({name:s.name,project:(db.projects.find(p=>p.id===s.project_id)||{}).name||'—',start:s.start,end:s.end,status:s.status,color:['blue','green','violet'][i%3]}))):'<div class="ganttEmpty">Занятость будет строиться из назначений на этапы</div>'):employeeTab==='tasks'?(db.tasks.filter(t=>t.executor===e.name).length?db.tasks.filter(t=>t.executor===e.name).map(t=>`<div class="activityItem"><b>${esc(t.name)}</b><br><small>${esc(t.due||'—')} · ${esc(t.status)}</small></div>`).join(''):'<div class="placeholder">Нет назначенных задач</div>'):employeeTab==='money'?(demoMode?`<div class="tableWrap"><table><thead><tr><th>Операция</th><th>Сумма</th><th>Статус</th></tr></thead><tbody>${db.finance.filter(f=>f.person===e.name).map(f=>`<tr><td>${esc(f.category)}</td><td><b>${money(f.amount)}</b></td><td><span class="status ${statusClass(f.status)}">${esc(f.status)}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="placeholder">Финансовых данных пока нет</div>'):'<div class="placeholder">Данных пока нет</div>'}</div></div></section>`}
 function simpleTable(title,sub,button,cols,rows,emptyHtml){$('#content').innerHTML=`<section class="page">${head(title,sub,button)}${rows.length?`<div class="card"><div class="tableWrap"><table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div></div>`:emptyHtml}</section>`}
 function renderClients(){simpleTable('Клиенты','Заказчики и доступ к объектам','<button class="btn primary" onclick="newClient()">+ Новый клиент</button>',['Клиент','Телефон','Email','WhatsApp','Telegram'],db.clients.map(c=>`<tr><td><b>${esc(c.name)}</b></td><td>${esc(c.phone||'—')}</td><td>${esc(c.email||'—')}</td><td>${esc(c.whatsapp||'—')}</td><td>${esc(c.telegram||'—')}</td></tr>`),empty('◎','Активных клиентов нет','Добавьте клиента.','+ Новый клиент','newClient()'))}
-function renderTools(){simpleTable('Инструменты и имущество','Склад, выдача, возврат и ремонт','<button class="btn primary" onclick="newTool()">+ Новый инструмент</button>',['Инструмент','Инв. №','Статус','Ответственный','Стоимость'],db.tools.map(i=>`<tr><td><b>${esc(i.name)}</b></td><td>${esc(i.inventory_no||'—')}</td><td><span class="status s-blue">${esc(i.status)}</span></td><td>${esc(i.responsible||'—')}</td><td>${i.cost?Number(i.cost).toLocaleString('ru-RU')+' ₽':'—'}</td></tr>`),empty('⚒','Список инструментов пуст','Добавьте инструмент или имущество.','+ Новый инструмент','newTool()'))}
-function renderCameras(){simpleTable('Камеры','Видеоконтроль и фотофиксация','<button class="btn primary" onclick="newCamera()">+ Новая камера</button>',['Камера','Объект','Тип','Статус'],db.cameras.map(c=>{let p=db.projects.find(x=>x.id===c.project_id);return `<tr><td><b>${esc(c.name)}</b></td><td>${esc(p?.name||'—')}</td><td>${esc(c.type)}</td><td><span class="status s-gray">${esc(c.status)}</span></td></tr>`}),empty('◉','Камеры не подключены','Добавьте камеру и привяжите её к объекту.','+ Новая камера','newCamera()'))}
-function renderFinance(){$('#content').innerHTML=`<section class="page">${head('Финансы','Договоры, начисления, выплаты и акты','<button class="btn primary" onclick="newFinance()">+ Операция</button>')}${db.finance.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Тип</th><th>Категория</th><th>Объект</th><th>Сумма</th><th>Комментарий</th></tr></thead><tbody>${db.finance.map(f=>{let p=db.projects.find(x=>x.id===f.project_id);return `<tr><td>${esc(f.type)}</td><td>${esc(f.category||'—')}</td><td>${esc(p?.name||'—')}</td><td><b>${Number(f.amount).toLocaleString('ru-RU')} ₽</b></td><td>${esc(f.comment||'—')}</td></tr>`}).join('')}</tbody></table></div></div>`:empty('₽','Финансовые данные отсутствуют','Добавьте первую финансовую операцию.','+ Операция','newFinance()')}</section>`}
-function renderDashboards(){$('#content').innerHTML=`<section class="page">${head('Дашборды','Аналитика появляется только из реальных данных')}${empty('▤','Недостаточно данных для аналитики','Графики будут строиться из объектов, этапов, задач, финансов и занятости.')}</section>`}
+function renderTools(){simpleTable('Инструменты и имущество','Склад, выдача, возврат и ремонт','<button class="btn primary" onclick="newTool()">+ Новый инструмент</button>',['Инструмент','Инв. №','Статус','Ответственный','Стоимость'],db.tools.map(i=>`<tr><td><b>${esc(i.name)}</b></td><td>${esc(i.inventory_no||'—')}</td><td><span class="status ${statusClass(i.status)}">${esc(i.status)}</span></td><td>${esc(i.responsible||'—')}</td><td>${i.cost?Number(i.cost).toLocaleString('ru-RU')+' ₽':'—'}</td></tr>`),empty('⚒','Список инструментов пуст','Добавьте инструмент или имущество.','+ Новый инструмент','newTool()'))}
+function renderCameras(){simpleTable('Камеры','Видеоконтроль и фотофиксация','<button class="btn primary" onclick="newCamera()">+ Новая камера</button>',['Камера','Объект','Тип','Статус'],db.cameras.map(c=>{let p=db.projects.find(x=>x.id===c.project_id);return `<tr><td><b>${esc(c.name)}</b></td><td>${esc(p?.name||'—')}</td><td>${esc(c.type)}</td><td><span class="status ${statusClass(c.status)}">${esc(c.status)}</span></td></tr>`}),empty('◉','Камеры не подключены','Добавьте камеру и привяжите её к объекту.','+ Новая камера','newCamera()'))}
+function renderFinance(){
+  const total=db.finance.reduce((a,b)=>a+Number(b.amount||0),0),review=db.finance.filter(f=>String(f.status||'').includes('провер')).reduce((a,b)=>a+Number(b.amount||0),0);
+  $('#content').innerHTML=`<section class="page">${head('Финансы','Договоры, начисления, выплаты, подотчёт и акты','<button class="btn primary" onclick="newFinance()">+ Операция</button>')}${db.finance.length?`<div class="financeStrip"><div><small>Оборот операций</small><strong>${money(total)}</strong></div><div><small>Незакрытый подотчёт</small><strong style="color:var(--red)">${money(demoMode?728000:0)}</strong></div><div><small>На проверке</small><strong style="color:#b98127">${money(review)}</strong></div><div><small>Операций</small><strong>${db.finance.length}</strong></div></div><div class="card"><div class="tableWrap"><table><thead><tr><th>Тип</th><th>Категория</th><th>Объект</th><th>Ответственный</th><th>Сумма</th><th>Статус</th><th>Комментарий</th></tr></thead><tbody>${db.finance.map(f=>{let p=db.projects.find(x=>x.id===f.project_id);return `<tr><td>${esc(f.type)}</td><td>${esc(f.category||'—')}</td><td>${esc(p?.name||'—')}</td><td>${esc(f.person||'—')}</td><td><b>${money(f.amount)}</b></td><td><span class="status ${statusClass(f.status)}">${esc(f.status||'Проведено')}</span></td><td>${esc(f.comment||'—')}</td></tr>`}).join('')}</tbody></table></div></div>`:empty('₽','Финансовые данные отсутствуют','Добавьте первую финансовую операцию.','+ Операция','newFinance()')}</section>`}
+
+function renderDashboards(){
+  if(!demoMode){$('#content').innerHTML=`<section class="page">${head('Дашборды','Аналитика появляется только из реальных данных')}${empty('▤','Недостаточно данных для аналитики','Графики будут строиться из объектов, этапов, задач, финансов и занятости.')}</section>`;return}
+  const alerts=demoAlerts();
+  $('#content').innerHTML=`<section class="page">${head('Дашборды','ООО «Спецпромстрой» · демонстрационная аналитика')}
+    <div class="kpis"><div class="card kpi kpi-green"><div class="v">68%</div><div class="l">Средняя готовность</div><div class="trend up">+4,2% за месяц</div></div><div class="card kpi kpi-blue"><div class="v">${money(18460000)}</div><div class="l">Освоено за октябрь</div><div class="trend up">в пределах плана</div></div><div class="card kpi kpi-red"><div class="v">4</div><div class="l">Критические отклонения</div><div class="trend down">нужна реакция</div></div><div class="card kpi kpi-violet"><div class="v">43</div><div class="l">Сотрудники на объектах</div><div class="trend">7 объектов активны</div></div></div>
+    <div class="dashGrid"><div class="card chartCard"><h3>Выполнение плана</h3><div class="chartSub">Процент выполнения работ по объектам</div><div class="barChart">${[84,61,73,58,79,91,42,36,18].map((v,i)=>`<div class="barCol"><div class="bar ${['green','blue','violet','teal','coral'][i%5]}" style="height:${v}%"></div><div class="barLabel">${['Нальчик','Терек','Баксан','Терскол','Тырныауз','Нарткала','Чегем','Эльбрус','Долинск'][i]}</div></div>`).join('')}</div></div><div class="card chartCard"><h3>Структура задач</h3><div class="chartSub">Текущие статусы</div><div class="donut"></div><div class="legend"><span><i class="dot" style="background:var(--green)"></i>31% завершено</span><span><i class="dot" style="background:var(--blue)"></i>36% работа</span><span><i class="dot" style="background:var(--amber)"></i>14% проверка</span><span><i class="dot" style="background:var(--red)"></i>19% просрочка</span></div></div></div>
+    <div class="dashGrid3"><div class="card chartCard"><h3>Расходы по неделям</h3><div class="chartSub">млн ₽</div><div class="barChart">${[38,62,48,81,74,91,67,84].map((v,i)=>`<div class="barCol"><div class="bar blue" style="height:${v}%"></div><div class="barLabel">${i+1}</div></div>`).join('')}</div></div><div class="card chartCard"><h3>Дисциплина подотчёта</h3><div class="chartSub">Контроль выдач и закрытий</div><div style="display:grid;gap:13px;margin-top:24px">${[['Закрыто вовремя',72,'var(--green)'],['Частично закрыто',18,'var(--amber)'],['Просрочено',10,'var(--red)']].map(x=>`<div><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px"><span>${x[0]}</span><b>${x[1]}%</b></div><div class="progressLine"><span style="width:${x[1]}%;background:${x[2]}"></span></div></div>`).join('')}</div></div><div class="card chartCard"><h3>Контроль</h3><div class="chartSub">Автоматические подсказки</div><div class="alertList">${alerts.slice(0,4).map(a=>`<div class="alertItem ${a.c}"><b>${a.t}</b><small>${a.d}</small></div>`).join('')}</div></div></div>
+    <div style="margin-top:14px">${ganttHtml(demoGanttRows())}</div>
+  </section>`;
+}
 function renderSettings(){$('#content').innerHTML=`<section class="page">${head('Настройки','Компания, роли, права и интеграции')}<div class="split"><div class="card panel"><h3>Роли и права</h3><div class="placeholder">RBAC: Владелец · Суперадмин · Бухгалтер · Админ · Работник · Клиент</div></div><div class="card panel"><h3>Интеграции</h3><div class="placeholder">Telegram · Email · S3-файлы</div></div></div></section>`}
 function render(){if(currentView==='home')renderHome();else if(currentView==='projects')renderProjects();else if(currentView==='tasks')renderTasks();else if(currentView==='employees')renderEmployees();else if(currentView==='clients')renderClients();else if(currentView==='tools')renderTools();else if(currentView==='finance')renderFinance();else if(currentView==='cameras')renderCameras();else if(currentView==='dashboards')renderDashboards();else renderSettings();counts()}
 start();
