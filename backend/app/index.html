@@ -1,0 +1,609 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ALI Project Control</title><style>
+:root{--nav:#274d73;--nav2:#1f3f60;--bg:#f4f7fa;--paper:#fff;--ink:#203243;--muted:#7b8b99;--line:#dfe6ec;--blue:#2f6fa6;--green:#62b18d;--amber:#e2ad5a;--red:#d76d6d;--shadow:0 10px 28px rgba(37,66,91,.08)}*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.app{display:grid;grid-template-columns:74px 238px minmax(0,1fr) 300px;min-height:100vh}.rail{background:var(--nav);color:#fff;display:flex;flex-direction:column;align-items:center;padding:14px 0;position:sticky;top:0;height:100vh}.logo{width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:12px;display:grid;place-items:center;font-weight:800;margin-bottom:18px;background:rgba(255,255,255,.07)}.rail button{width:44px;height:44px;border:0;background:transparent;color:#dce8f4;border-radius:10px;margin:3px 0;font-size:18px}.rail button:hover,.rail button.active{background:rgba(255,255,255,.14);color:#fff}.rail .spacer{flex:1}.rail small{writing-mode:vertical-rl;transform:rotate(180deg);opacity:.6;font-size:10px;margin-bottom:10px}.side{background:#f9fbfc;border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow:auto}.sideHead{padding:22px 18px 16px;border-bottom:1px solid var(--line)}.brand{font-weight:800;font-size:16px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.sideSection{padding:14px 10px 4px}.sideLabel{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#9aabb8;padding:0 10px 7px;font-weight:800}.side button{width:100%;border:0;background:transparent;text-align:left;color:#536576;padding:10px 12px;border-radius:9px;margin:2px 0;display:flex;align-items:center}.side button:hover,.side button.active{background:#eaf1f7;color:var(--blue);font-weight:700}.count{margin-left:auto;font-size:11px;background:#e2edf6;color:var(--blue);padding:2px 7px;border-radius:999px}.main{min-width:0;padding:0 22px 42px}.top{height:68px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(244,247,250,.94);backdrop-filter:blur(10px);z-index:4}.search{flex:1;max-width:520px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 12px;color:var(--muted)}.search input{border:0;outline:0;width:100%}.topActions{margin-left:auto;display:flex;gap:8px}.btn,.iconBtn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:9px 12px}.iconBtn{width:38px;height:38px;padding:0}.btn.primary{background:var(--nav);border-color:var(--nav);color:#fff}.btn.soft{background:#eef4f8;color:var(--blue);border-color:#d7e5ef}.page{padding-top:20px}.pageHead{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}.pageHead h1{margin:0;font-size:24px}.pageHead p{margin:4px 0 0;color:var(--muted)}.pageHead .actions{margin-left:auto;display:flex;gap:8px}.tabs{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 16px}.tab{border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:9px;color:#637686}.tab.active{background:var(--nav);border-color:var(--nav);color:#fff}.card{background:var(--paper);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.empty{min-height:360px;display:grid;place-items:center;text-align:center;padding:35px}.empty .icon{width:64px;height:64px;border-radius:18px;background:#edf3f8;color:var(--blue);display:grid;place-items:center;font-size:27px;margin:0 auto 15px}.empty h3{font-size:18px;margin:0 0 7px}.empty p{color:var(--muted);max-width:450px;margin:0 auto 18px;line-height:1.55}.toolbar{display:flex;gap:8px;padding:13px 14px;border-bottom:1px solid var(--line)}.searchMini{min-width:220px;max-width:360px;flex:1}.searchMini input{width:100%;border:1px solid var(--line);padding:9px 11px;border-radius:8px;outline:0}.tableWrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:12px 14px;border-bottom:1px solid #edf1f4;text-align:left;white-space:nowrap}th{font-size:11px;color:#8393a1;text-transform:uppercase;letter-spacing:.06em;background:#fbfcfd}tbody tr:hover{background:#fafcfd}.status{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}.status:before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}.s-blue{background:#eaf2f8;color:#447ca7}.s-amber{background:#fff3dd;color:#b98127}.s-gray{background:#eef1f3;color:#75828d}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.kpi{padding:16px}.kpi .v{font-size:24px;font-weight:800}.kpi .l{color:var(--muted);font-size:12px;margin-top:4px}.projectShell{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px}.panel{padding:16px}.panel h3{margin:0 0 12px;font-size:15px}.stageTrack{display:flex;overflow:auto;padding:8px 0 14px}.stageNode{min-width:120px;text-align:center;position:relative;padding:0 8px}.stageNode:not(:last-child):after{content:'';position:absolute;top:13px;left:60%;right:-40%;height:2px;background:#d9e2e9}.stageDot{width:28px;height:28px;border-radius:50%;background:#e6edf2;border:6px solid #fff;box-shadow:0 0 0 1px #d9e3ea;margin:0 auto 8px;position:relative;z-index:1}.stageNode strong{font-size:11px;display:block}.stageNode small{color:var(--muted);font-size:10px}.projectTiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tile{border:1px solid var(--line);border-radius:11px;padding:14px;min-height:135px}.tile h4{margin:0 0 10px;font-size:13px}.placeholder{height:88px;border:1px dashed #cfd9e1;border-radius:9px;display:grid;place-items:center;color:#9aabb8;font-size:12px;background:#fbfdfe}.right{border-left:1px solid var(--line);background:#f9fbfc;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}.right h3{font-size:13px;margin:0 0 10px}.emptySmall{border:1px dashed #d1dbe3;border-radius:10px;padding:18px;text-align:center;color:#8a9aa7;background:#fff;font-size:12px;margin-bottom:18px}.modalBack{position:fixed;inset:0;background:rgba(20,35,48,.48);display:grid;place-items:center;padding:20px;z-index:40}.modal{width:min(620px,96vw);max-height:92vh;overflow:auto;background:#fff;border-radius:14px;box-shadow:0 24px 80px rgba(22,41,58,.28)}.modalHead{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center}.modalHead h3{margin:0}.modalHead button{margin-left:auto;border:0;background:transparent;font-size:20px}.modalBody{padding:18px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field.full{grid-column:1/-1}.field label{display:block;font-size:11px;color:#758795;margin-bottom:5px;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;outline:0;background:#fff}.field textarea{min-height:90px}.modalFoot{padding:14px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}.toast{position:fixed;right:22px;bottom:22px;background:#243f56;color:#fff;padding:12px 14px;border-radius:10px;z-index:60}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ganttEmpty{min-height:300px;background:linear-gradient(90deg,#fbfcfd 0,#fbfcfd 19.8%,#edf2f6 20%,#fbfcfd 20.2%);background-size:120px 100%;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;color:#8a9aa7}.employeeTabs{display:flex;gap:5px;border-bottom:1px solid var(--line);padding:0 16px}.employeeTabs button{border:0;background:transparent;padding:12px 10px;color:#6d7e8c;border-bottom:2px solid transparent}.employeeTabs button.active{color:var(--blue);border-color:var(--blue);font-weight:700}@media(max-width:1250px){.app{grid-template-columns:68px 220px minmax(0,1fr)}.right{display:none}}@media(max-width:900px){.app{grid-template-columns:62px minmax(0,1fr)}.side{display:none}.main{padding:0 14px 30px}.kpis{grid-template-columns:1fr 1fr}.projectShell{grid-template-columns:1fr}.formGrid{grid-template-columns:1fr}.field.full{grid-column:auto}}@media(max-width:560px){.rail{position:fixed;bottom:0;left:0;right:0;top:auto;height:62px;width:100%;flex-direction:row;justify-content:space-around;padding:6px}.logo,.rail .spacer,.rail small,.rail button:nth-of-type(n+6){display:none}.rail button{margin:0}.app{display:block}.main{padding-bottom:78px}.kpis,.projectTiles,.split{grid-template-columns:1fr}.pageHead{display:block}.pageHead .actions{margin-top:12px}.search{display:none}}
+
+
+.authGate{position:fixed;inset:0;background:#eef3f7;z-index:100;display:grid;place-items:center;padding:24px}
+.authShell{width:min(1120px,100%);min-height:680px;display:grid;grid-template-columns:1.08fr .92fr;background:#fff;border:1px solid #dbe5ec;border-radius:24px;overflow:hidden;box-shadow:0 30px 90px rgba(30,55,78,.16)}
+.authIntro{background:linear-gradient(145deg,#173b5b 0%,#244f73 58%,#2c6686 100%);color:#fff;padding:38px 44px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.authIntro:after{content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-190px;bottom:-190px;box-shadow:0 0 0 70px rgba(255,255,255,.025),0 0 0 140px rgba(255,255,255,.018)}
+.authBrand,.authMobileBrand{display:flex;align-items:center;gap:12px;font-size:16px;letter-spacing:.01em}
+.authBrand>span,.authMobileBrand>span{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);font-weight:900}
+.authIntroBody{margin:auto 0;position:relative;z-index:1}
+.authEyebrow{font-size:10px;font-weight:800;letter-spacing:.18em;color:#9fd2eb;margin-bottom:14px}
+.authEyebrow.dark{color:#66869e}
+.authIntro h1{font-size:42px;line-height:1.08;letter-spacing:-.035em;margin:0 0 20px;max-width:610px}
+.authIntroBody>p{font-size:16px;line-height:1.65;color:#d7e5ef;max-width:530px;margin:0}
+.authFeatureGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:34px;max-width:530px}
+.authFeatureGrid div{border-top:1px solid rgba(255,255,255,.18);padding:13px 0;display:flex;gap:12px;align-items:center}
+.authFeatureGrid b{font-size:10px;color:#81c3df;letter-spacing:.08em}
+.authFeatureGrid span{font-size:12px;color:#e8f1f6}
+.authFoot{font-size:11px;color:#9eb9cc;position:relative;z-index:1}
+.authPanel{display:grid;place-items:center;padding:40px}
+.authPanelInner{width:min(390px,100%)}
+.authMobileBrand{display:none;color:#173b5b;margin-bottom:34px}.authMobileBrand>span{background:#244f73;color:#fff}
+.authPanel h2{font-size:29px;letter-spacing:-.025em;margin:0 0 8px}
+.authPanel p{color:#718391;line-height:1.55;margin:0 0 24px}
+.authChooser{display:grid;gap:10px}
+.authChooser h2,.authChooser p{grid-column:1/-1}
+.authBig{width:100%;border:1px solid #dbe4eb;background:#fff;border-radius:13px;padding:15px 16px;display:flex;align-items:center;gap:14px;text-align:left;color:#233746;transition:.18s ease}
+.authBig:hover{border-color:#a9c1d2;transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,66,91,.08)}
+.authBig.primary{background:#244f73;color:#fff;border-color:#244f73}
+.authBig.demo{background:#f0f7f7;border-color:#d4e9e6}
+.authBigIcon{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:rgba(43,89,123,.09);font-size:18px;flex:0 0 auto}
+.authBig.primary .authBigIcon{background:rgba(255,255,255,.14)}
+.authBig span:last-child{display:grid;gap:3px}.authBig b{font-size:14px}.authBig small{font-size:11px;color:#7b8c99;font-weight:500}
+.authBig.primary small{color:#cddce7}
+.authPane h2{margin-top:0}.authBack{border:0;background:transparent;padding:0;color:#5d7f98;margin:0 0 28px;font-weight:700}
+.authForm{display:grid;gap:12px}
+.authForm label{display:grid;gap:6px;font-size:11px;color:#617686;font-weight:700}
+.authForm input{width:100%;border:1px solid #d9e3ea;border-radius:10px;padding:12px 13px;outline:0;background:#fff;color:#203243}
+.authForm input:focus{border-color:#5687aa;box-shadow:0 0 0 3px rgba(86,135,170,.10)}
+.authSubmit{margin-top:4px;padding:12px 14px}
+.authCheck{grid-template-columns:auto 1fr!important;align-items:start;font-weight:500!important;color:#7b8b99!important}
+.authCheck input{width:16px;height:16px;margin:1px 0 0}
+.authLink{border:0;background:transparent;color:#4e7897;padding:4px;text-align:center;font-size:12px}
+.authError{color:#b95656;font-size:12px;min-height:18px;margin-top:12px;line-height:1.4}
+.authInfo{color:#4e806c;font-size:12px;min-height:18px;line-height:1.4}
+.activityItem{padding:10px 0;border-bottom:1px solid #edf1f4}.activityItem small{color:var(--muted)}
+.logoutBtn{border:0;background:transparent;color:#718391;text-align:left;padding:10px 12px;width:100%;cursor:pointer}
+.demoBadge{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border-radius:999px;background:#e7f5ef;color:#447d66;font-size:11px;font-weight:800}
+@media(max-width:800px){
+  .authGate{padding:0;background:#fff;overflow:auto}
+  .authShell{min-height:100vh;width:100%;display:block;border:0;border-radius:0;box-shadow:none}
+  .authIntro{display:none}
+  .authPanel{min-height:100vh;padding:28px 22px}
+  .authMobileBrand{display:flex}
+  .authPanelInner{width:min(430px,100%)}
+}
+
+/* ===== AP CONTROL v0.5 · visual layer only ===== */
+:root{
+  --nav:#20384d;--nav2:#172c3d;--bg:#f5f7fa;--paper:#ffffff;--ink:#263746;
+  --muted:#778896;--line:#e1e7ec;--blue:#4c97cf;--green:#55a77d;--amber:#e0a33d;
+  --red:#de6668;--violet:#8d78ae;--teal:#47a39d;--coral:#ed7f76;--sky:#6db1dc;
+  --shadow:0 10px 26px rgba(26,55,78,.075)
+}
+.rail{background:linear-gradient(180deg,#20384d,#1a3042)}
+.logo{background:#f05f5d;border-color:#f05f5d;box-shadow:0 8px 18px rgba(240,95,93,.22)}
+.side{background:#f7f9fb}
+.side button.active{background:#e9f1f7;color:#2c79ae}
+.btn.primary{background:#3f8fc6;border-color:#3f8fc6;box-shadow:0 5px 14px rgba(63,143,198,.18)}
+.btn.primary:hover{background:#347fae}.btn.soft{background:#edf6fb;color:#357ea9;border-color:#d4e9f4}
+.tab.active{background:#3f8fc6;border-color:#3f8fc6}.card{border-color:#e5eaee}
+.s-green{background:#e8f6ee;color:#3f9369}.s-red{background:#fdeaea;color:#c94e55}
+.s-violet{background:#f0ebf7;color:#775f9e}.s-teal{background:#e4f5f3;color:#31877f}
+.s-coral{background:#fcebe9;color:#c96b63}
+.kpi{position:relative;overflow:hidden;border-top:3px solid transparent}
+.kpi.kpi-green{border-top-color:var(--green)}.kpi.kpi-blue{border-top-color:var(--blue)}
+.kpi.kpi-red{border-top-color:var(--red)}.kpi.kpi-violet{border-top-color:var(--violet)}
+.kpi.kpi-amber{border-top-color:var(--amber)}.kpi.kpi-teal{border-top-color:var(--teal)}
+.kpi .trend{margin-top:7px;font-size:11px;font-weight:700}.trend.up{color:var(--green)}.trend.down{color:var(--red)}.trend.warn{color:#b37a1e}
+.dashGrid{display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin-top:14px}
+.dashGrid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.chartCard{padding:17px;min-height:280px}.chartCard h3{margin:0 0 3px;font-size:15px}.chartSub{font-size:11px;color:var(--muted);margin-bottom:16px}
+.barChart{height:190px;display:flex;align-items:flex-end;gap:11px;border-bottom:1px solid #e6ecef;padding:0 4px}
+.barCol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:5px}
+.bar{width:min(34px,70%);border-radius:5px 5px 1px 1px;min-height:3px}.bar.blue{background:var(--blue)}.bar.green{background:var(--green)}
+.bar.violet{background:var(--violet)}.bar.coral{background:var(--coral)}.bar.amber{background:var(--amber)}.bar.teal{background:var(--teal)}
+.barLabel{font-size:9px;color:#84939f;white-space:nowrap}
+.donut{width:150px;height:150px;border-radius:50%;margin:9px auto;display:grid;place-items:center;background:conic-gradient(var(--green) 0 52%,var(--blue) 52% 75%,var(--amber) 75% 89%,var(--red) 89% 100%)}
+.donut:after{content:"";width:92px;height:92px;background:white;border-radius:50%;box-shadow:0 0 0 1px #edf1f4}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px}.legend span{display:flex;align-items:center;gap:6px}.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.alertList{display:grid;gap:8px}.alertItem{border-left:3px solid var(--amber);background:#fffaf1;border-radius:7px;padding:10px 11px}
+.alertItem.red{border-color:var(--red);background:#fff5f5}.alertItem.green{border-color:var(--green);background:#f2faf6}.alertItem.blue{border-color:var(--blue);background:#f2f8fc}
+.alertItem b{display:block;font-size:12px;margin-bottom:3px}.alertItem small{color:#758693;line-height:1.4}
+.financeStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#e8ecef;border-radius:12px;overflow:hidden;margin:14px 0}
+.financeStrip>div{background:white;padding:15px}.financeStrip strong{display:block;font-size:20px;margin-top:4px}.financeStrip small{color:var(--muted)}
+.ganttBoard{border:1px solid var(--line);background:#fff;border-radius:12px;overflow:hidden}
+.ganttHeader,.ganttRow{display:grid;grid-template-columns:235px minmax(640px,1fr)}
+.ganttHeader{background:#f8fafb;border-bottom:1px solid var(--line);font-size:10px;color:#778896;font-weight:800}
+.ganttHeader>div,.ganttName{padding:10px 12px}.ganttMonths{display:grid;grid-template-columns:repeat(12,1fr);border-left:1px solid var(--line)}
+.ganttMonths span{text-align:center;padding:10px 2px;border-right:1px solid #edf1f4}.ganttRow{min-height:49px;border-bottom:1px solid #edf1f4}.ganttRow:last-child{border-bottom:0}
+.ganttName{font-size:11px;display:flex;flex-direction:column;justify-content:center}.ganttName b{font-size:12px}.ganttName small{color:var(--muted);margin-top:2px}
+.ganttTrack{position:relative;border-left:1px solid var(--line);background:repeating-linear-gradient(90deg,#fff 0,#fff calc(8.333% - 1px),#edf1f4 calc(8.333% - 1px),#edf1f4 8.333%)}
+.ganttBar{position:absolute;top:13px;height:22px;border-radius:5px;color:white;font-size:9px;font-weight:800;padding:5px 7px;overflow:hidden;white-space:nowrap;min-width:18px}
+.ganttBar.green{background:var(--green)}.ganttBar.blue{background:var(--blue)}.ganttBar.red{background:var(--red)}
+.ganttBar.amber{background:var(--amber)}.ganttBar.violet{background:var(--violet)}.ganttBar.teal{background:var(--teal)}
+.progressLine{height:7px;background:#edf1f4;border-radius:10px;overflow:hidden}.progressLine span{display:block;height:100%;border-radius:10px}
+@media(max-width:900px){.dashGrid,.dashGrid3{grid-template-columns:1fr}.financeStrip{grid-template-columns:1fr 1fr}.chartCard{min-height:auto}}
+@media(max-width:560px){
+ body{font-size:13px;background:#f3f6f8}.top{height:58px}.main{padding-left:12px;padding-right:12px}.page{padding-top:14px}.pageHead h1{font-size:21px}
+ .card{border-radius:12px;box-shadow:0 5px 16px rgba(26,55,78,.06)}.kpis{grid-template-columns:1fr 1fr;gap:9px}.kpi{padding:13px}.kpi .v{font-size:20px}.kpi .l{font-size:10px}
+ .financeStrip{grid-template-columns:1fr 1fr}.financeStrip>div{padding:12px}.financeStrip strong{font-size:16px}.dashGrid3{gap:10px}.dashGrid{gap:10px}.chartCard{padding:14px}
+ .barChart{height:150px;gap:5px}.barLabel{font-size:8px}.ganttBoard{overflow-x:auto}.ganttHeader,.ganttRow{min-width:820px}
+}
+
+
+/* ===== AP CONTROL v0.6 · working object ===== */
+.objectSummary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
+.objectSummary .mini{background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px}
+.objectSummary .mini small{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}.objectSummary .mini b{font-size:18px}
+.teamGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.teamCard{border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff}
+.teamCard b{display:block;font-size:12px}.teamCard small{color:var(--muted)}
+.stageProgress{display:flex;align-items:center;gap:8px;min-width:120px}.stageProgress span{font-size:10px;color:var(--muted);width:30px}
+@media(max-width:760px){.objectSummary{grid-template-columns:1fr 1fr}.teamGrid{grid-template-columns:1fr}.projectShell{grid-template-columns:1fr!important}}
+
+/* ===== AP CONTROL v0.7 · task control ===== */
+.taskToolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0 14px}
+.taskFilterBtn{border:1px solid var(--line);background:#fff;color:#5f7180;border-radius:9px;padding:8px 11px;font-size:11px;font-weight:800;cursor:pointer}
+.taskFilterBtn.active{background:#edf5fa;color:#347dac;border-color:#cfe3ef}
+.taskNameBtn{border:0;background:none;padding:0;color:#273b4b;font-weight:800;text-align:left;cursor:pointer}
+.taskNameBtn:hover{color:var(--blue)}
+.priority-critical{color:#c84c53;font-weight:800}.priority-high{color:#b9781d;font-weight:800}
+.noticeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.noticeCard{border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:10px;background:#fff;padding:12px}
+.noticeCard.red{border-left-color:var(--red);background:#fff8f8}.noticeCard.blue{border-left-color:var(--blue);background:#f7fbfe}.noticeCard.green{border-left-color:var(--green);background:#f7fcf9}
+.noticeCard b{display:block;font-size:12px;margin-bottom:4px}.noticeCard small{color:var(--muted);line-height:1.45}
+.taskDetailGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.taskDetailBox{border:1px solid var(--line);border-radius:10px;padding:11px;background:#f9fbfc}
+.taskDetailBox small{display:block;color:var(--muted);font-size:10px;margin-bottom:4px}.taskDetailBox b{font-size:12px}
+@media(max-width:650px){.noticeGrid,.taskDetailGrid{grid-template-columns:1fr}.taskToolbar{overflow-x:auto;flex-wrap:nowrap;padding-bottom:3px}.taskFilterBtn{white-space:nowrap}}
+</style></head><body>
+
+<div id="authGate" class="authGate">
+  <div class="authShell">
+    <section class="authIntro">
+      <div class="authBrand"><span>AP</span><b>ALI Project Control</b></div>
+      <div class="authIntroBody">
+        <div class="authEyebrow">СТРОИТЕЛЬНАЯ CRM / ERP</div>
+        <h1>Управляйте объектами,<br>командой и финансами<br>в одном пространстве.</h1>
+        <p>Объекты, этапы, задачи, Гант, сотрудники, документы, финансы и контроль исполнения.</p>
+        <div class="authFeatureGrid">
+          <div><b>01</b><span>Объекты и этапы</span></div>
+          <div><b>02</b><span>Задачи и Гант</span></div>
+          <div><b>03</b><span>Финансы и документы</span></div>
+          <div><b>04</b><span>Команда и контроль</span></div>
+        </div>
+      </div>
+      <div class="authFoot">ALI Project · AP Control</div>
+    </section>
+
+    <section class="authPanel">
+      <div class="authPanelInner">
+        <div class="authMobileBrand"><span>AP</span><b>ALI Project Control</b></div>
+
+        <div class="authChooser" id="authChooser">
+          <div class="authEyebrow dark">ДОБРО ПОЖАЛОВАТЬ</div>
+          <h2>Начало работы</h2>
+          <p>Войдите в свою компанию, создайте новую или посмотрите систему в демонстрационном режиме.</p>
+
+          <button class="authBig primary" id="openLogin">
+            <span class="authBigIcon">→</span>
+            <span><b>Войти</b><small>У меня уже есть аккаунт</small></span>
+          </button>
+          <button class="authBig" id="openRegister">
+            <span class="authBigIcon">＋</span>
+            <span><b>Создать компанию</b><small>Зарегистрировать новое рабочее пространство</small></span>
+          </button>
+          <button class="authBig demo" id="demoBtn">
+            <span class="authBigIcon">◫</span>
+            <span><b>Попробовать демо</b><small>Посмотреть интерфейс без регистрации</small></span>
+          </button>
+        </div>
+
+        <div id="loginPane" class="authPane hidden">
+          <button class="authBack" data-auth-back>← Назад</button>
+          <div class="authEyebrow dark">ВХОД</div>
+          <h2>Войти в AP Control</h2>
+          <p>Используйте email и пароль вашей учётной записи.</p>
+          <div class="authForm">
+            <label>Email<input id="loginEmail" type="email" autocomplete="email" placeholder="name@company.ru"></label>
+            <label>Пароль<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Ваш пароль"></label>
+            <button class="btn primary authSubmit" id="loginBtn">Войти</button>
+            <button class="authLink" id="forgotBtn" type="button">Забыли пароль?</button>
+          </div>
+        </div>
+
+        <div id="registerPane" class="authPane hidden">
+          <button class="authBack" data-auth-back>← Назад</button>
+          <div class="authEyebrow dark">РЕГИСТРАЦИЯ</div>
+          <h2>Создать компанию</h2>
+          <p>Будет создано отдельное рабочее пространство. Первый пользователь получит роль владельца.</p>
+          <div class="authForm">
+            <label>Название компании<input id="regCompany" placeholder="Например: ALI Project"></label>
+            <label>Ваше имя<input id="regName" autocomplete="name" placeholder="Имя и фамилия"></label>
+            <label>Email<input id="regEmail" type="email" autocomplete="email" placeholder="name@company.ru"></label>
+            <label>Пароль<input id="regPassword" type="password" autocomplete="new-password" placeholder="Не менее 8 символов"></label>
+            <label>Повторите пароль<input id="regPassword2" type="password" autocomplete="new-password" placeholder="Повторите пароль"></label>
+            <label class="authCheck"><input id="termsCheck" type="checkbox"> <span>Я принимаю условия использования сервиса</span></label>
+            <button class="btn primary authSubmit" id="regBtn">Создать компанию</button>
+          </div>
+        </div>
+
+        <div id="authError" class="authError"></div>
+        <div id="authInfo" class="authInfo"></div>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="app"><nav class="rail"><div class="logo">AP</div><button class="active" data-view="home">⌂</button><button data-view="projects">▦</button><button data-view="tasks">✓</button><button data-view="employees">♙</button><button data-view="finance">₽</button><button data-view="tools">⚒</button><button data-view="clients">◎</button><button data-view="cameras">◉</button><button data-view="dashboards">▤</button><div class="spacer"></div><small>ALI PROJECT CONTROL</small></nav>
+<aside class="side"><div class="sideHead"><div class="brand">ALI Project Control<small id="companyName">Строительная CRM / ERP</small></div></div><div class="sideSection"><div class="sideLabel">Рабочее пространство</div><button class="active" data-view="home">Обзор</button><button data-view="projects">Объекты <span class="count" id="sideProjectCount">0</span></button><button data-view="tasks">Задачи <span class="count" id="sideTaskCount">0</span></button></div><div class="sideSection"><div class="sideLabel">Управление</div><button data-view="employees">Сотрудники <span class="count" id="sideEmployeeCount">0</span></button><button data-view="clients">Клиенты <span class="count" id="sideClientCount">0</span></button><button data-view="finance">Финансы</button><button data-view="tools">Инструменты <span class="count" id="sideToolCount">0</span></button><button data-view="cameras">Камеры <span class="count" id="sideCameraCount">0</span></button><button data-view="dashboards">Дашборды</button></div><div class="sideSection"><div class="sideLabel">Система</div><button data-view="settings">Настройки</button><button class="logoutBtn" onclick="logout()">Выйти</button></div></aside>
+<main class="main"><header class="top"><div class="search">⌕ <input placeholder="Поиск по AP Control"></div><div class="topActions"><button class="iconBtn">♢</button><button class="iconBtn">?</button><button class="btn soft" id="profileBtn">Профиль</button></div></header><div id="content"></div></main>
+<aside class="right"><h3>Новые задачи</h3><div class="emptySmall" id="rightTasks">Новых задач пока нет</div><div id="rightDemoAlerts"></div><h3>Напоминания</h3><div class="emptySmall">Напоминаний пока нет</div><h3>Уведомления</h3><div class="emptySmall">Новых уведомлений нет</div></aside></div><div id="modalHost"></div><div id="toastHost"></div>
+<script>
+const API='https://ap-control-backend-crm.onrender.com/api';
+let token=localStorage.getItem('ap_token')||'';let demoMode=sessionStorage.getItem('ap_demo')==='1';let me=null;let company=null;let db={projects:[],tasks:[],employees:[],clients:[],tools:[],cameras:[],finance:[],stages:[],activity:[],project_members:[],alerts:[]};let currentView='home';let currentProjectId=null;let taskMode='list';let taskFilter='active';let employeeTab='info';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function toast(t){$('#toastHost').innerHTML=`<div class="toast">${esc(t)}</div>`;setTimeout(()=>$('#toastHost').innerHTML='',2200)}
+async function api(path,opts={}){opts.headers=Object.assign({'Content-Type':'application/json'},opts.headers||{});if(token)opts.headers.Authorization='Bearer '+token;let r=await fetch(API+path,opts);let txt=await r.text();let data=null;try{data=txt?JSON.parse(txt):null}catch(_){data=txt};if(!r.ok){let msg=typeof data==='object'?(data?.detail||data?.message):data;if(Array.isArray(msg))msg=msg.map(x=>x.msg).join('; ');throw new Error(msg||'Ошибка сервера')}return data}
+async function bootstrap(){let info=await api('/me');me=info.user;company=info.company;$('#companyName').textContent=company.name;$('#profileBtn').textContent=me.full_name;db=await api('/bootstrap');try{db.alerts=await api('/alerts')}catch(_){db.alerts=[]}counts();render()}
+function showAuth(show=true){$('#authGate').classList.toggle('hidden',!show)}
+function authScreen(name){
+  $('#authChooser').classList.toggle('hidden',name!=='chooser');
+  $('#loginPane').classList.toggle('hidden',name!=='login');
+  $('#registerPane').classList.toggle('hidden',name!=='register');
+  $('#authError').textContent='';
+  $('#authInfo').textContent='';
+}
+function demoData(){
+  const projects=[
+    ['p1','ЖК Нальчик','Активен','Нальчик','2026-03-10','2027-12-20','Монолит и инженерные сети'],
+    ['p2','ЖК Терек','Активен','Терек','2026-04-01','2027-10-30','Монолит 7–9 этаж'],
+    ['p3','ЖК Баксан','Активен','Баксан','2026-01-20','2027-08-15','Фасад и внутренние сети'],
+    ['p4','ЖК Терскол','Активен','Терскол','2026-05-01','2027-11-30','Кровля, окна, вентиляция'],
+    ['p5','ЖК Тырныауз','Активен','Тырныауз','2025-11-15','2027-05-30','Отделка и инженерия'],
+    ['p6','ЖК Нарткала','Активен','Нарткала','2026-02-01','2027-04-20','Кровля и благоустройство'],
+    ['p7','ЖК Чегем','Активен','Чегем','2026-06-10','2028-01-30','Монолит, лифты, инженерия'],
+    ['p8','ЖК Эльбрус','Активен','Эльбрус','2026-07-01','2028-03-15','Фундамент и подпорные стены'],
+    ['p9','ЖК Долинск','Подготовка','Нальчик','2026-10-20','2028-06-01','Проектирование и подготовка площадки']
+  ].map(x=>({id:x[0],name:x[1],type:'Строительство',status:x[2],address:x[3],start:x[4],end:x[5],description:x[6]}));
+
+  const employees=[
+    ['e1','Залим Докшоков','Главный инженер','Админ'],['e2','Казим Бейтуганов','Начальник участка','Админ'],
+    ['e3','Залим Кагазежев','Прораб','Работник'],['e4','Ислам Жемухов','Прораб','Работник'],['e5','Азамат Анахаев','Прораб','Работник'],
+    ['e6','Асхат Биттиров','Инженер ПТО','Работник'],['e7','Павел Васильев','Инженер-сметчик','Работник'],
+    ['e8','Жукова Альбина','Бухгалтер','Бухгалтер'],['e9','Оксана Битокова','Кассир','Работник'],['e10','Кирилл Борисов','Проектировщик','Работник'],
+    ['e11','Тархон Улугбеков','Бригадир-монолитчик','Работник'],['e12','Жашон Туркменов','Монолитчик','Работник'],
+    ['e13','Ароджон Мухаметджанов','Монолитчик','Работник'],['e14','Осман Рахимов','Монолитчик','Работник'],['e15','Нияз Насретдинов','Монолитчик','Работник'],
+    ['e16','Гафур Мирзиев','Монолитчик','Работник'],['e17','Исуф Нишанов','Монолитчик','Работник'],['e18','Рахмет Искандаров','Монолитчик','Работник'],
+    ['e19','Бегшот Пулатов','Монолитчик','Работник'],['e20','Аброр Азимов','Монолитчик','Работник'],['e21','Айдым Акимов','Монолитчик','Работник'],
+    ['e22','Шерзод Рахманов','Монолитчик','Работник'],['e23','Бахтиёр Камолов','Монолитчик','Работник'],['e24','Дилшод Эргашев','Монолитчик','Работник'],
+    ['e25','Анзор Батыров','Штукатурщик','Работник'],['e26','Семён Дорофеев','Сварщик','Работник'],['e27','Роман Лебедев','Сантехник','Работник'],
+    ['e28','Арсен Мамишев','Фасадчик','Работник'],['e29','Денис Устинов','Электрик','Работник'],['e30','Аслан Нагеров','Вентиляционщик','Работник'],
+    ['e31','Беслан Османов','Кровельщик','Работник'],['e32','Константин Демидов','Гидроизоляционщик','Работник'],['e33','Николай Федоров','Шпаклевщик','Работник'],
+    ['e34','Арсен Дауров','Слаботочник','Работник'],['e35','Адам Машуков','Оконщик-монтажник','Работник'],['e36','Артур Бегидов','Асфальтчик','Работник'],
+    ['e37','Юрий Маслов','Экскаваторщик','Работник'],['e38','Марат Боттаев','Крановщик','Работник'],['e39','Игорь Семёнов','Сторож','Работник'],
+    ['e40','Руслан Хачиров','Инженер газоснабжения','Работник'],['e41','Мурат Шогенов','Мастер ВК','Работник'],['e42','Альберт Кумыков','Инженер по лифтам','Работник'],
+    ['e43','Рустам Карданов','Мастер благоустройства','Работник']
+  ].map((x,i)=>({id:x[0],name:x[1],job:x[2],role:x[3],phone:'+7 928 410-'+String(10+i).padStart(2,'0')+'-'+String(20+i).padStart(2,'0'),email:'demo'+(i+1)+'@specpromstroy.ru',status:i===23?'В отпуске':'Активен'}));
+
+  const S=(id,p,name,status,start,end,responsible,cost,checker='Залим Докшоков')=>({id,project_id:p,name,status,start,end,responsible,checker,cost});
+  const stages=[
+    S('s1','p1','Фундаментная плита','Завершен','2026-03-10','2026-04-18','Тархон Улугбеков',12800000),
+    S('s2','p1','Монолит 10–12 этаж','В работе','2026-09-15','2026-11-25','Тархон Улугбеков',18600000),
+    S('s3','p1','Электроснабжение стояков','В работе','2026-10-01','2026-12-18','Денис Устинов',5400000),
+    S('s4','p1','ВК и канализация','В работе','2026-09-25','2026-12-30','Мурат Шогенов',6100000),
+    S('s5','p2','Колонны 7 этажа','Завершен','2026-09-01','2026-09-20','Тархон Улугбеков',3900000),
+    S('s6','p2','Перекрытие 7 этажа','Просрочен','2026-09-21','2026-09-30','Ислам Жемухов',4750000),
+    S('s7','p2','Монолит 8 этажа','В работе','2026-10-01','2026-10-20','Ислам Жемухов',5200000),
+    S('s8','p3','Кладка наружных стен','Завершен','2026-06-01','2026-08-30','Залим Кагазежев',9800000),
+    S('s9','p3','Вентилируемый фасад','В работе','2026-09-01','2027-01-30','Арсен Мамишев',21400000),
+    S('s10','p3','Вентиляция и подпор воздуха','На проверке','2026-08-20','2026-10-15','Аслан Нагеров',8700000),
+    S('s11','p4','Монтаж окон','В работе','2026-09-10','2026-11-20','Адам Машуков',7400000),
+    S('s12','p4','Кровля ПВХ-мембрана','В работе','2026-09-25','2026-10-30','Беслан Османов',6300000),
+    S('s13','p4','Гидроизоляция техэтажа','На проверке','2026-10-01','2026-10-18','Константин Демидов',1850000),
+    S('s14','p5','Штукатурные работы','В работе','2026-08-01','2026-11-10','Анзор Батыров',6900000),
+    S('s15','p5','Шпаклёвка МОП','В работе','2026-09-15','2026-12-20','Николай Федоров',4300000),
+    S('s16','p5','Газоснабжение','В работе','2026-09-01','2026-11-25','Руслан Хачиров',5100000),
+    S('s17','p6','Гидроизоляция кровли','Завершен','2026-08-01','2026-09-28','Константин Демидов',3900000),
+    S('s18','p6','Благоустройство двора','В работе','2026-09-10','2026-11-15','Рустам Карданов',12500000),
+    S('s19','p6','Асфальтирование проездов','Не начат','2026-10-20','2026-11-12','Артур Бегидов',5800000),
+    S('s20','p7','Фундамент и ростверк','Завершен','2026-06-10','2026-08-10','Тархон Улугбеков',16700000),
+    S('s21','p7','Монолит 1–3 этаж','В работе','2026-08-11','2026-12-20','Тархон Улугбеков',24900000),
+    S('s22','p7','Подготовка шахт лифтов','В работе','2026-10-01','2026-11-05','Альберт Кумыков',2700000),
+    S('s23','p8','Разработка котлована','Завершен','2026-07-01','2026-08-10','Юрий Маслов',4500000),
+    S('s24','p8','Подпорные стены','В работе','2026-08-11','2026-12-25','Семён Дорофеев',18600000),
+    S('s25','p8','Фундаментная плита','В работе','2026-09-15','2026-11-30','Тархон Улугбеков',21800000),
+    S('s26','p9','Рабочее проектирование','В работе','2026-09-20','2027-01-20','Кирилл Борисов',3600000),
+    S('s27','p9','Подготовка площадки','Не начат','2026-11-01','2026-12-10','Казим Бейтуганов',4200000)
+  ];
+
+  const T=(id,p,name,executor,due,priority,status)=>({id,project_id:p,name,executor,due,priority,status});
+  const tasks=[
+    T('t1','p1','Армирование плиты перекрытия 11 этажа','Тархон Улугбеков','2026-10-07','Высокий','Активная'),
+    T('t2','p1','Проверить исполнительную схему ВК','Асхат Биттиров','2026-10-06','Обычный','На проверке'),
+    T('t3','p2','Закрыть замечания по перекрытию 7 этажа','Ислам Жемухов','2026-10-01','Критический','Просрочена'),
+    T('t4','p2','Заказать бетон В25 — 180 м³','Залим Кагазежев','2026-10-05','Высокий','Активная'),
+    T('t5','p3','Сдать узлы фасада технадзору','Арсен Мамишев','2026-10-09','Высокий','Активная'),
+    T('t6','p3','Подписать акт вентиляции','Аслан Нагеров','2026-10-03','Высокий','Просрочена'),
+    T('t7','p4','Испытание кровли проливом','Беслан Османов','2026-10-08','Обычный','Активная'),
+    T('t8','p4','Закрыть примыкания окон 3 секции','Адам Машуков','2026-10-11','Обычный','Активная'),
+    T('t9','p5','Проверить давление газопровода','Руслан Хачиров','2026-10-12','Высокий','Активная'),
+    T('t10','p5','Завершить шпаклёвку 4 этажа','Николай Федоров','2026-10-02','Обычный','Просрочена'),
+    T('t11','p6','Подготовить основание под асфальт','Рустам Карданов','2026-10-14','Обычный','Активная'),
+    T('t12','p7','Проверить геометрию лифтовых шахт','Альберт Кумыков','2026-10-13','Высокий','Активная'),
+    T('t13','p8','Приёмка армирования фундаментной плиты','Залим Докшоков','2026-10-04','Критический','На проверке'),
+    T('t14','p9','Выдать корректировку раздела КЖ','Кирилл Борисов','2026-10-08','Высокий','Активная'),
+    T('t15','p1','Закрыть журнал бетонных работ','Асхат Биттиров','2026-10-01','Высокий','Завершена'),
+    T('t16','p6','Сдать гидроизоляцию кровли','Константин Демидов','2026-09-28','Обычный','Завершена')
+  ];
+
+  const F=(id,p,type,category,amount,comment,status='Проведено',person='')=>({id,project_id:p,type,category,amount,comment,status,person});
+  const finance=[
+    F('f1','p1','Расход','Бетон',2180000,'Бетон В25, плита 11 этажа','Проведено','Залим Кагазежев'),
+    F('f2','p1','Подотчёт','Материалы',780000,'Выдано под закупку арматуры; закрыто 610 000 ₽','Частично закрыт','Залим Кагазежев'),
+    F('f3','p2','Подотчёт','Бетон',490000,'Не представлены закрывающие документы','Не закрыт','Ислам Жемухов'),
+    F('f4','p2','Расход','Опалубка',860000,'Аренда опалубки на октябрь','Проведено',''),
+    F('f5','p3','Оплата подрядчику','Фасад',1650000,'Аванс фасадной бригаде','Проведено','Арсен Мамишев'),
+    F('f6','p3','Акт КС-2','Вентиляция',1240000,'Акт загружен, ожидает проверки','На проверке','Аслан Нагеров'),
+    F('f7','p4','Расход','Кровля',970000,'ПВХ-мембрана и комплектующие','Проведено','Беслан Османов'),
+    F('f8','p5','Подотчёт','Хозрасходы',465000,'Остаток сентября 145 000 ₽ + новая выдача 320 000 ₽','Не закрыт','Азамат Анахаев'),
+    F('f9','p5','Расход','Газоснабжение',1120000,'Трубы и запорная арматура','Проведено','Руслан Хачиров'),
+    F('f10','p6','Расход','Благоустройство',1380000,'Бордюр, щебень, песок','Проведено','Рустам Карданов'),
+    F('f11','p7','Оплата подрядчику','Лифты',3200000,'Первый платёж по поставке лифтов','Проведено','Альберт Кумыков'),
+    F('f12','p8','Расход','Арматура',2860000,'Фундаментная плита','Проведено','Казим Бейтуганов'),
+    F('f13','p8','Подотчёт','Топливо',210000,'Не закрыто 68 000 ₽','Частично закрыт','Юрий Маслов'),
+    F('f14','p9','Оплата подрядчику','Проектирование',720000,'Аванс проектной группе','Проведено','Кирилл Борисов')
+  ];
+
+  const tools=[
+    {id:'i1',name:'Лазерный нивелир Leica',inventory_no:'AP-001',status:'Выдан',responsible:'Залим Кагазежев',cost:118000},
+    {id:'i2',name:'Вибратор глубинный',inventory_no:'AP-014',status:'Выдан',responsible:'Тархон Улугбеков',cost:64000},
+    {id:'i3',name:'Сварочный аппарат',inventory_no:'AP-021',status:'Выдан',responsible:'Семён Дорофеев',cost:94000},
+    {id:'i4',name:'Компрессор',inventory_no:'AP-034',status:'На складе',responsible:'—',cost:135000},
+    {id:'i5',name:'Тепловизор',inventory_no:'AP-043',status:'Выдан',responsible:'Аслан Нагеров',cost:189000}
+  ];
+  const cameras=projects.slice(0,7).map((p,i)=>({id:'c'+i,name:'Камера '+(i+1)+' · '+p.name,project_id:p.id,type:'RTSP / ONVIF',status:i===4?'Требует проверки':'Онлайн'}));
+  const clients=[
+    {id:'cl1',name:'Заказчик · ЖК Нальчик',phone:'+7 928 100-20-30',email:'nalchik@client.demo',whatsapp:'Подключен',telegram:'Подключен'},
+    {id:'cl2',name:'Заказчик · ЖК Терек',phone:'+7 928 110-25-40',email:'terek@client.demo',whatsapp:'Подключен',telegram:'Подключен'},
+    {id:'cl3',name:'Заказчик · ЖК Баксан',phone:'+7 928 120-30-50',email:'baksan@client.demo',whatsapp:'—',telegram:'Подключен'}
+  ];
+  const activity=[
+    {action:'Загружен акт КС-2 по вентиляции',details:'ЖК Баксан · Аслан Нагеров',created_at:'2026-10-04T17:12:00'},
+    {action:'Этап «Гидроизоляция кровли» принят',details:'ЖК Нарткала · Залим Докшоков',created_at:'2026-10-04T15:40:00'},
+    {action:'Зафиксирована просрочка задачи',details:'ЖК Терек · перекрытие 7 этажа',created_at:'2026-10-04T12:15:00'},
+    {action:'Выдано 320 000 ₽ под отчёт',details:'Азамат Анахаев · ЖК Тырныауз',created_at:'2026-10-03T18:05:00'},
+    {action:'Камера восстановила связь',details:'ЖК Чегем',created_at:'2026-10-03T14:20:00'},
+    {action:'Добавлен фотоотчёт по фасаду',details:'ЖК Баксан · Арсен Мамишев',created_at:'2026-10-03T10:46:00'}
+  ];
+  const project_members=[
+    ['pm1','p1','e1','Главный инженер'],['pm2','p1','e3','Прораб'],['pm3','p1','e11','Бригадир'],['pm4','p1','e29','Электрик'],['pm5','p1','e41','ВК'],
+    ['pm6','p2','e4','Прораб'],['pm7','p2','e11','Бригадир'],['pm8','p2','e12','Монолитчик'],['pm9','p2','e13','Монолитчик'],['pm10','p2','e14','Монолитчик'],
+    ['pm11','p3','e3','Прораб'],['pm12','p3','e28','Фасад'],['pm13','p3','e30','Вентиляция'],['pm14','p3','e6','ПТО'],
+    ['pm15','p4','e5','Прораб'],['pm16','p4','e31','Кровля'],['pm17','p4','e32','Гидроизоляция'],['pm18','p4','e35','Окна'],
+    ['pm19','p5','e5','Прораб'],['pm20','p5','e25','Штукатурка'],['pm21','p5','e33','Шпаклёвка'],['pm22','p5','e40','Газоснабжение'],
+    ['pm23','p6','e3','Прораб'],['pm24','p6','e43','Благоустройство'],['pm25','p6','e36','Асфальт'],['pm26','p6','e32','Гидроизоляция'],
+    ['pm27','p7','e4','Прораб'],['pm28','p7','e11','Бригадир'],['pm29','p7','e42','Лифты'],['pm30','p7','e38','Крановщик'],
+    ['pm31','p8','e2','Начальник участка'],['pm32','p8','e37','Экскаватор'],['pm33','p8','e26','Сварка'],['pm34','p8','e11','Бригадир'],
+    ['pm35','p9','e10','Проектировщик'],['pm36','p9','e7','Сметчик'],['pm37','p9','e6','ПТО']
+  ].map(x=>({id:x[0],project_id:x[1],employee_id:x[2],role:x[3]}));
+  return {projects,stages,tasks,employees,clients,tools,cameras,finance,activity,project_members,alerts:[]};
+}
+async function start(){
+  if(demoMode){
+    token='';me={full_name:'Демо пользователь',role:'demo'};company={name:'ООО Спецпромстрой'};db=demoData();
+    $('#companyName').textContent=company.name;$('#profileBtn').innerHTML='Демо <span class="demoBadge">DEMO</span>';
+    counts();render();showAuth(false);return;
+  }
+  if(!token)return showAuth(true);
+  try{await bootstrap();showAuth(false)}catch(e){localStorage.removeItem('ap_token');token='';showAuth(true)}
+}
+function logout(){localStorage.removeItem('ap_token');sessionStorage.removeItem('ap_demo');token='';demoMode=false;location.reload()}
+$('#openLogin').onclick=()=>authScreen('login');
+$('#openRegister').onclick=()=>authScreen('register');
+$$('[data-auth-back]').forEach(b=>b.onclick=()=>authScreen('chooser'));
+$('#forgotBtn').onclick=()=>{$('#authError').textContent='Восстановление пароля подключим после настройки почтовой отправки. Сейчас используйте действующий пароль.'};
+$('#demoBtn').onclick=()=>{
+  demoMode=true;sessionStorage.setItem('ap_demo','1');me={full_name:'Демо пользователь',role:'demo'};company={name:'ООО Спецпромстрой'};db=demoData();
+  $('#companyName').textContent=company.name;$('#profileBtn').innerHTML='Демо <span class="demoBadge">DEMO</span>';
+  counts();render();showAuth(false);toast('Демо-режим: данные не записываются в вашу базу');
+};
+$('#loginBtn').onclick=async()=>{
+  try{
+    $('#authError').textContent='';$('#authInfo').textContent='';
+    const email=$('#loginEmail').value.trim(),password=$('#loginPassword').value;
+    if(!email||!password)throw new Error('Введите email и пароль');
+    let d=await api('/auth/login',{method:'POST',body:JSON.stringify({email,password})});
+    token=d.token;localStorage.setItem('ap_token',token);sessionStorage.removeItem('ap_demo');demoMode=false;
+    await bootstrap();showAuth(false)
+  }catch(e){$('#authError').textContent=e.message}
+};
+$('#regBtn').onclick=async()=>{
+  try{
+    $('#authError').textContent='';$('#authInfo').textContent='';
+    const company_name=$('#regCompany').value.trim(),full_name=$('#regName').value.trim(),email=$('#regEmail').value.trim();
+    const password=$('#regPassword').value,password2=$('#regPassword2').value;
+    if(!company_name||!full_name||!email||!password)throw new Error('Заполните все обязательные поля');
+    if(password.length<8)throw new Error('Пароль должен содержать не менее 8 символов');
+    if(password!==password2)throw new Error('Пароли не совпадают');
+    if(!$('#termsCheck').checked)throw new Error('Подтвердите условия использования');
+    let d=await api('/auth/register',{method:'POST',body:JSON.stringify({company_name,full_name,email,password})});
+    token=d.token;localStorage.setItem('ap_token',token);sessionStorage.removeItem('ap_demo');demoMode=false;
+    await bootstrap();showAuth(false);toast('Компания создана')
+  }catch(e){$('#authError').textContent=e.message}
+};
+function demoBlock(){
+  if(!demoMode)return false;
+  toast('Демо-режим: создание и изменение данных отключено');
+  return true;
+}
+function counts(){$('#sideProjectCount').textContent=db.projects.length;$('#sideTaskCount').textContent=db.tasks.filter(x=>x.status!=='Завершена').length;$('#sideEmployeeCount').textContent=db.employees.length;$('#sideClientCount').textContent=db.clients.length;$('#sideToolCount').textContent=db.tools.length;$('#sideCameraCount').textContent=db.cameras.length;$('#rightTasks').textContent=db.tasks.length?db.tasks.filter(x=>x.status!=='Завершена').length+' активных задач':'Новых задач пока нет';let r=$('#rightDemoAlerts'),rows=alertRows();if(r)r.innerHTML=rows.length?'<h3 style="margin-top:18px;display:flex;justify-content:space-between;align-items:center"><span>Контроль</span><button class="btn soft" style="padding:5px 8px" onclick="notificationPage()">Все</button></h3>'+rows.slice(0,3).map(a=>`<div class="alertItem ${a.c}" style="margin-bottom:8px"><b>${a.t}</b><small>${a.d}</small></div>`).join(''):''}
+function empty(ic,t,d,b='',a=''){return `<div class="card empty"><div><div class="icon">${ic}</div><h3>${t}</h3><p>${d}</p>${b?`<button class="btn primary" onclick="${a}">${b}</button>`:''}</div></div>`}
+function head(t,s,b=''){return `<div class="pageHead"><div><h1>${t}</h1><p>${s}</p></div><div class="actions">${b}</div></div>`}
+function modal(t,b,onSave,save='Сохранить'){$('#modalHost').innerHTML=`<div class="modalBack" id="modalBack"><div class="modal"><div class="modalHead"><h3>${t}</h3><button onclick="closeModal()">×</button></div><div class="modalBody">${b}</div><div class="modalFoot"><button class="btn" onclick="closeModal()">Отмена</button><button class="btn primary" id="modalSave">${save}</button></div></div></div>`;$('#modalSave').onclick=onSave;$('#modalBack').onclick=e=>{if(e.target.id==='modalBack')closeModal()}}
+function closeModal(){$('#modalHost').innerHTML=''}
+function setView(v){currentView=v;currentProjectId=null;$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));render()}$$('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
+async function reload(){db=await api('/bootstrap');counts();render()}
+function projectStages(pid){return db.stages.filter(s=>s.project_id===pid)}
+function projectMembers(pid){return (db.project_members||[]).filter(m=>m.project_id===pid)}
+function projectTasks(pid){return db.tasks.filter(t=>t.project_id===pid)}
+function projectFinance(pid){return db.finance.filter(f=>f.project_id===pid)}
+function projectEmployeeRows(pid){return projectMembers(pid).map(m=>({m,e:db.employees.find(x=>x.id===m.employee_id)})).filter(x=>x.e)}
+function avgProjectProgress(pid){let s=projectStages(pid);return s.length?Math.round(s.reduce((a,b)=>a+Number(b.progress||0),0)/s.length):0}
+function isOverdueTask(t){if(t.status==='Завершена')return false;if(t.status==='Просрочена')return true;if(!t.due)return false;return new Date(t.due+'T23:59:59')<new Date()}
+function taskFilteredRows(){let rows=[...db.tasks];if(taskFilter==='active')rows=rows.filter(t=>t.status!=='Завершена'&&!isOverdueTask(t));if(taskFilter==='done')rows=rows.filter(t=>t.status==='Завершена');if(taskFilter==='overdue')rows=rows.filter(isOverdueTask);return rows}
+function alertRows(){if(demoMode)return demoAlerts();return (db.alerts||[]).map(a=>({c:a.level==='critical'?'red':a.level==='info'?'blue':a.level==='success'?'green':'',t:a.title,d:a.details||''}))}
+function notificationPage(){const rows=alertRows();$('#content').innerHTML=`<section class="page">${head('Уведомления и контроль','Автоматические сигналы по срокам и исполнению',`<button class="btn" onclick="setView('home')">← Обзор</button>`)}${rows.length?`<div class="noticeGrid">${rows.map(a=>`<div class="noticeCard ${a.c}"><b>${esc(a.t)}</b><small>${esc(a.d)}</small></div>`).join('')}</div>`:empty('✓','Критических уведомлений нет','Система не обнаружила отклонений по текущим данным.')}</section>`}
+
+
+function statusClass(v){
+  v=String(v||'').toLowerCase();
+  if(v.includes('заверш')||v.includes('активен')||v.includes('оплачен')||v.includes('принят'))return 's-green';
+  if(v.includes('проср')||v.includes('крит')||v.includes('долг')||v.includes('не закрыт')||v.includes('отклон'))return 's-red';
+  if(v.includes('работ')||v.includes('провер')||v.includes('частич'))return 's-blue';
+  if(v.includes('ожид')||v.includes('план')||v.includes('не начат')||v.includes('подготов'))return 's-amber';
+  return 's-gray';
+}
+function money(n){return Number(n||0).toLocaleString('ru-RU')+' ₽'}
+function demoAlerts(){
+  if(!demoMode)return [];
+  return [
+    {c:'red',t:'ЖК Терек · просрочка монолита',d:'Перекрытие 7 этажа отстаёт от графика на 4 дня. Ответственный: Ислам Жемухов.'},
+    {c:'red',t:'Не закрыт подотчёт 170 000 ₽',d:'Азамат Анахаев получил новый аванс при незакрытом остатке за сентябрь.'},
+    {c:'',t:'ЖК Баксан · акт ожидает проверки',d:'КС-2 по вентиляции загружен, но ещё не принят главным инженером.'},
+    {c:'blue',t:'ЖК Чегем · поставка лифтов',d:'Плановая поставка через 12 дней. Требуется подтвердить готовность шахт.'},
+    {c:'green',t:'ЖК Нарткала · этап завершён',d:'Гидроизоляция кровли принята без замечаний.'}
+  ];
+}
+function demoGanttRows(){
+  if(!demoMode)return [];
+  return db.stages.slice(0,18).map((s,i)=>({name:s.name,project:(db.projects.find(p=>p.id===s.project_id)||{}).name||'—',start:s.start,end:s.end,status:s.status,color:['green','blue','violet','amber','teal'][i%5]}));
+}
+function ganttHtml(rows){
+  const months=['Окт','Ноя','Дек','Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен'];
+  const base=new Date('2026-10-01T00:00:00'),end=new Date('2027-10-01T00:00:00'),total=end-base;
+  return `<div class="ganttBoard"><div class="ganttHeader"><div>Работа / объект</div><div class="ganttMonths">${months.map(m=>`<span>${m}</span>`).join('')}</div></div>${rows.map(r=>{let s=new Date((r.start||'2026-10-01')+'T00:00:00'),e=new Date((r.end||r.start||'2026-11-01')+'T00:00:00');let l=Math.max(0,Math.min(98,(s-base)/total*100)),w=Math.max(2,Math.min(100-l,(e-s)/total*100));let color=String(r.status).includes('Проср')?'red':String(r.status).includes('Заверш')?'green':String(r.status).includes('провер')?'amber':r.color||'blue';return `<div class="ganttRow"><div class="ganttName"><b>${esc(r.name)}</b><small>${esc(r.project)}</small></div><div class="ganttTrack"><div class="ganttBar ${color}" style="left:${l}%;width:${w}%">${esc(r.status||'В работе')}</div></div></div>`}).join('')}</div>`;
+}
+
+async function newProject(){if(demoBlock())return;modal('Новый объект',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="pName"></div><div class="field"><label>Тип</label><select id="pType"><option>Строительство</option><option>Проектирование</option><option>Отделка</option></select></div><div class="field"><label>Статус</label><select id="pStatus"><option>Подготовка</option><option>Активен</option></select></div><div class="field full"><label>Адрес</label><input id="pAddr"></div><div class="field"><label>Начало</label><input id="pStart" type="date"></div><div class="field"><label>Плановое завершение</label><input id="pEnd" type="date"></div><div class="field full"><label>Описание</label><textarea id="pDesc"></textarea></div></div>`,async()=>{try{await api('/projects',{method:'POST',body:JSON.stringify({name:$('#pName').value,type:$('#pType').value,status:$('#pStatus').value,address:$('#pAddr').value||null,start:$('#pStart').value||null,end:$('#pEnd').value||null,description:$('#pDesc').value||null})});closeModal();await reload();toast('Объект создан')}catch(e){toast(e.message)}},'Создать объект')}
+async function newStage(pid){if(demoBlock())return;modal('Новый этап',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="sName"></div><div class="field"><label>Начало</label><input id="sStart" type="date"></div><div class="field"><label>Окончание</label><input id="sEnd" type="date"></div><div class="field"><label>Ответственный</label><select id="sResp"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Проверяющий</label><select id="sCheck"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Стоимость</label><input id="sCost" type="number"></div><div class="field"><label>Статус</label><select id="sStatus"><option>Не начат</option><option>В работе</option><option>На проверке</option><option>Завершен</option></select></div><div class="field"><label>Прогресс, %</label><input id="sProgress" type="number" min="0" max="100" value="0"></div></div>`,async()=>{try{await api(`/projects/${pid}/stages`,{method:'POST',body:JSON.stringify({name:$('#sName').value,start:$('#sStart').value||null,end:$('#sEnd').value||null,responsible:$('#sResp').value,checker:$('#sCheck').value,cost:$('#sCost').value?Number($('#sCost').value):null,status:$('#sStatus').value,progress:Number($('#sProgress').value||0)})});closeModal();await bootstrap();openProject(pid)}catch(e){toast(e.message)}},'Добавить этап')}
+async function createSimple(kind,title,fields,map){modal(title,`<div class="formGrid">${fields}</div>`,async()=>{let payload=map();try{await api('/'+kind,{method:'POST',body:JSON.stringify(payload)});closeModal();await reload();toast('Сохранено')}catch(e){toast(e.message)}},'Сохранить')}
+function newTask(){createSimple('tasks','Новая задача',`<div class="field full"><label>Название *</label><input id="xName"></div><div class="field"><label>Объект</label><select id="xProject"><option value="">Без объекта</option>${db.projects.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></div><div class="field"><label>Исполнитель</label><select id="xExec"><option value="">Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Срок</label><input id="xDue" type="date"></div><div class="field"><label>Приоритет</label><select id="xPri"><option>Обычный</option><option>Высокий</option><option>Критический</option></select></div><div class="field full"><label>Описание</label><textarea id="xDesc"></textarea></div>`,()=>({name:$('#xName').value,project_id:$('#xProject').value||null,executor:$('#xExec').value||null,due:$('#xDue').value||null,priority:$('#xPri').value,description:$('#xDesc').value||null,status:'Активная'}))}
+function newEmployee(){createSimple('employees','Новый сотрудник',`<div class="field full"><label>ФИО *</label><input id="xName"></div><div class="field"><label>Должность</label><input id="xJob"></div><div class="field"><label>Роль</label><select id="xRole"><option>Работник</option><option>Админ</option><option>Бухгалтер</option><option>Суперадмин</option></select></div><div class="field"><label>Телефон</label><input id="xPhone"></div><div class="field"><label>Email</label><input id="xMail"></div><div class="field"><label>Telegram</label><input id="xTg"></div>`,()=>({name:$('#xName').value,job:$('#xJob').value||null,role:$('#xRole').value,phone:$('#xPhone').value||null,email:$('#xMail').value||null,telegram:$('#xTg').value||null}))}
+function newClient(){createSimple('clients','Новый клиент',`<div class="field full"><label>Имя / компания *</label><input id="xName"></div><div class="field"><label>Телефон</label><input id="xPhone"></div><div class="field"><label>Email</label><input id="xMail"></div><div class="field"><label>WhatsApp</label><input id="xWa"></div><div class="field"><label>Telegram</label><input id="xTg"></div>`,()=>({name:$('#xName').value,phone:$('#xPhone').value||null,email:$('#xMail').value||null,whatsapp:$('#xWa').value||null,telegram:$('#xTg').value||null}))}
+function newTool(){createSimple('tools','Новый инструмент',`<div class="field full"><label>Наименование *</label><input id="xName"></div><div class="field"><label>Инв. №</label><input id="xNum"></div><div class="field"><label>Стоимость</label><input id="xCost" type="number"></div><div class="field"><label>Статус</label><select id="xStatus"><option>Склад</option><option>Выдан</option><option>Ремонт</option></select></div><div class="field"><label>Ответственный</label><select id="xResp"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div>`,()=>({name:$('#xName').value,inventory_no:$('#xNum').value||null,cost:$('#xCost').value?Number($('#xCost').value):null,status:$('#xStatus').value,responsible:$('#xResp').value}))}
+function newCamera(){createSimple('cameras','Новая камера',`<div class="field full"><label>Название *</label><input id="xName"></div><div class="field"><label>Объект</label><select id="xProject"><option value="">Не выбран</option>${db.projects.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></div><div class="field"><label>Тип</label><select id="xType"><option>RTSP / ONVIF</option><option>Snapshot / FTP</option></select></div><div class="field full"><label>URL</label><input id="xUrl"></div>`,()=>({name:$('#xName').value,project_id:$('#xProject').value||null,type:$('#xType').value,url:$('#xUrl').value||null}))}
+function newFinance(){createSimple('finance','Финансовая операция',`<div class="field"><label>Тип</label><select id="xType"><option>Начисление</option><option>Выдача</option><option>Перерасчет</option><option>Оплата</option><option>Акт</option></select></div><div class="field"><label>Категория</label><input id="xCat"></div><div class="field"><label>Объект</label><select id="xProject"><option value="">Без объекта</option>${db.projects.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></div><div class="field"><label>Сумма</label><input id="xAmount" type="number"></div><div class="field full"><label>Комментарий</label><textarea id="xComment"></textarea></div>`,()=>({type:$('#xType').value,category:$('#xCat').value||null,project_id:$('#xProject').value||null,amount:Number($('#xAmount').value||0),comment:$('#xComment').value||null}))}
+function renderHome(){
+  let has=db.projects.length||db.tasks.length||db.employees.length;
+  if(!has){$('#content').innerHTML=`<section class="page">${head('Обзор','Центр управления компанией',`<button class="btn primary" onclick="newProject()">+ Новый объект</button>`)}${empty('▦','Система готова к работе','Создайте первый объект. Показатели появятся только из реальных данных.','Создать первый объект','newProject()')}</section>`;return}
+  const active=db.tasks.filter(x=>x.status!=='Завершена').length,overdue=db.tasks.filter(isOverdueTask).length,alerts=alertRows();
+  $('#content').innerHTML=`<section class="page">
+    ${head('Обзор',demoMode?'ООО «Спецпромстрой» · демонстрационный центр управления':'Центр управления компанией',`<button class="btn primary" onclick="newProject()">+ Новый объект</button>`)}
+    <div class="kpis">
+      <div class="card kpi kpi-green"><div class="v">${db.projects.filter(x=>x.status==='Активен').length}</div><div class="l">Активные объекты</div><div class="trend up">● в работе</div></div>
+      <div class="card kpi kpi-blue"><div class="v">${active}</div><div class="l">Активные задачи</div><div class="trend">${db.tasks.length} всего</div></div>
+      <div class="card kpi kpi-red"><div class="v">${overdue}</div><div class="l">Просрочено</div><div class="trend down">${overdue?'требует внимания':'нет проблем'}</div></div>
+      <div class="card kpi kpi-violet"><div class="v">${db.employees.length}</div><div class="l">Сотрудники</div><div class="trend up">команда</div></div>
+    </div>
+    ${demoMode?`<div class="financeStrip"><div><small>Операции за период</small><strong>${money(db.finance.reduce((a,b)=>a+Number(b.amount||0),0))}</strong></div><div><small>Незакрытый подотчёт</small><strong style="color:var(--red)">${money(728000)}</strong></div><div><small>Этапы в работе</small><strong>${db.stages.filter(s=>s.status==='В работе').length}</strong></div><div><small>На проверке</small><strong style="color:#b98127">${db.stages.filter(s=>s.status==='На проверке').length}</strong></div></div>`:''}
+    <div class="dashGrid">
+      <div class="card chartCard"><h3>Динамика по объектам</h3><div class="chartSub">Условный объём выполненных работ по неделям</div><div class="barChart">${[42,58,51,72,64,81,76,88,69,91,84,96].map((v,i)=>`<div class="barCol"><div class="bar ${['blue','green','violet','teal'][i%4]}" style="height:${v}%"></div><div class="barLabel">${i+1} нед</div></div>`).join('')}</div></div>
+      <div class="card chartCard"><h3>Статусы задач</h3><div class="chartSub">Распределение текущей нагрузки</div><div class="donut"></div><div class="legend"><span><i class="dot" style="background:var(--green)"></i>Завершены</span><span><i class="dot" style="background:var(--blue)"></i>В работе</span><span><i class="dot" style="background:var(--amber)"></i>Проверка</span><span><i class="dot" style="background:var(--red)"></i>Просрочка</span></div></div>
+    </div>
+    <div class="dashGrid">
+      <div class="card panel"><h3>Объекты</h3>${db.projects.slice(0,9).map((p,i)=>`<div style="padding:10px 0;border-bottom:1px solid #edf1f4;display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:12px;align-items:center"><div><button style="border:0;background:none;color:var(--blue);font-weight:800;padding:0" onclick="openProject('${p.id}')">${esc(p.name)}</button><div style="font-size:11px;color:var(--muted);margin-top:3px">${esc(p.description||p.type)}</div></div><div><div class="progressLine"><span style="width:${[64,48,72,57,81,88,36,29,12][i]||50}%;background:${['var(--green)','var(--blue)','var(--violet)','var(--teal)'][i%4]}"></span></div><small style="color:var(--muted)">${[64,48,72,57,81,88,36,29,12][i]||50}%</small></div></div>`).join('')}</div>
+      <div class="card panel"><h3>Контроль и подсказки</h3>${alerts.length?`<div class="alertList">${alerts.map(a=>`<div class="alertItem ${a.c}"><b>${a.t}</b><small>${a.d}</small></div>`).join('')}</div>`:(db.activity.length?db.activity.slice(0,6).map(a=>`<div class="activityItem"><b>${esc(a.action)}</b><br><small>${esc(a.details||'')}</small></div>`).join(''):'<div class="placeholder">Нет событий</div>')}</div>
+    </div>
+  </section>`;
+}
+function renderProjects(){$('#content').innerHTML=`<section class="page">${head('Объекты','Строительство · Проектирование · Отделка',`<button class="btn primary" onclick="newProject()">+ Новый объект</button>`)}<div class="tabs"><button class="tab active">Активные (${db.projects.length})</button><button class="tab">Архив (0)</button></div>${db.projects.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Объект</th><th>Тип</th><th>Статус</th><th>Адрес</th><th>Этапы</th><th></th></tr></thead><tbody>${db.projects.map(p=>`<tr><td><b>${esc(p.name)}</b></td><td>${esc(p.type)}</td><td><span class="status ${statusClass(p.status)}">${esc(p.status)}</span></td><td>${esc(p.address||'—')}</td><td>${projectStages(p.id).length}</td><td><button class="btn soft" onclick="openProject('${p.id}')">Открыть</button></td></tr>`).join('')}</tbody></table></div></div>`:empty('▦','Объектов пока нет','Добавьте первый объект.','+ Новый объект','newProject()')}</section>`}
+function openProject(pid){currentProjectId=pid;renderProject(pid)}
+function renderProject(pid){
+  let p=db.projects.find(x=>x.id===pid); if(!p)return setView('projects');
+  let st=projectStages(pid),members=projectEmployeeRows(pid),pt=projectTasks(pid),pf=projectFinance(pid),progress=avgProjectProgress(pid);
+  $('#content').innerHTML=`<section class="page">
+    ${head(esc(p.name),`${esc(p.type)} · ${esc(p.address||'Адрес не указан')}`,`<button class="btn" onclick="setView('projects')">← Объекты</button>${demoMode?'':`<button class="btn soft" onclick="editProject('${pid}')">Редактировать</button>`}<button class="btn primary" onclick="newStage('${pid}')">+ Этап</button>`)}
+    <div class="tabs">
+      <button class="tab active">Обзор</button>
+      <button class="tab" onclick="projectStagePage('${pid}')">Этапы</button>
+      <button class="tab" onclick="projectGanttPage('${pid}')">Гант</button>
+      <button class="tab" onclick="projectTeamPage('${pid}')">Команда</button>
+      <button class="tab" onclick="projectTasksPage('${pid}')">Задачи</button>
+      <button class="tab" onclick="projectFinancePage('${pid}')">Финансы</button>
+      <button class="tab">Документы</button><button class="tab">Галерея</button><button class="tab" onclick="setView('cameras')">Камеры</button>
+    </div>
+    <div class="objectSummary">
+      <div class="mini"><small>Готовность</small><b>${progress}%</b><div class="progressLine" style="margin-top:8px"><span style="width:${progress}%;background:var(--green)"></span></div></div>
+      <div class="mini"><small>Этапы</small><b>${st.length}</b></div>
+      <div class="mini"><small>Команда</small><b>${members.length}</b></div>
+      <div class="mini"><small>Активные задачи</small><b>${pt.filter(t=>t.status!=='Завершена').length}</b></div>
+    </div>
+    <div class="projectShell">
+      <div>
+        <div class="card panel" style="margin-bottom:12px"><h3>Этапы проекта</h3>${st.length?`<div class="stageTrack">${st.slice(0,8).map(s=>`<div class="stageNode"><div class="stageDot" style="background:${s.status==='Завершен'?'var(--green)':s.status==='Просрочен'?'var(--red)':s.status==='В работе'?'var(--blue)':'#e6edf2'}"></div><strong>${esc(s.name)}</strong><small>${esc(s.status)} · ${Number(s.progress||0)}%</small></div>`).join('')}</div>`:'<div class="placeholder">Этапы пока не добавлены</div>'}</div>
+        <div class="projectTiles">
+          <div class="tile"><h4>Команда</h4>${members.length?members.slice(0,5).map(x=>`<div class="activityItem"><b>${esc(x.e.name)}</b><br><small>${esc(x.m.role||x.e.job||'Сотрудник')}</small></div>`).join(''):'<div class="placeholder">Сотрудники не назначены</div>'}</div>
+          <div class="tile"><h4>Финансы объекта</h4><div style="font-size:22px;font-weight:800">${money(pf.reduce((a,b)=>a+Number(b.amount||0),0))}</div><small style="color:var(--muted)">${pf.length} операций</small></div>
+          <div class="tile"><h4>Ближайшие задачи</h4>${pt.length?pt.filter(t=>t.status!=='Завершена').slice(0,4).map(t=>`<div class="activityItem"><b>${esc(t.name)}</b><br><small>${esc(t.executor||'Не назначен')} · ${esc(t.due||'без срока')}</small></div>`).join(''):'<div class="placeholder">Нет задач</div>'}</div>
+          <div class="tile"><h4>Последние события</h4>${db.activity.filter(a=>a.entity_id===pid||String(a.details||'').includes(p.name)).slice(0,4).map(a=>`<div class="activityItem"><b>${esc(a.action)}</b><br><small>${esc(a.details||'')}</small></div>`).join('')||'<div class="placeholder">События появятся автоматически</div>'}</div>
+        </div>
+      </div>
+      <div class="card panel"><h3>Информация</h3><p><b>Статус:</b> <span class="status ${statusClass(p.status)}">${esc(p.status)}</span></p><p><b>Начало:</b> ${esc(p.start||'—')}</p><p><b>План:</b> ${esc(p.end||'—')}</p><p><b>Этапов:</b> ${st.length}</p><p><b>Сотрудников:</b> ${members.length}</p><hr style="border:0;border-top:1px solid var(--line)"><p style="color:var(--muted)">${esc(p.description||'Описание пока не добавлено.')}</p></div>
+    </div>
+  </section>`;
+}
+function projectStagePage(pid){
+  let p=db.projects.find(x=>x.id===pid),st=projectStages(pid);
+  $('#content').innerHTML=`<section class="page">${head(esc(p.name)+' · Этапы','Планирование, стоимость и контроль выполнения',`<button class="btn" onclick="renderProject('${pid}')">← Обзор</button><button class="btn primary" onclick="newStage('${pid}')">+ Новый этап</button>`)}
+  ${st.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Этап</th><th>Статус</th><th>Период</th><th>Ответственный</th><th>Проверяющий</th><th>Прогресс</th><th>Стоимость</th><th></th></tr></thead><tbody>${st.map(s=>`<tr><td><b>${esc(s.name)}</b></td><td><span class="status ${statusClass(s.status)}">${esc(s.status)}</span></td><td>${esc(s.start||'—')} → ${esc(s.end||'—')}</td><td>${esc(s.responsible||'—')}</td><td>${esc(s.checker||'—')}</td><td><div class="stageProgress"><div class="progressLine" style="flex:1"><span style="width:${Number(s.progress||0)}%;background:${s.status==='Просрочен'?'var(--red)':'var(--blue)'}"></span></div><span>${Number(s.progress||0)}%</span></div></td><td>${s.cost?money(s.cost):'—'}</td><td>${demoMode?'':`<button class="btn soft" onclick="editStage('${s.id}','${pid}')">Изменить</button>`}</td></tr>`).join('')}</tbody></table></div></div>`:empty('◌','Этапов пока нет','Добавьте основной этап.','+ Новый этап',`newStage('${pid}')`)}</section>`;
+}
+function projectGanttPage(pid){
+  let p=db.projects.find(x=>x.id===pid),st=projectStages(pid);
+  $('#content').innerHTML=`<section class="page">${head(esc(p.name)+' · Гант','Сроки и последовательность работ',`<button class="btn" onclick="renderProject('${pid}')">← Обзор</button><button class="btn primary" onclick="newStage('${pid}')">+ Этап</button>`)}${st.length?ganttHtml(st.map((s,i)=>({name:s.name,project:p.name,start:s.start,end:s.end,status:s.status,color:['blue','green','violet','teal','amber'][i%5]}))):empty('▥','Гант пока пуст','Добавьте этапы со сроками.')}</section>`;
+}
+function projectTeamPage(pid){
+  let p=db.projects.find(x=>x.id===pid),rows=projectEmployeeRows(pid);
+  $('#content').innerHTML=`<section class="page">${head(esc(p.name)+' · Команда','Сотрудники, назначенные на объект',`<button class="btn" onclick="renderProject('${pid}')">← Обзор</button>${demoMode?'':`<button class="btn primary" onclick="assignEmployee('${pid}')">+ Назначить сотрудника</button>`}`)}
+  ${rows.length?`<div class="teamGrid">${rows.map(x=>`<div class="teamCard"><b>${esc(x.e.name)}</b><small>${esc(x.e.job||'—')} · ${esc(x.m.role||'Участник')}</small>${demoMode?'':`<div style="margin-top:9px"><button class="btn soft" onclick="removeProjectMember('${pid}','${x.e.id}')">Убрать с объекта</button></div>`}</div>`).join('')}</div>`:empty('♙','Команда не назначена','Добавьте сотрудников на объект.',demoMode?'':'+ Назначить',demoMode?'':`assignEmployee('${pid}')`)}</section>`;
+}
+function projectTasksPage(pid){let p=db.projects.find(x=>x.id===pid),rows=projectTasks(pid);$('#content').innerHTML=`<section class="page">${head(esc(p.name)+' · Задачи','Задачи и контроль исполнения по объекту',`<button class="btn" onclick="renderProject('${pid}')">← Обзор</button><button class="btn primary" onclick="newTask()">+ Новая задача</button>`)}${rows.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Задача</th><th>Исполнитель</th><th>Срок</th><th>Приоритет</th><th>Статус</th><th></th></tr></thead><tbody>${rows.map(t=>{let over=isOverdueTask(t);return `<tr><td><button class="taskNameBtn" onclick="openTask('${t.id}')">${esc(t.name)}</button></td><td>${esc(t.executor||'—')}</td><td style="${over?'color:var(--red);font-weight:800':''}">${esc(t.due||'—')}</td><td>${esc(t.priority)}</td><td><span class="status ${statusClass(over?'Просрочена':t.status)}">${esc(over?'Просрочена':t.status)}</span></td><td>${demoMode?'':`<button class="btn soft" onclick="editTask('${t.id}')">Изменить</button>`}</td></tr>`}).join('')}</tbody></table></div></div>`:empty('✓','Задач нет','Создайте первую задачу.')}</section>`}
+function projectFinancePage(pid){
+  let p=db.projects.find(x=>x.id===pid),rows=projectFinance(pid),total=rows.reduce((a,b)=>a+Number(b.amount||0),0);
+  $('#content').innerHTML=`<section class="page">${head(esc(p.name)+' · Финансы','Операции по выбранному объекту',`<button class="btn" onclick="renderProject('${pid}')">← Обзор</button><button class="btn primary" onclick="newFinance()">+ Операция</button>`)}<div class="financeStrip"><div><small>Операций</small><strong>${rows.length}</strong></div><div><small>Сумма</small><strong>${money(total)}</strong></div><div><small>Подотчёт</small><strong>${money(rows.filter(f=>f.type==='Подотчёт').reduce((a,b)=>a+Number(b.amount||0),0))}</strong></div><div><small>Акты</small><strong>${rows.filter(f=>String(f.type).includes('Акт')).length}</strong></div></div>${rows.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Тип</th><th>Категория</th><th>Ответственный</th><th>Сумма</th><th>Статус</th><th>Комментарий</th></tr></thead><tbody>${rows.map(f=>`<tr><td>${esc(f.type)}</td><td>${esc(f.category||'—')}</td><td>${esc(f.person||'—')}</td><td><b>${money(f.amount)}</b></td><td><span class="status ${statusClass(f.status||'Проведено')}">${esc(f.status||'Проведено')}</span></td><td>${esc(f.comment||'—')}</td></tr>`).join('')}</tbody></table></div></div>`:empty('₽','Операций пока нет','Добавьте первую финансовую операцию.')}</section>`;
+}
+async function editProject(pid){
+  if(demoBlock())return;let p=db.projects.find(x=>x.id===pid);
+  modal('Редактировать объект',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="epName" value="${esc(p.name)}"></div><div class="field"><label>Тип</label><select id="epType">${['Строительство','Проектирование','Отделка'].map(x=>`<option ${p.type===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Статус</label><select id="epStatus">${['Подготовка','Активен','Приостановлен','Завершен','Архив'].map(x=>`<option ${p.status===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field full"><label>Адрес</label><input id="epAddr" value="${esc(p.address||'')}"></div><div class="field"><label>Начало</label><input id="epStart" type="date" value="${esc(p.start||'')}"></div><div class="field"><label>Плановое завершение</label><input id="epEnd" type="date" value="${esc(p.end||'')}"></div><div class="field full"><label>Описание</label><textarea id="epDesc">${esc(p.description||'')}</textarea></div></div>`,async()=>{try{await api('/projects/'+pid,{method:'PATCH',body:JSON.stringify({name:$('#epName').value,type:$('#epType').value,status:$('#epStatus').value,address:$('#epAddr').value||null,start:$('#epStart').value||null,end:$('#epEnd').value||null,description:$('#epDesc').value||null})});closeModal();await bootstrap();openProject(pid);toast('Объект обновлён')}catch(e){toast(e.message)}},'Сохранить');
+}
+async function editStage(sid,pid){
+  if(demoBlock())return;let s=db.stages.find(x=>x.id===sid);
+  modal('Изменить этап',`<div class="formGrid"><div class="field full"><label>Название</label><input id="esName" value="${esc(s.name)}"></div><div class="field"><label>Статус</label><select id="esStatus">${['Не начат','В работе','На проверке','Завершен','Просрочен'].map(x=>`<option ${s.status===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Прогресс, %</label><input id="esProgress" type="number" min="0" max="100" value="${Number(s.progress||0)}"></div><div class="field"><label>Начало</label><input id="esStart" type="date" value="${esc(s.start||'')}"></div><div class="field"><label>Окончание</label><input id="esEnd" type="date" value="${esc(s.end||'')}"></div><div class="field"><label>Ответственный</label><select id="esResp"><option>Не назначен</option>${db.employees.map(e=>`<option ${s.responsible===e.name?'selected':''}>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Проверяющий</label><select id="esCheck"><option>Не назначен</option>${db.employees.map(e=>`<option ${s.checker===e.name?'selected':''}>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Стоимость</label><input id="esCost" type="number" value="${s.cost||''}"></div></div>`,async()=>{try{await api('/stages/'+sid,{method:'PATCH',body:JSON.stringify({name:$('#esName').value,status:$('#esStatus').value,progress:Number($('#esProgress').value||0),start:$('#esStart').value||null,end:$('#esEnd').value||null,responsible:$('#esResp').value,checker:$('#esCheck').value,cost:$('#esCost').value?Number($('#esCost').value):null})});closeModal();await bootstrap();projectStagePage(pid);toast('Этап обновлён')}catch(e){toast(e.message)}},'Сохранить');
+}
+async function assignEmployee(pid){
+  if(demoBlock())return;
+  let assigned=new Set(projectMembers(pid).map(m=>m.employee_id)),opts=db.employees.filter(e=>!assigned.has(e.id));
+  modal('Назначить сотрудника',`<div class="formGrid"><div class="field full"><label>Сотрудник</label><select id="amEmp">${opts.map(e=>`<option value="${e.id}">${esc(e.name)} · ${esc(e.job||'')}</option>`).join('')}</select></div><div class="field full"><label>Роль на объекте</label><input id="amRole" placeholder="Например: Прораб"></div></div>`,async()=>{try{await api(`/projects/${pid}/members`,{method:'POST',body:JSON.stringify({employee_id:$('#amEmp').value,role:$('#amRole').value||null})});closeModal();await bootstrap();projectTeamPage(pid);toast('Сотрудник назначен')}catch(e){toast(e.message)}},'Назначить');
+}
+async function removeProjectMember(pid,eid){
+  if(demoBlock())return;if(!confirm('Убрать сотрудника с объекта?'))return;
+  try{await api(`/projects/${pid}/members/${eid}`,{method:'DELETE'});await bootstrap();projectTeamPage(pid);toast('Сотрудник убран')}catch(e){toast(e.message)}
+}
+
+function renderTasks(){
+ const activeCount=db.tasks.filter(x=>x.status!=='Завершена'&&!isOverdueTask(x)).length,doneCount=db.tasks.filter(x=>x.status==='Завершена').length,overdue=db.tasks.filter(isOverdueTask).length,rows=taskFilteredRows();
+ let body='';
+ if(taskMode==='gantt'){const gr=(taskFilter==='all'?db.tasks:rows).map((t,i)=>({name:t.name,project:(db.projects.find(p=>p.id===t.project_id)||{}).name||'—',start:t.due,end:t.due,status:isOverdueTask(t)?'Просрочена':t.status,color:['blue','green','violet','amber'][i%4]}));body=gr.length?ganttHtml(gr):empty('▥','Гант пока пуст','Нет задач для выбранного фильтра.')}
+ else{body=rows.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Задача</th><th>Объект</th><th>Исполнитель</th><th>Срок</th><th>Приоритет</th><th>Статус</th><th></th></tr></thead><tbody>${rows.map(t=>{const p=db.projects.find(x=>x.id===t.project_id),over=isOverdueTask(t);return `<tr><td><button class="taskNameBtn" onclick="openTask('${t.id}')">${esc(t.name)}</button></td><td>${esc(p?.name||'—')}</td><td>${esc(t.executor||'—')}</td><td style="${over?'color:var(--red);font-weight:800':''}">${esc(t.due||'—')}</td><td class="${t.priority==='Критический'?'priority-critical':t.priority==='Высокий'?'priority-high':''}">${esc(t.priority)}</td><td><span class="status ${statusClass(over?'Просрочена':t.status)}">${esc(over?'Просрочена':t.status)}</span></td><td>${demoMode?'':`<button class="btn soft" onclick="editTask('${t.id}')">Изменить</button>`}</td></tr>`}).join('')}</tbody></table></div></div>`:empty('✓','Нет задач','Для выбранного фильтра задач нет.','+ Новая задача','newTask()')}
+ $('#content').innerHTML=`<section class="page">${head('Задачи','Постановка, исполнение, проверка и контроль сроков',`<button class="btn soft" onclick="notificationPage()">Уведомления (${alertRows().length})</button><button class="btn primary" onclick="newTask()">+ Новая задача</button>`)}<div class="taskToolbar"><button class="taskFilterBtn ${taskFilter==='active'?'active':''}" onclick="taskFilter='active';renderTasks()">Активные (${activeCount})</button><button class="taskFilterBtn ${taskFilter==='overdue'?'active':''}" onclick="taskFilter='overdue';renderTasks()">Просрочены (${overdue})</button><button class="taskFilterBtn ${taskFilter==='done'?'active':''}" onclick="taskFilter='done';renderTasks()">Завершены (${doneCount})</button><button class="taskFilterBtn ${taskFilter==='all'?'active':''}" onclick="taskFilter='all';renderTasks()">Все (${db.tasks.length})</button><span style="flex:1"></span><button class="tab ${taskMode==='list'?'active':''}" onclick="taskMode='list';renderTasks()">Список</button><button class="tab ${taskMode==='gantt'?'active':''}" onclick="taskMode='gantt';renderTasks()">Гант</button></div>${body}</section>`
+}
+function openTask(tid){let t=db.tasks.find(x=>x.id===tid);if(!t)return;let p=db.projects.find(x=>x.id===t.project_id),s=db.stages.find(x=>x.id===t.stage_id),over=isOverdueTask(t);modal('Карточка задачи',`<div class="taskDetailGrid"><div class="taskDetailBox"><small>Задача</small><b>${esc(t.name)}</b></div><div class="taskDetailBox"><small>Статус</small><b><span class="status ${statusClass(over?'Просрочена':t.status)}">${esc(over?'Просрочена':t.status)}</span></b></div><div class="taskDetailBox"><small>Объект</small><b>${esc(p?.name||'—')}</b></div><div class="taskDetailBox"><small>Этап</small><b>${esc(s?.name||'—')}</b></div><div class="taskDetailBox"><small>Исполнитель</small><b>${esc(t.executor||'—')}</b></div><div class="taskDetailBox"><small>Срок</small><b>${esc(t.due||'—')}</b></div><div class="taskDetailBox"><small>Приоритет</small><b>${esc(t.priority)}</b></div><div class="taskDetailBox"><small>Описание</small><b>${esc(t.description||'—')}</b></div></div>`,async()=>{closeModal();if(!demoMode)editTask(tid)},demoMode?'Закрыть':'Редактировать')}
+async function editTask(tid){if(demoBlock())return;let t=db.tasks.find(x=>x.id===tid);if(!t)return;modal('Изменить задачу',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="etName" value="${esc(t.name)}"></div><div class="field"><label>Объект</label><select id="etProject"><option value="">Без объекта</option>${db.projects.map(p=>`<option value="${p.id}" ${t.project_id===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select></div><div class="field"><label>Исполнитель</label><select id="etExec"><option value="">Не назначен</option>${db.employees.map(e=>`<option ${t.executor===e.name?'selected':''}>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Срок</label><input id="etDue" type="date" value="${esc(t.due||'')}"></div><div class="field"><label>Приоритет</label><select id="etPriority">${['Обычный','Высокий','Критический'].map(x=>`<option ${t.priority===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Статус</label><select id="etStatus">${['Активная','На проверке','Завершена','Просрочена'].map(x=>`<option ${t.status===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field full"><label>Описание</label><textarea id="etDesc">${esc(t.description||'')}</textarea></div></div>`,async()=>{try{await api('/tasks/'+tid,{method:'PATCH',body:JSON.stringify({name:$('#etName').value,project_id:$('#etProject').value||null,executor:$('#etExec').value||null,due:$('#etDue').value||null,priority:$('#etPriority').value,status:$('#etStatus').value,description:$('#etDesc').value||null})});closeModal();await bootstrap();renderTasks();toast('Задача обновлена')}catch(e){toast(e.message)}},'Сохранить')}
+async function completeTask(tid){if(demoBlock())return;try{await api('/tasks/'+tid+'/status?status='+encodeURIComponent('Завершена'),{method:'PATCH'});await bootstrap();renderTasks();toast('Задача завершена')}catch(e){toast(e.message)}}
+async function deleteTask(tid){if(demoBlock())return;if(!confirm('Удалить задачу?'))return;try{await api('/tasks/'+tid,{method:'DELETE'});await bootstrap();renderTasks();toast('Задача удалена')}catch(e){toast(e.message)}}
+
+function renderEmployees(){$('#content').innerHTML=`<section class="page">${head('Сотрудники','Команда, роли, доступы и занятость',`<button class="btn primary" onclick="newEmployee()">+ Новый сотрудник</button>`)}<div class="tabs"><button class="tab active">Активные (${db.employees.length})</button><button class="tab">Архив (0)</button></div>${db.employees.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Сотрудник</th><th>Должность</th><th>Роль</th><th>Телефон</th><th>Email</th><th>Статус</th></tr></thead><tbody>${db.employees.map(e=>`<tr onclick="openEmployee('${e.id}')" style="cursor:pointer"><td><b>${esc(e.name)}</b></td><td>${esc(e.job||'—')}</td><td>${esc(e.role)}</td><td>${esc(e.phone||'—')}</td><td>${esc(e.email||'—')}</td><td><span class="status ${statusClass(e.status)}">${esc(e.status)}</span></td></tr>`).join('')}</tbody></table></div></div>`:empty('♙','Сотрудников пока нет','Добавьте сотрудника и назначьте роль.','+ Новый сотрудник','newEmployee()')}</section>`}
+function openEmployee(eid){let e=db.employees.find(x=>x.id===eid);$('#content').innerHTML=`<section class="page">${head(esc(e.name),`${esc(e.job||'Должность не указана')} · ${esc(e.role)}`,`<button class="btn" onclick="renderEmployees()">← Сотрудники</button>`)}<div class="card"><div class="employeeTabs">${['info','tasks','tools','busy','trips','money'].map((x,i)=>`<button class="${employeeTab===x?'active':''}" onclick="employeeTab='${x}';openEmployee('${eid}')">${['Информация','Задачи','Инструменты','Занятость','Поездки','Финансы'][i]}</button>`).join('')}</div><div class="panel">${employeeTab==='info'?`<div class="split"><div><p><b>Телефон:</b> ${esc(e.phone||'—')}</p><p><b>Email:</b> ${esc(e.email||'—')}</p><p><b>Telegram:</b> ${esc(e.telegram||'—')}</p></div><div><p><b>Статус:</b> ${esc(e.status)}</p><p><b>Роль:</b> ${esc(e.role)}</p></div></div>`:employeeTab==='busy'?(demoMode?ganttHtml(db.stages.filter(s=>s.responsible===e.name).map((s,i)=>({name:s.name,project:(db.projects.find(p=>p.id===s.project_id)||{}).name||'—',start:s.start,end:s.end,status:s.status,color:['blue','green','violet'][i%3]}))):'<div class="ganttEmpty">Занятость будет строиться из назначений на этапы</div>'):employeeTab==='tasks'?(db.tasks.filter(t=>t.executor===e.name).length?db.tasks.filter(t=>t.executor===e.name).map(t=>`<div class="activityItem"><b>${esc(t.name)}</b><br><small>${esc(t.due||'—')} · ${esc(t.status)}</small></div>`).join(''):'<div class="placeholder">Нет назначенных задач</div>'):employeeTab==='money'?(demoMode?`<div class="tableWrap"><table><thead><tr><th>Операция</th><th>Сумма</th><th>Статус</th></tr></thead><tbody>${db.finance.filter(f=>f.person===e.name).map(f=>`<tr><td>${esc(f.category)}</td><td><b>${money(f.amount)}</b></td><td><span class="status ${statusClass(f.status)}">${esc(f.status)}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="placeholder">Финансовых данных пока нет</div>'):'<div class="placeholder">Данных пока нет</div>'}</div></div></section>`}
+function simpleTable(title,sub,button,cols,rows,emptyHtml){$('#content').innerHTML=`<section class="page">${head(title,sub,button)}${rows.length?`<div class="card"><div class="tableWrap"><table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div></div>`:emptyHtml}</section>`}
+function renderClients(){simpleTable('Клиенты','Заказчики и доступ к объектам','<button class="btn primary" onclick="newClient()">+ Новый клиент</button>',['Клиент','Телефон','Email','WhatsApp','Telegram'],db.clients.map(c=>`<tr><td><b>${esc(c.name)}</b></td><td>${esc(c.phone||'—')}</td><td>${esc(c.email||'—')}</td><td>${esc(c.whatsapp||'—')}</td><td>${esc(c.telegram||'—')}</td></tr>`),empty('◎','Активных клиентов нет','Добавьте клиента.','+ Новый клиент','newClient()'))}
+function renderTools(){simpleTable('Инструменты и имущество','Склад, выдача, возврат и ремонт','<button class="btn primary" onclick="newTool()">+ Новый инструмент</button>',['Инструмент','Инв. №','Статус','Ответственный','Стоимость'],db.tools.map(i=>`<tr><td><b>${esc(i.name)}</b></td><td>${esc(i.inventory_no||'—')}</td><td><span class="status ${statusClass(i.status)}">${esc(i.status)}</span></td><td>${esc(i.responsible||'—')}</td><td>${i.cost?Number(i.cost).toLocaleString('ru-RU')+' ₽':'—'}</td></tr>`),empty('⚒','Список инструментов пуст','Добавьте инструмент или имущество.','+ Новый инструмент','newTool()'))}
+function renderCameras(){simpleTable('Камеры','Видеоконтроль и фотофиксация','<button class="btn primary" onclick="newCamera()">+ Новая камера</button>',['Камера','Объект','Тип','Статус'],db.cameras.map(c=>{let p=db.projects.find(x=>x.id===c.project_id);return `<tr><td><b>${esc(c.name)}</b></td><td>${esc(p?.name||'—')}</td><td>${esc(c.type)}</td><td><span class="status ${statusClass(c.status)}">${esc(c.status)}</span></td></tr>`}),empty('◉','Камеры не подключены','Добавьте камеру и привяжите её к объекту.','+ Новая камера','newCamera()'))}
+function renderFinance(){
+  const total=db.finance.reduce((a,b)=>a+Number(b.amount||0),0),review=db.finance.filter(f=>String(f.status||'').includes('провер')).reduce((a,b)=>a+Number(b.amount||0),0);
+  $('#content').innerHTML=`<section class="page">${head('Финансы','Договоры, начисления, выплаты, подотчёт и акты','<button class="btn primary" onclick="newFinance()">+ Операция</button>')}${db.finance.length?`<div class="financeStrip"><div><small>Оборот операций</small><strong>${money(total)}</strong></div><div><small>Незакрытый подотчёт</small><strong style="color:var(--red)">${money(demoMode?728000:0)}</strong></div><div><small>На проверке</small><strong style="color:#b98127">${money(review)}</strong></div><div><small>Операций</small><strong>${db.finance.length}</strong></div></div><div class="card"><div class="tableWrap"><table><thead><tr><th>Тип</th><th>Категория</th><th>Объект</th><th>Ответственный</th><th>Сумма</th><th>Статус</th><th>Комментарий</th></tr></thead><tbody>${db.finance.map(f=>{let p=db.projects.find(x=>x.id===f.project_id);return `<tr><td>${esc(f.type)}</td><td>${esc(f.category||'—')}</td><td>${esc(p?.name||'—')}</td><td>${esc(f.person||'—')}</td><td><b>${money(f.amount)}</b></td><td><span class="status ${statusClass(f.status)}">${esc(f.status||'Проведено')}</span></td><td>${esc(f.comment||'—')}</td></tr>`}).join('')}</tbody></table></div></div>`:empty('₽','Финансовые данные отсутствуют','Добавьте первую финансовую операцию.','+ Операция','newFinance()')}</section>`}
+
+function renderDashboards(){
+  if(!demoMode){$('#content').innerHTML=`<section class="page">${head('Дашборды','Аналитика появляется только из реальных данных')}${empty('▤','Недостаточно данных для аналитики','Графики будут строиться из объектов, этапов, задач, финансов и занятости.')}</section>`;return}
+  const alerts=demoAlerts();
+  $('#content').innerHTML=`<section class="page">${head('Дашборды','ООО «Спецпромстрой» · демонстрационная аналитика')}
+    <div class="kpis"><div class="card kpi kpi-green"><div class="v">68%</div><div class="l">Средняя готовность</div><div class="trend up">+4,2% за месяц</div></div><div class="card kpi kpi-blue"><div class="v">${money(18460000)}</div><div class="l">Освоено за октябрь</div><div class="trend up">в пределах плана</div></div><div class="card kpi kpi-red"><div class="v">4</div><div class="l">Критические отклонения</div><div class="trend down">нужна реакция</div></div><div class="card kpi kpi-violet"><div class="v">43</div><div class="l">Сотрудники на объектах</div><div class="trend">7 объектов активны</div></div></div>
+    <div class="dashGrid"><div class="card chartCard"><h3>Выполнение плана</h3><div class="chartSub">Процент выполнения работ по объектам</div><div class="barChart">${[84,61,73,58,79,91,42,36,18].map((v,i)=>`<div class="barCol"><div class="bar ${['green','blue','violet','teal','coral'][i%5]}" style="height:${v}%"></div><div class="barLabel">${['Нальчик','Терек','Баксан','Терскол','Тырныауз','Нарткала','Чегем','Эльбрус','Долинск'][i]}</div></div>`).join('')}</div></div><div class="card chartCard"><h3>Структура задач</h3><div class="chartSub">Текущие статусы</div><div class="donut"></div><div class="legend"><span><i class="dot" style="background:var(--green)"></i>31% завершено</span><span><i class="dot" style="background:var(--blue)"></i>36% работа</span><span><i class="dot" style="background:var(--amber)"></i>14% проверка</span><span><i class="dot" style="background:var(--red)"></i>19% просрочка</span></div></div></div>
+    <div class="dashGrid3"><div class="card chartCard"><h3>Расходы по неделям</h3><div class="chartSub">млн ₽</div><div class="barChart">${[38,62,48,81,74,91,67,84].map((v,i)=>`<div class="barCol"><div class="bar blue" style="height:${v}%"></div><div class="barLabel">${i+1}</div></div>`).join('')}</div></div><div class="card chartCard"><h3>Дисциплина подотчёта</h3><div class="chartSub">Контроль выдач и закрытий</div><div style="display:grid;gap:13px;margin-top:24px">${[['Закрыто вовремя',72,'var(--green)'],['Частично закрыто',18,'var(--amber)'],['Просрочено',10,'var(--red)']].map(x=>`<div><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px"><span>${x[0]}</span><b>${x[1]}%</b></div><div class="progressLine"><span style="width:${x[1]}%;background:${x[2]}"></span></div></div>`).join('')}</div></div><div class="card chartCard"><h3>Контроль</h3><div class="chartSub">Автоматические подсказки</div><div class="alertList">${alerts.slice(0,4).map(a=>`<div class="alertItem ${a.c}"><b>${a.t}</b><small>${a.d}</small></div>`).join('')}</div></div></div>
+    <div style="margin-top:14px">${ganttHtml(demoGanttRows())}</div>
+  </section>`;
+}
+function renderSettings(){$('#content').innerHTML=`<section class="page">${head('Настройки','Компания, роли, права и интеграции')}<div class="split"><div class="card panel"><h3>Роли и права</h3><div class="placeholder">RBAC: Владелец · Суперадмин · Бухгалтер · Админ · Работник · Клиент</div></div><div class="card panel"><h3>Интеграции</h3><div class="placeholder">Telegram · Email · S3-файлы</div></div></div></section>`}
+function render(){if(currentView==='home')renderHome();else if(currentView==='projects')renderProjects();else if(currentView==='tasks')renderTasks();else if(currentView==='employees')renderEmployees();else if(currentView==='clients')renderClients();else if(currentView==='tools')renderTools();else if(currentView==='finance')renderFinance();else if(currentView==='cameras')renderCameras();else if(currentView==='dashboards')renderDashboards();else renderSettings();counts()}
+start();
+</script></body></html>
