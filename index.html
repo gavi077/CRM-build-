@@ -247,7 +247,49 @@ function renderProjects(){$('#content').innerHTML=`<section class="page">${head(
 function openProject(pid){currentProjectId=pid;renderProject(pid)}
 function renderProject(pid){let p=db.projects.find(x=>x.id===pid),st=projectStages(pid);$('#content').innerHTML=`<section class="page">${head(esc(p.name),`${esc(p.type)} · ${esc(p.address||'Адрес не указан')}`,`<button class="btn" onclick="setView('projects')">← Объекты</button><button class="btn primary" onclick="newStage('${pid}')">+ Этап</button>`)}<div class="tabs"><button class="tab active">Обзор</button><button class="tab" onclick="projectStagePage('${pid}')">Этапы</button><button class="tab" onclick="setView('tasks')">Задачи</button><button class="tab" onclick="setView('finance')">Финансы</button><button class="tab">Документы</button><button class="tab">Галерея</button><button class="tab" onclick="setView('cameras')">Камеры</button><button class="tab">Лента активности</button></div><div class="projectShell"><div><div class="card panel" style="margin-bottom:12px"><h3>Этапы проекта</h3>${st.length?`<div class="stageTrack">${st.map(s=>`<div class="stageNode"><div class="stageDot" style="background:${s.status==='Завершен'?'var(--green)':s.status==='В работе'?'var(--blue)':'#e6edf2'}"></div><strong>${esc(s.name)}</strong><small>${esc(s.status)}</small></div>`).join('')}</div>`:'<div class="placeholder">Этапы пока не добавлены</div>'}</div><div class="projectTiles"><div class="tile"><h4>Документы проекта</h4><div class="placeholder">Нет документов</div></div><div class="tile"><h4>Галерея</h4><div class="placeholder">Нет фотографий</div></div><div class="tile"><h4>Онлайн-камера</h4><div class="placeholder">Камеры не подключены</div></div><div class="tile"><h4>Последние события</h4><div class="placeholder">События появятся автоматически</div></div></div></div><div class="card panel"><h3>Информация</h3><p><b>Статус:</b> ${esc(p.status)}</p><p><b>Начало:</b> ${esc(p.start||'—')}</p><p><b>План:</b> ${esc(p.end||'—')}</p><p><b>Этапов:</b> ${st.length}</p><hr style="border:0;border-top:1px solid var(--line)"><p style="color:var(--muted)">${esc(p.description||'Описание пока не добавлено.')}</p></div></div></section>`}
 function projectStagePage(pid){let p=db.projects.find(x=>x.id===pid),st=projectStages(pid);$('#content').innerHTML=`<section class="page">${head(esc(p.name)+' · Этапы','Планирование и контроль работ',`<button class="btn" onclick="renderProject('${pid}')">← Обзор</button><button class="btn primary" onclick="newStage('${pid}')">+ Новый этап</button>`)}${st.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Этап</th><th>Статус</th><th>Начало</th><th>Окончание</th><th>Ответственный</th><th>Проверяющий</th><th>Стоимость</th></tr></thead><tbody>${st.map(s=>`<tr><td><b>${esc(s.name)}</b></td><td><span class="status s-blue">${esc(s.status)}</span></td><td>${esc(s.start||'—')}</td><td>${esc(s.end||'—')}</td><td>${esc(s.responsible||'—')}</td><td>${esc(s.checker||'—')}</td><td>${s.cost?Number(s.cost).toLocaleString('ru-RU')+' ₽':'—'}</td></tr>`).join('')}</tbody></table></div></div>`:empty('◌','Этапов пока нет','Добавьте основной этап.','+ Новый этап',`newStage('${pid}')`)}</section>`}
-function renderTasks(){$('#content').innerHTML=`<section class="page">${head('Задачи','Постановка, исполнение, проверка и сроки',`<button class="btn primary" onclick="newTask()">+ Новая задача</button>`)}<div class="tabs"><button class="tab ${taskMode==='list'?'active':''}" onclick="taskMode='list';renderTasks()">Список</button><button class="tab ${taskMode==='gantt'?'active':''}" onclick="taskMode='gantt';renderTasks()">Гант</button><button class="tab active">Активные (${db.tasks.filter(x=>x.status!=='Завершена').length})</button><button class="tab">Завершены (${db.tasks.filter(x=>x.status==='Завершена').length})</button><button class="tab">Просрочены (0)</button></div>${taskMode==='gantt'?(db.tasks.length?'<div class="ganttEmpty">Временная шкала строится по срокам созданных задач</div>':empty('▥','Гант пока пуст','Создайте задачи со сроками.','+ Новая задача','newTask()')):(db.tasks.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Задача</th><th>Объект</th><th>Исполнитель</th><th>Срок</th><th>Приоритет</th><th>Статус</th></tr></thead><tbody>${db.tasks.map(t=>{let p=db.projects.find(x=>x.id===t.project_id);return `<tr><td><b>${esc(t.name)}</b></td><td>${esc(p?.name||'—')}</td><td>${esc(t.executor||'—')}</td><td>${esc(t.due||'—')}</td><td>${esc(t.priority)}</td><td><span class="status s-blue">${esc(t.status)}</span></td></tr>`}).join('')}</tbody></table></div></div>`:empty('✓','Список задач пуст','Создайте первую задачу.','+ Новая задача','newTask()')))}</section>`}
+
+function renderTasks(){
+  const activeCount=db.tasks.filter(x=>x.status!=='Завершена').length;
+  const doneCount=db.tasks.filter(x=>x.status==='Завершена').length;
+  let body='';
+  if(taskMode==='gantt'){
+    body=db.tasks.length
+      ? '<div class="ganttEmpty">Временная шкала строится по срокам созданных задач</div>'
+      : empty('▥','Гант пока пуст','Создайте задачи со сроками.','+ Новая задача','newTask()');
+  }else{
+    if(db.tasks.length){
+      const rows=db.tasks.map(t=>{
+        const p=db.projects.find(x=>x.id===t.project_id);
+        return `<tr>
+          <td><b>${esc(t.name)}</b></td>
+          <td>${esc(p?.name||'—')}</td>
+          <td>${esc(t.executor||'—')}</td>
+          <td>${esc(t.due||'—')}</td>
+          <td>${esc(t.priority)}</td>
+          <td><span class="status s-blue">${esc(t.status)}</span></td>
+        </tr>`;
+      }).join('');
+      body=`<div class="card"><div class="tableWrap"><table>
+        <thead><tr><th>Задача</th><th>Объект</th><th>Исполнитель</th><th>Срок</th><th>Приоритет</th><th>Статус</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div></div>`;
+    }else{
+      body=empty('✓','Список задач пуст','Создайте первую задачу.','+ Новая задача','newTask()');
+    }
+  }
+  $('#content').innerHTML=`<section class="page">
+    ${head('Задачи','Постановка, исполнение, проверка и сроки',`<button class="btn primary" onclick="newTask()">+ Новая задача</button>`)}
+    <div class="tabs">
+      <button class="tab ${taskMode==='list'?'active':''}" onclick="taskMode='list';renderTasks()">Список</button>
+      <button class="tab ${taskMode==='gantt'?'active':''}" onclick="taskMode='gantt';renderTasks()">Гант</button>
+      <button class="tab">Активные (${activeCount})</button>
+      <button class="tab">Завершены (${doneCount})</button>
+      <button class="tab">Просрочены (0)</button>
+    </div>
+    ${body}
+  </section>`;
+}
+
 function renderEmployees(){$('#content').innerHTML=`<section class="page">${head('Сотрудники','Команда, роли, доступы и занятость',`<button class="btn primary" onclick="newEmployee()">+ Новый сотрудник</button>`)}<div class="tabs"><button class="tab active">Активные (${db.employees.length})</button><button class="tab">Архив (0)</button></div>${db.employees.length?`<div class="card"><div class="tableWrap"><table><thead><tr><th>Сотрудник</th><th>Должность</th><th>Роль</th><th>Телефон</th><th>Email</th><th>Статус</th></tr></thead><tbody>${db.employees.map(e=>`<tr onclick="openEmployee('${e.id}')" style="cursor:pointer"><td><b>${esc(e.name)}</b></td><td>${esc(e.job||'—')}</td><td>${esc(e.role)}</td><td>${esc(e.phone||'—')}</td><td>${esc(e.email||'—')}</td><td><span class="status s-amber">${esc(e.status)}</span></td></tr>`).join('')}</tbody></table></div></div>`:empty('♙','Сотрудников пока нет','Добавьте сотрудника и назначьте роль.','+ Новый сотрудник','newEmployee()')}</section>`}
 function openEmployee(eid){let e=db.employees.find(x=>x.id===eid);$('#content').innerHTML=`<section class="page">${head(esc(e.name),`${esc(e.job||'Должность не указана')} · ${esc(e.role)}`,`<button class="btn" onclick="renderEmployees()">← Сотрудники</button>`)}<div class="card"><div class="employeeTabs">${['info','tasks','tools','busy','trips','money'].map((x,i)=>`<button class="${employeeTab===x?'active':''}" onclick="employeeTab='${x}';openEmployee('${eid}')">${['Информация','Задачи','Инструменты','Занятость','Поездки','Финансы'][i]}</button>`).join('')}</div><div class="panel">${employeeTab==='info'?`<div class="split"><div><p><b>Телефон:</b> ${esc(e.phone||'—')}</p><p><b>Email:</b> ${esc(e.email||'—')}</p><p><b>Telegram:</b> ${esc(e.telegram||'—')}</p></div><div><p><b>Статус:</b> ${esc(e.status)}</p><p><b>Роль:</b> ${esc(e.role)}</p></div></div>`:employeeTab==='busy'?'<div class="ganttEmpty">Занятость будет строиться из назначений на этапы</div>':'<div class="placeholder">Данных пока нет</div>'}</div></div></section>`}
 function simpleTable(title,sub,button,cols,rows,emptyHtml){$('#content').innerHTML=`<section class="page">${head(title,sub,button)}${rows.length?`<div class="card"><div class="tableWrap"><table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div></div>`:emptyHtml}</section>`}
