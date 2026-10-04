@@ -1,25 +1,230 @@
 <!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ALI Project Control</title><style>
 :root{--nav:#274d73;--nav2:#1f3f60;--bg:#f4f7fa;--paper:#fff;--ink:#203243;--muted:#7b8b99;--line:#dfe6ec;--blue:#2f6fa6;--green:#62b18d;--amber:#e2ad5a;--red:#d76d6d;--shadow:0 10px 28px rgba(37,66,91,.08)}*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.app{display:grid;grid-template-columns:74px 238px minmax(0,1fr) 300px;min-height:100vh}.rail{background:var(--nav);color:#fff;display:flex;flex-direction:column;align-items:center;padding:14px 0;position:sticky;top:0;height:100vh}.logo{width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:12px;display:grid;place-items:center;font-weight:800;margin-bottom:18px;background:rgba(255,255,255,.07)}.rail button{width:44px;height:44px;border:0;background:transparent;color:#dce8f4;border-radius:10px;margin:3px 0;font-size:18px}.rail button:hover,.rail button.active{background:rgba(255,255,255,.14);color:#fff}.rail .spacer{flex:1}.rail small{writing-mode:vertical-rl;transform:rotate(180deg);opacity:.6;font-size:10px;margin-bottom:10px}.side{background:#f9fbfc;border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow:auto}.sideHead{padding:22px 18px 16px;border-bottom:1px solid var(--line)}.brand{font-weight:800;font-size:16px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.sideSection{padding:14px 10px 4px}.sideLabel{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#9aabb8;padding:0 10px 7px;font-weight:800}.side button{width:100%;border:0;background:transparent;text-align:left;color:#536576;padding:10px 12px;border-radius:9px;margin:2px 0;display:flex;align-items:center}.side button:hover,.side button.active{background:#eaf1f7;color:var(--blue);font-weight:700}.count{margin-left:auto;font-size:11px;background:#e2edf6;color:var(--blue);padding:2px 7px;border-radius:999px}.main{min-width:0;padding:0 22px 42px}.top{height:68px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(244,247,250,.94);backdrop-filter:blur(10px);z-index:4}.search{flex:1;max-width:520px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 12px;color:var(--muted)}.search input{border:0;outline:0;width:100%}.topActions{margin-left:auto;display:flex;gap:8px}.btn,.iconBtn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:9px 12px}.iconBtn{width:38px;height:38px;padding:0}.btn.primary{background:var(--nav);border-color:var(--nav);color:#fff}.btn.soft{background:#eef4f8;color:var(--blue);border-color:#d7e5ef}.page{padding-top:20px}.pageHead{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}.pageHead h1{margin:0;font-size:24px}.pageHead p{margin:4px 0 0;color:var(--muted)}.pageHead .actions{margin-left:auto;display:flex;gap:8px}.tabs{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 16px}.tab{border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:9px;color:#637686}.tab.active{background:var(--nav);border-color:var(--nav);color:#fff}.card{background:var(--paper);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.empty{min-height:360px;display:grid;place-items:center;text-align:center;padding:35px}.empty .icon{width:64px;height:64px;border-radius:18px;background:#edf3f8;color:var(--blue);display:grid;place-items:center;font-size:27px;margin:0 auto 15px}.empty h3{font-size:18px;margin:0 0 7px}.empty p{color:var(--muted);max-width:450px;margin:0 auto 18px;line-height:1.55}.toolbar{display:flex;gap:8px;padding:13px 14px;border-bottom:1px solid var(--line)}.searchMini{min-width:220px;max-width:360px;flex:1}.searchMini input{width:100%;border:1px solid var(--line);padding:9px 11px;border-radius:8px;outline:0}.tableWrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:12px 14px;border-bottom:1px solid #edf1f4;text-align:left;white-space:nowrap}th{font-size:11px;color:#8393a1;text-transform:uppercase;letter-spacing:.06em;background:#fbfcfd}tbody tr:hover{background:#fafcfd}.status{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}.status:before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}.s-blue{background:#eaf2f8;color:#447ca7}.s-amber{background:#fff3dd;color:#b98127}.s-gray{background:#eef1f3;color:#75828d}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.kpi{padding:16px}.kpi .v{font-size:24px;font-weight:800}.kpi .l{color:var(--muted);font-size:12px;margin-top:4px}.projectShell{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px}.panel{padding:16px}.panel h3{margin:0 0 12px;font-size:15px}.stageTrack{display:flex;overflow:auto;padding:8px 0 14px}.stageNode{min-width:120px;text-align:center;position:relative;padding:0 8px}.stageNode:not(:last-child):after{content:'';position:absolute;top:13px;left:60%;right:-40%;height:2px;background:#d9e2e9}.stageDot{width:28px;height:28px;border-radius:50%;background:#e6edf2;border:6px solid #fff;box-shadow:0 0 0 1px #d9e3ea;margin:0 auto 8px;position:relative;z-index:1}.stageNode strong{font-size:11px;display:block}.stageNode small{color:var(--muted);font-size:10px}.projectTiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tile{border:1px solid var(--line);border-radius:11px;padding:14px;min-height:135px}.tile h4{margin:0 0 10px;font-size:13px}.placeholder{height:88px;border:1px dashed #cfd9e1;border-radius:9px;display:grid;place-items:center;color:#9aabb8;font-size:12px;background:#fbfdfe}.right{border-left:1px solid var(--line);background:#f9fbfc;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}.right h3{font-size:13px;margin:0 0 10px}.emptySmall{border:1px dashed #d1dbe3;border-radius:10px;padding:18px;text-align:center;color:#8a9aa7;background:#fff;font-size:12px;margin-bottom:18px}.modalBack{position:fixed;inset:0;background:rgba(20,35,48,.48);display:grid;place-items:center;padding:20px;z-index:40}.modal{width:min(620px,96vw);max-height:92vh;overflow:auto;background:#fff;border-radius:14px;box-shadow:0 24px 80px rgba(22,41,58,.28)}.modalHead{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center}.modalHead h3{margin:0}.modalHead button{margin-left:auto;border:0;background:transparent;font-size:20px}.modalBody{padding:18px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field.full{grid-column:1/-1}.field label{display:block;font-size:11px;color:#758795;margin-bottom:5px;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;outline:0;background:#fff}.field textarea{min-height:90px}.modalFoot{padding:14px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}.toast{position:fixed;right:22px;bottom:22px;background:#243f56;color:#fff;padding:12px 14px;border-radius:10px;z-index:60}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ganttEmpty{min-height:300px;background:linear-gradient(90deg,#fbfcfd 0,#fbfcfd 19.8%,#edf2f6 20%,#fbfcfd 20.2%);background-size:120px 100%;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;color:#8a9aa7}.employeeTabs{display:flex;gap:5px;border-bottom:1px solid var(--line);padding:0 16px}.employeeTabs button{border:0;background:transparent;padding:12px 10px;color:#6d7e8c;border-bottom:2px solid transparent}.employeeTabs button.active{color:var(--blue);border-color:var(--blue);font-weight:700}@media(max-width:1250px){.app{grid-template-columns:68px 220px minmax(0,1fr)}.right{display:none}}@media(max-width:900px){.app{grid-template-columns:62px minmax(0,1fr)}.side{display:none}.main{padding:0 14px 30px}.kpis{grid-template-columns:1fr 1fr}.projectShell{grid-template-columns:1fr}.formGrid{grid-template-columns:1fr}.field.full{grid-column:auto}}@media(max-width:560px){.rail{position:fixed;bottom:0;left:0;right:0;top:auto;height:62px;width:100%;flex-direction:row;justify-content:space-around;padding:6px}.logo,.rail .spacer,.rail small,.rail button:nth-of-type(n+6){display:none}.rail button{margin:0}.app{display:block}.main{padding-bottom:78px}.kpis,.projectTiles,.split{grid-template-columns:1fr}.pageHead{display:block}.pageHead .actions{margin-top:12px}.search{display:none}}
 
-.authGate{position:fixed;inset:0;background:linear-gradient(135deg,#eaf1f7,#f8fafc);z-index:100;display:grid;place-items:center;padding:20px}.authCard{width:min(430px,96vw);background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 28px 80px rgba(37,66,91,.16);padding:26px}.authMark{width:54px;height:54px;background:var(--nav);color:#fff;border-radius:14px;display:grid;place-items:center;font-weight:900;margin-bottom:18px}.authCard h1{font-size:23px;margin:0 0 5px}.authCard>p{color:var(--muted);margin:0 0 18px}.authTabs{display:flex;gap:6px;margin-bottom:14px}.authTabs button{flex:1;border:1px solid var(--line);background:#fff;padding:9px;border-radius:9px}.authTabs button.active{background:var(--nav);color:#fff;border-color:var(--nav)}.authForm{display:grid;gap:10px}.authForm input{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px}.authError{color:var(--red);font-size:12px;min-height:16px}.activityItem{padding:10px 0;border-bottom:1px solid #edf1f4}.activityItem small{color:var(--muted)}.logoutBtn{border:0;background:transparent;color:#718391;text-align:left;padding:10px 12px;width:100%;cursor:pointer}</style></head><body>
-<div id="authGate" class="authGate"><div class="authCard"><div class="authMark">AP</div><h1>ALI Project Control</h1><p>Строительная CRM / ERP</p><div class="authTabs"><button id="loginTab" class="active">Войти</button><button id="regTab">Создать компанию</button></div><div id="loginForm" class="authForm"><input id="loginEmail" type="email" placeholder="Email"><input id="loginPassword" type="password" placeholder="Пароль"><button class="btn primary" id="loginBtn">Войти</button></div><div id="regForm" class="authForm hidden"><input id="regCompany" placeholder="Название компании"><input id="regName" placeholder="Ваше имя"><input id="regEmail" type="email" placeholder="Email"><input id="regPassword" type="password" placeholder="Пароль, минимум 6 символов"><button class="btn primary" id="regBtn">Создать компанию</button></div><div id="authError" class="authError"></div></div></div>
+
+.authGate{position:fixed;inset:0;background:#eef3f7;z-index:100;display:grid;place-items:center;padding:24px}
+.authShell{width:min(1120px,100%);min-height:680px;display:grid;grid-template-columns:1.08fr .92fr;background:#fff;border:1px solid #dbe5ec;border-radius:24px;overflow:hidden;box-shadow:0 30px 90px rgba(30,55,78,.16)}
+.authIntro{background:linear-gradient(145deg,#173b5b 0%,#244f73 58%,#2c6686 100%);color:#fff;padding:38px 44px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.authIntro:after{content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-190px;bottom:-190px;box-shadow:0 0 0 70px rgba(255,255,255,.025),0 0 0 140px rgba(255,255,255,.018)}
+.authBrand,.authMobileBrand{display:flex;align-items:center;gap:12px;font-size:16px;letter-spacing:.01em}
+.authBrand>span,.authMobileBrand>span{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);font-weight:900}
+.authIntroBody{margin:auto 0;position:relative;z-index:1}
+.authEyebrow{font-size:10px;font-weight:800;letter-spacing:.18em;color:#9fd2eb;margin-bottom:14px}
+.authEyebrow.dark{color:#66869e}
+.authIntro h1{font-size:42px;line-height:1.08;letter-spacing:-.035em;margin:0 0 20px;max-width:610px}
+.authIntroBody>p{font-size:16px;line-height:1.65;color:#d7e5ef;max-width:530px;margin:0}
+.authFeatureGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:34px;max-width:530px}
+.authFeatureGrid div{border-top:1px solid rgba(255,255,255,.18);padding:13px 0;display:flex;gap:12px;align-items:center}
+.authFeatureGrid b{font-size:10px;color:#81c3df;letter-spacing:.08em}
+.authFeatureGrid span{font-size:12px;color:#e8f1f6}
+.authFoot{font-size:11px;color:#9eb9cc;position:relative;z-index:1}
+.authPanel{display:grid;place-items:center;padding:40px}
+.authPanelInner{width:min(390px,100%)}
+.authMobileBrand{display:none;color:#173b5b;margin-bottom:34px}.authMobileBrand>span{background:#244f73;color:#fff}
+.authPanel h2{font-size:29px;letter-spacing:-.025em;margin:0 0 8px}
+.authPanel p{color:#718391;line-height:1.55;margin:0 0 24px}
+.authChooser{display:grid;gap:10px}
+.authChooser h2,.authChooser p{grid-column:1/-1}
+.authBig{width:100%;border:1px solid #dbe4eb;background:#fff;border-radius:13px;padding:15px 16px;display:flex;align-items:center;gap:14px;text-align:left;color:#233746;transition:.18s ease}
+.authBig:hover{border-color:#a9c1d2;transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,66,91,.08)}
+.authBig.primary{background:#244f73;color:#fff;border-color:#244f73}
+.authBig.demo{background:#f0f7f7;border-color:#d4e9e6}
+.authBigIcon{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:rgba(43,89,123,.09);font-size:18px;flex:0 0 auto}
+.authBig.primary .authBigIcon{background:rgba(255,255,255,.14)}
+.authBig span:last-child{display:grid;gap:3px}.authBig b{font-size:14px}.authBig small{font-size:11px;color:#7b8c99;font-weight:500}
+.authBig.primary small{color:#cddce7}
+.authPane h2{margin-top:0}.authBack{border:0;background:transparent;padding:0;color:#5d7f98;margin:0 0 28px;font-weight:700}
+.authForm{display:grid;gap:12px}
+.authForm label{display:grid;gap:6px;font-size:11px;color:#617686;font-weight:700}
+.authForm input{width:100%;border:1px solid #d9e3ea;border-radius:10px;padding:12px 13px;outline:0;background:#fff;color:#203243}
+.authForm input:focus{border-color:#5687aa;box-shadow:0 0 0 3px rgba(86,135,170,.10)}
+.authSubmit{margin-top:4px;padding:12px 14px}
+.authCheck{grid-template-columns:auto 1fr!important;align-items:start;font-weight:500!important;color:#7b8b99!important}
+.authCheck input{width:16px;height:16px;margin:1px 0 0}
+.authLink{border:0;background:transparent;color:#4e7897;padding:4px;text-align:center;font-size:12px}
+.authError{color:#b95656;font-size:12px;min-height:18px;margin-top:12px;line-height:1.4}
+.authInfo{color:#4e806c;font-size:12px;min-height:18px;line-height:1.4}
+.activityItem{padding:10px 0;border-bottom:1px solid #edf1f4}.activityItem small{color:var(--muted)}
+.logoutBtn{border:0;background:transparent;color:#718391;text-align:left;padding:10px 12px;width:100%;cursor:pointer}
+.demoBadge{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border-radius:999px;background:#e7f5ef;color:#447d66;font-size:11px;font-weight:800}
+@media(max-width:800px){
+  .authGate{padding:0;background:#fff;overflow:auto}
+  .authShell{min-height:100vh;width:100%;display:block;border:0;border-radius:0;box-shadow:none}
+  .authIntro{display:none}
+  .authPanel{min-height:100vh;padding:28px 22px}
+  .authMobileBrand{display:flex}
+  .authPanelInner{width:min(430px,100%)}
+}
+</style></head><body>
+
+<div id="authGate" class="authGate">
+  <div class="authShell">
+    <section class="authIntro">
+      <div class="authBrand"><span>AP</span><b>ALI Project Control</b></div>
+      <div class="authIntroBody">
+        <div class="authEyebrow">СТРОИТЕЛЬНАЯ CRM / ERP</div>
+        <h1>Управляйте объектами,<br>командой и финансами<br>в одном пространстве.</h1>
+        <p>Объекты, этапы, задачи, Гант, сотрудники, документы, финансы и контроль исполнения.</p>
+        <div class="authFeatureGrid">
+          <div><b>01</b><span>Объекты и этапы</span></div>
+          <div><b>02</b><span>Задачи и Гант</span></div>
+          <div><b>03</b><span>Финансы и документы</span></div>
+          <div><b>04</b><span>Команда и контроль</span></div>
+        </div>
+      </div>
+      <div class="authFoot">ALI Project · AP Control</div>
+    </section>
+
+    <section class="authPanel">
+      <div class="authPanelInner">
+        <div class="authMobileBrand"><span>AP</span><b>ALI Project Control</b></div>
+
+        <div class="authChooser" id="authChooser">
+          <div class="authEyebrow dark">ДОБРО ПОЖАЛОВАТЬ</div>
+          <h2>Начало работы</h2>
+          <p>Войдите в свою компанию, создайте новую или посмотрите систему в демонстрационном режиме.</p>
+
+          <button class="authBig primary" id="openLogin">
+            <span class="authBigIcon">→</span>
+            <span><b>Войти</b><small>У меня уже есть аккаунт</small></span>
+          </button>
+          <button class="authBig" id="openRegister">
+            <span class="authBigIcon">＋</span>
+            <span><b>Создать компанию</b><small>Зарегистрировать новое рабочее пространство</small></span>
+          </button>
+          <button class="authBig demo" id="demoBtn">
+            <span class="authBigIcon">◫</span>
+            <span><b>Попробовать демо</b><small>Посмотреть интерфейс без регистрации</small></span>
+          </button>
+        </div>
+
+        <div id="loginPane" class="authPane hidden">
+          <button class="authBack" data-auth-back>← Назад</button>
+          <div class="authEyebrow dark">ВХОД</div>
+          <h2>Войти в AP Control</h2>
+          <p>Используйте email и пароль вашей учётной записи.</p>
+          <div class="authForm">
+            <label>Email<input id="loginEmail" type="email" autocomplete="email" placeholder="name@company.ru"></label>
+            <label>Пароль<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Ваш пароль"></label>
+            <button class="btn primary authSubmit" id="loginBtn">Войти</button>
+            <button class="authLink" id="forgotBtn" type="button">Забыли пароль?</button>
+          </div>
+        </div>
+
+        <div id="registerPane" class="authPane hidden">
+          <button class="authBack" data-auth-back>← Назад</button>
+          <div class="authEyebrow dark">РЕГИСТРАЦИЯ</div>
+          <h2>Создать компанию</h2>
+          <p>Будет создано отдельное рабочее пространство. Первый пользователь получит роль владельца.</p>
+          <div class="authForm">
+            <label>Название компании<input id="regCompany" placeholder="Например: ALI Project"></label>
+            <label>Ваше имя<input id="regName" autocomplete="name" placeholder="Имя и фамилия"></label>
+            <label>Email<input id="regEmail" type="email" autocomplete="email" placeholder="name@company.ru"></label>
+            <label>Пароль<input id="regPassword" type="password" autocomplete="new-password" placeholder="Не менее 8 символов"></label>
+            <label>Повторите пароль<input id="regPassword2" type="password" autocomplete="new-password" placeholder="Повторите пароль"></label>
+            <label class="authCheck"><input id="termsCheck" type="checkbox"> <span>Я принимаю условия использования сервиса</span></label>
+            <button class="btn primary authSubmit" id="regBtn">Создать компанию</button>
+          </div>
+        </div>
+
+        <div id="authError" class="authError"></div>
+        <div id="authInfo" class="authInfo"></div>
+      </div>
+    </section>
+  </div>
+</div>
 <div class="app"><nav class="rail"><div class="logo">AP</div><button class="active" data-view="home">⌂</button><button data-view="projects">▦</button><button data-view="tasks">✓</button><button data-view="employees">♙</button><button data-view="finance">₽</button><button data-view="tools">⚒</button><button data-view="clients">◎</button><button data-view="cameras">◉</button><button data-view="dashboards">▤</button><div class="spacer"></div><small>ALI PROJECT CONTROL</small></nav>
 <aside class="side"><div class="sideHead"><div class="brand">ALI Project Control<small id="companyName">Строительная CRM / ERP</small></div></div><div class="sideSection"><div class="sideLabel">Рабочее пространство</div><button class="active" data-view="home">Обзор</button><button data-view="projects">Объекты <span class="count" id="sideProjectCount">0</span></button><button data-view="tasks">Задачи <span class="count" id="sideTaskCount">0</span></button></div><div class="sideSection"><div class="sideLabel">Управление</div><button data-view="employees">Сотрудники <span class="count" id="sideEmployeeCount">0</span></button><button data-view="clients">Клиенты <span class="count" id="sideClientCount">0</span></button><button data-view="finance">Финансы</button><button data-view="tools">Инструменты <span class="count" id="sideToolCount">0</span></button><button data-view="cameras">Камеры <span class="count" id="sideCameraCount">0</span></button><button data-view="dashboards">Дашборды</button></div><div class="sideSection"><div class="sideLabel">Система</div><button data-view="settings">Настройки</button><button class="logoutBtn" onclick="logout()">Выйти</button></div></aside>
 <main class="main"><header class="top"><div class="search">⌕ <input placeholder="Поиск по AP Control"></div><div class="topActions"><button class="iconBtn">♢</button><button class="iconBtn">?</button><button class="btn soft" id="profileBtn">Профиль</button></div></header><div id="content"></div></main>
 <aside class="right"><h3>Новые задачи</h3><div class="emptySmall" id="rightTasks">Новых задач пока нет</div><h3>Напоминания</h3><div class="emptySmall">Напоминаний пока нет</div><h3>Уведомления</h3><div class="emptySmall">Новых уведомлений нет</div></aside></div><div id="modalHost"></div><div id="toastHost"></div>
 <script>
-const API=(location.hostname==='localhost'||location.hostname==='127.0.0.1')?'http://localhost:8000/api':'/api';
-let token=localStorage.getItem('ap_token')||'';let me=null;let company=null;let db={projects:[],tasks:[],employees:[],clients:[],tools:[],cameras:[],finance:[],stages:[],activity:[]};let currentView='home';let currentProjectId=null;let taskMode='list';let employeeTab='info';
+const API='https://ap-control-backend-crm.onrender.com/api';
+let token=localStorage.getItem('ap_token')||'';let demoMode=sessionStorage.getItem('ap_demo')==='1';let me=null;let company=null;let db={projects:[],tasks:[],employees:[],clients:[],tools:[],cameras:[],finance:[],stages:[],activity:[]};let currentView='home';let currentProjectId=null;let taskMode='list';let employeeTab='info';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 function toast(t){$('#toastHost').innerHTML=`<div class="toast">${esc(t)}</div>`;setTimeout(()=>$('#toastHost').innerHTML='',2200)}
-async function api(path,opts={}){opts.headers=Object.assign({'Content-Type':'application/json'},opts.headers||{});if(token)opts.headers.Authorization='Bearer '+token;let r=await fetch(API+path,opts);let txt=await r.text();let data=txt?JSON.parse(txt):null;if(!r.ok)throw new Error(data?.detail||'Ошибка сервера');return data}
+async function api(path,opts={}){opts.headers=Object.assign({'Content-Type':'application/json'},opts.headers||{});if(token)opts.headers.Authorization='Bearer '+token;let r=await fetch(API+path,opts);let txt=await r.text();let data=null;try{data=txt?JSON.parse(txt):null}catch(_){data=txt};if(!r.ok){let msg=typeof data==='object'?(data?.detail||data?.message):data;if(Array.isArray(msg))msg=msg.map(x=>x.msg).join('; ');throw new Error(msg||'Ошибка сервера')}return data}
 async function bootstrap(){let info=await api('/me');me=info.user;company=info.company;$('#companyName').textContent=company.name;$('#profileBtn').textContent=me.full_name;db=await api('/bootstrap');counts();render()}
 function showAuth(show=true){$('#authGate').classList.toggle('hidden',!show)}
-async function start(){if(!token)return showAuth(true);try{await bootstrap();showAuth(false)}catch(e){localStorage.removeItem('ap_token');token='';showAuth(true)}}
-function logout(){localStorage.removeItem('ap_token');token='';location.reload()}
-$('#loginTab').onclick=()=>{$('#loginTab').classList.add('active');$('#regTab').classList.remove('active');$('#loginForm').classList.remove('hidden');$('#regForm').classList.add('hidden')};$('#regTab').onclick=()=>{$('#regTab').classList.add('active');$('#loginTab').classList.remove('active');$('#regForm').classList.remove('hidden');$('#loginForm').classList.add('hidden')};
-$('#loginBtn').onclick=async()=>{try{$('#authError').textContent='';let d=await api('/auth/login',{method:'POST',body:JSON.stringify({email:$('#loginEmail').value,password:$('#loginPassword').value})});token=d.token;localStorage.setItem('ap_token',token);await bootstrap();showAuth(false)}catch(e){$('#authError').textContent=e.message}};
-$('#regBtn').onclick=async()=>{try{$('#authError').textContent='';let d=await api('/auth/register',{method:'POST',body:JSON.stringify({company_name:$('#regCompany').value,full_name:$('#regName').value,email:$('#regEmail').value,password:$('#regPassword').value})});token=d.token;localStorage.setItem('ap_token',token);await bootstrap();showAuth(false)}catch(e){$('#authError').textContent=e.message}};
+function authScreen(name){
+  $('#authChooser').classList.toggle('hidden',name!=='chooser');
+  $('#loginPane').classList.toggle('hidden',name!=='login');
+  $('#registerPane').classList.toggle('hidden',name!=='register');
+  $('#authError').textContent='';
+  $('#authInfo').textContent='';
+}
+function demoData(){
+  return {
+    projects:[
+      {id:'demo-p1',name:'Демо · Жилой комплекс',type:'Строительство',status:'Активен',address:'Демонстрационный объект',start:'2026-09-01',end:'2027-05-30',description:'Демонстрационные данные не сохраняются в рабочую базу.'}
+    ],
+    stages:[
+      {id:'ds1',project_id:'demo-p1',name:'Фундамент',status:'Завершен',start:'2026-09-01',end:'2026-09-28',responsible:'Алексей Смирнов',checker:'Технадзор',cost:1850000},
+      {id:'ds2',project_id:'demo-p1',name:'Монолит',status:'В работе',start:'2026-09-29',end:'2026-12-15',responsible:'Иван Петров',checker:'Технадзор',cost:4600000},
+      {id:'ds3',project_id:'demo-p1',name:'Фасад',status:'Не начат',start:'2027-01-10',end:'2027-03-30',responsible:'Не назначен',checker:'Не назначен',cost:2900000}
+    ],
+    tasks:[
+      {id:'dt1',name:'Проверить армирование перекрытия',project_id:'demo-p1',executor:'Иван Петров',due:'2026-10-08',priority:'Высокий',status:'Активная'},
+      {id:'dt2',name:'Согласовать поставку бетона',project_id:'demo-p1',executor:'Алексей Смирнов',due:'2026-10-10',priority:'Обычный',status:'Активная'}
+    ],
+    employees:[
+      {id:'de1',name:'Алексей Смирнов',job:'Руководитель проекта',role:'Админ',phone:'+7 900 000-00-01',email:'demo.manager@example.com',status:'Активен'},
+      {id:'de2',name:'Иван Петров',job:'Прораб',role:'Работник',phone:'+7 900 000-00-02',email:'demo.foreman@example.com',status:'Активен'}
+    ],
+    clients:[{id:'dc1',name:'Демо-заказчик',phone:'+7 900 000-00-03',email:'client@example.com',whatsapp:'—',telegram:'—'}],
+    tools:[{id:'di1',name:'Лазерный нивелир',inventory_no:'AP-001',status:'Выдан',responsible:'Иван Петров',cost:45000}],
+    cameras:[{id:'dca1',name:'Камера стройплощадки',project_id:'demo-p1',type:'RTSP / ONVIF',status:'Демо'}],
+    finance:[{id:'df1',type:'Расход',category:'Материалы',project_id:'demo-p1',amount:350000,comment:'Демонстрационная операция'}],
+    activity:[]
+  };
+}
+async function start(){
+  if(demoMode){
+    token='';me={full_name:'Демо пользователь',role:'demo'};company={name:'Демо AP Control'};db=demoData();
+    $('#companyName').textContent=company.name;$('#profileBtn').innerHTML='Демо <span class="demoBadge">DEMO</span>';
+    counts();render();showAuth(false);return;
+  }
+  if(!token)return showAuth(true);
+  try{await bootstrap();showAuth(false)}catch(e){localStorage.removeItem('ap_token');token='';showAuth(true)}
+}
+function logout(){localStorage.removeItem('ap_token');sessionStorage.removeItem('ap_demo');token='';demoMode=false;location.reload()}
+$('#openLogin').onclick=()=>authScreen('login');
+$('#openRegister').onclick=()=>authScreen('register');
+$$('[data-auth-back]').forEach(b=>b.onclick=()=>authScreen('chooser'));
+$('#forgotBtn').onclick=()=>{$('#authError').textContent='Восстановление пароля подключим после настройки почтовой отправки. Сейчас используйте действующий пароль.'};
+$('#demoBtn').onclick=()=>{
+  demoMode=true;sessionStorage.setItem('ap_demo','1');me={full_name:'Демо пользователь',role:'demo'};company={name:'Демо AP Control'};db=demoData();
+  $('#companyName').textContent=company.name;$('#profileBtn').innerHTML='Демо <span class="demoBadge">DEMO</span>';
+  counts();render();showAuth(false);toast('Демо-режим: данные не записываются в вашу базу');
+};
+$('#loginBtn').onclick=async()=>{
+  try{
+    $('#authError').textContent='';$('#authInfo').textContent='';
+    const email=$('#loginEmail').value.trim(),password=$('#loginPassword').value;
+    if(!email||!password)throw new Error('Введите email и пароль');
+    let d=await api('/auth/login',{method:'POST',body:JSON.stringify({email,password})});
+    token=d.token;localStorage.setItem('ap_token',token);sessionStorage.removeItem('ap_demo');demoMode=false;
+    await bootstrap();showAuth(false)
+  }catch(e){$('#authError').textContent=e.message}
+};
+$('#regBtn').onclick=async()=>{
+  try{
+    $('#authError').textContent='';$('#authInfo').textContent='';
+    const company_name=$('#regCompany').value.trim(),full_name=$('#regName').value.trim(),email=$('#regEmail').value.trim();
+    const password=$('#regPassword').value,password2=$('#regPassword2').value;
+    if(!company_name||!full_name||!email||!password)throw new Error('Заполните все обязательные поля');
+    if(password.length<8)throw new Error('Пароль должен содержать не менее 8 символов');
+    if(password!==password2)throw new Error('Пароли не совпадают');
+    if(!$('#termsCheck').checked)throw new Error('Подтвердите условия использования');
+    let d=await api('/auth/register',{method:'POST',body:JSON.stringify({company_name,full_name,email,password})});
+    token=d.token;localStorage.setItem('ap_token',token);sessionStorage.removeItem('ap_demo');demoMode=false;
+    await bootstrap();showAuth(false);toast('Компания создана')
+  }catch(e){$('#authError').textContent=e.message}
+};
+function demoBlock(){
+  if(!demoMode)return false;
+  toast('Демо-режим: создание и изменение данных отключено');
+  return true;
+}
 function counts(){$('#sideProjectCount').textContent=db.projects.length;$('#sideTaskCount').textContent=db.tasks.filter(x=>x.status!=='Завершена').length;$('#sideEmployeeCount').textContent=db.employees.length;$('#sideClientCount').textContent=db.clients.length;$('#sideToolCount').textContent=db.tools.length;$('#sideCameraCount').textContent=db.cameras.length;$('#rightTasks').textContent=db.tasks.length?db.tasks.filter(x=>x.status!=='Завершена').length+' активных задач':'Новых задач пока нет'}
 function empty(ic,t,d,b='',a=''){return `<div class="card empty"><div><div class="icon">${ic}</div><h3>${t}</h3><p>${d}</p>${b?`<button class="btn primary" onclick="${a}">${b}</button>`:''}</div></div>`}
 function head(t,s,b=''){return `<div class="pageHead"><div><h1>${t}</h1><p>${s}</p></div><div class="actions">${b}</div></div>`}
@@ -28,8 +233,8 @@ function closeModal(){$('#modalHost').innerHTML=''}
 function setView(v){currentView=v;currentProjectId=null;$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));render()}$$('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
 async function reload(){db=await api('/bootstrap');counts();render()}
 function projectStages(pid){return db.stages.filter(s=>s.project_id===pid)}
-async function newProject(){modal('Новый объект',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="pName"></div><div class="field"><label>Тип</label><select id="pType"><option>Строительство</option><option>Проектирование</option><option>Отделка</option></select></div><div class="field"><label>Статус</label><select id="pStatus"><option>Подготовка</option><option>Активен</option></select></div><div class="field full"><label>Адрес</label><input id="pAddr"></div><div class="field"><label>Начало</label><input id="pStart" type="date"></div><div class="field"><label>Плановое завершение</label><input id="pEnd" type="date"></div><div class="field full"><label>Описание</label><textarea id="pDesc"></textarea></div></div>`,async()=>{try{await api('/projects',{method:'POST',body:JSON.stringify({name:$('#pName').value,type:$('#pType').value,status:$('#pStatus').value,address:$('#pAddr').value||null,start:$('#pStart').value||null,end:$('#pEnd').value||null,description:$('#pDesc').value||null})});closeModal();await reload();toast('Объект создан')}catch(e){toast(e.message)}},'Создать объект')}
-async function newStage(pid){modal('Новый этап',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="sName"></div><div class="field"><label>Начало</label><input id="sStart" type="date"></div><div class="field"><label>Окончание</label><input id="sEnd" type="date"></div><div class="field"><label>Ответственный</label><select id="sResp"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Проверяющий</label><select id="sCheck"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Стоимость</label><input id="sCost" type="number"></div><div class="field"><label>Статус</label><select id="sStatus"><option>Не начат</option><option>В работе</option><option>На проверке</option><option>Завершен</option></select></div></div>`,async()=>{try{await api(`/projects/${pid}/stages`,{method:'POST',body:JSON.stringify({name:$('#sName').value,start:$('#sStart').value||null,end:$('#sEnd').value||null,responsible:$('#sResp').value,checker:$('#sCheck').value,cost:$('#sCost').value?Number($('#sCost').value):null,status:$('#sStatus').value})});closeModal();await bootstrap();openProject(pid)}catch(e){toast(e.message)}},'Добавить этап')}
+async function newProject(){if(demoBlock())return;modal('Новый объект',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="pName"></div><div class="field"><label>Тип</label><select id="pType"><option>Строительство</option><option>Проектирование</option><option>Отделка</option></select></div><div class="field"><label>Статус</label><select id="pStatus"><option>Подготовка</option><option>Активен</option></select></div><div class="field full"><label>Адрес</label><input id="pAddr"></div><div class="field"><label>Начало</label><input id="pStart" type="date"></div><div class="field"><label>Плановое завершение</label><input id="pEnd" type="date"></div><div class="field full"><label>Описание</label><textarea id="pDesc"></textarea></div></div>`,async()=>{try{await api('/projects',{method:'POST',body:JSON.stringify({name:$('#pName').value,type:$('#pType').value,status:$('#pStatus').value,address:$('#pAddr').value||null,start:$('#pStart').value||null,end:$('#pEnd').value||null,description:$('#pDesc').value||null})});closeModal();await reload();toast('Объект создан')}catch(e){toast(e.message)}},'Создать объект')}
+async function newStage(pid){if(demoBlock())return;modal('Новый этап',`<div class="formGrid"><div class="field full"><label>Название *</label><input id="sName"></div><div class="field"><label>Начало</label><input id="sStart" type="date"></div><div class="field"><label>Окончание</label><input id="sEnd" type="date"></div><div class="field"><label>Ответственный</label><select id="sResp"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Проверяющий</label><select id="sCheck"><option>Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Стоимость</label><input id="sCost" type="number"></div><div class="field"><label>Статус</label><select id="sStatus"><option>Не начат</option><option>В работе</option><option>На проверке</option><option>Завершен</option></select></div></div>`,async()=>{try{await api(`/projects/${pid}/stages`,{method:'POST',body:JSON.stringify({name:$('#sName').value,start:$('#sStart').value||null,end:$('#sEnd').value||null,responsible:$('#sResp').value,checker:$('#sCheck').value,cost:$('#sCost').value?Number($('#sCost').value):null,status:$('#sStatus').value})});closeModal();await bootstrap();openProject(pid)}catch(e){toast(e.message)}},'Добавить этап')}
 async function createSimple(kind,title,fields,map){modal(title,`<div class="formGrid">${fields}</div>`,async()=>{let payload=map();try{await api('/'+kind,{method:'POST',body:JSON.stringify(payload)});closeModal();await reload();toast('Сохранено')}catch(e){toast(e.message)}},'Сохранить')}
 function newTask(){createSimple('tasks','Новая задача',`<div class="field full"><label>Название *</label><input id="xName"></div><div class="field"><label>Объект</label><select id="xProject"><option value="">Без объекта</option>${db.projects.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></div><div class="field"><label>Исполнитель</label><select id="xExec"><option value="">Не назначен</option>${db.employees.map(e=>`<option>${esc(e.name)}</option>`).join('')}</select></div><div class="field"><label>Срок</label><input id="xDue" type="date"></div><div class="field"><label>Приоритет</label><select id="xPri"><option>Обычный</option><option>Высокий</option><option>Критический</option></select></div><div class="field full"><label>Описание</label><textarea id="xDesc"></textarea></div>`,()=>({name:$('#xName').value,project_id:$('#xProject').value||null,executor:$('#xExec').value||null,due:$('#xDue').value||null,priority:$('#xPri').value,description:$('#xDesc').value||null,status:'Активная'}))}
 function newEmployee(){createSimple('employees','Новый сотрудник',`<div class="field full"><label>ФИО *</label><input id="xName"></div><div class="field"><label>Должность</label><input id="xJob"></div><div class="field"><label>Роль</label><select id="xRole"><option>Работник</option><option>Админ</option><option>Бухгалтер</option><option>Суперадмин</option></select></div><div class="field"><label>Телефон</label><input id="xPhone"></div><div class="field"><label>Email</label><input id="xMail"></div><div class="field"><label>Telegram</label><input id="xTg"></div>`,()=>({name:$('#xName').value,job:$('#xJob').value||null,role:$('#xRole').value,phone:$('#xPhone').value||null,email:$('#xMail').value||null,telegram:$('#xTg').value||null}))}
